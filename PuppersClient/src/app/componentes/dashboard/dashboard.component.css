@@ -15,6 +15,7 @@ mat-drawer {
     row-gap: 2vh;
   }
   
+  
   .content {
     height: calc(100vh - 98px);
     border-radius: 10px;
@@ -29,6 +30,14 @@ mat-drawer {
     color: lightgray;
   }
 
+  .contentcalendar{
+    height: calc(100vh - 98px);
+    border-radius: 10px;
+    margin: 16px;
+    margin-left: 32px;
+
+  }
+
   .pickers{
     border-radius: 10px;
     margin: 16px;
@@ -40,10 +49,6 @@ mat-drawer {
   
   mat-drawer-container {
     height: calc(100vh - 65px);
-  }
-
-  mat-grid-tile {
-    background: lightblue;
   }
 
   mat-form-field{
