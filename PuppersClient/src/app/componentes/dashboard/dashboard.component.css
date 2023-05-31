@@ -2,9 +2,10 @@ mat-drawer {
     margin: 16px;
     width: 200px;
     border-right: none;
-    background: #002b5c;
+    background: #fff;
     color: white;
-    border-radius: 10px;
+    border-radius: 20px;
+    border-color: rgba(0, 0, 0, 0.655);
     padding: 16px;
     text-align: center;
   }
