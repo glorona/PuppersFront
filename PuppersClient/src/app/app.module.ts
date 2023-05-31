@@ -10,7 +10,9 @@ import { ClienteComponent } from './componentes/cliente/cliente.component';
 import { NavbarComponent } from './common/navbar/navbar.component';
 import { SidenavComponent } from './common/sidenav/sidenav.component';
 import { DashboardComponent } from './componentes/dashboard/dashboard.component';
-
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,10 @@ import { DashboardComponent } from './componentes/dashboard/dashboard.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    MatCardModule,
+    MatGridListModule,
+    BrowserAnimationsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

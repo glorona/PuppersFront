@@ -1,0 +1,54 @@
+*{
+    
+    font-family:Georgia, 'Times New Roman', Times, serif ;
+        
+}
+.titles{
+    color: white;
+    height: 25%;
+}
+h2{
+    padding: 15px;
+    font-size: large;
+
+}
+h3{
+    font-size: small;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.fontcolor{
+    color: white;
+    padding-top: 20px;
+}
+mat-grid-list{
+    background-color: black;
+    color: white;
+}
+.example-card {
+    width: 80%;
+    height: 100%;
+    
+    
+  }
+
+mat-card{
+    background-image: url(../../../assets/img/pupppy.jpeg) ;
+    
+    background-size: cover;
+    background-position: center;
+    padding:10px;
+    color: white;
+  }
+img{
+    opacity: 0.5;
+}
+.cu1{
+    margin-top: 0px;
+}
+.c2{
+    background-image: url(../../../assets/img/2.jpeg) ;
+}
+.c3{
+    background-image: url(../../../assets/img/3.jpeg) ;
+}
