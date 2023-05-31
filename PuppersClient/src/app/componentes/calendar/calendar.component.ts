@@ -12,6 +12,11 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 export class CalendarComponent {
   calendarOptions: CalendarOptions = {
     initialView: 'timeGridWeek',
-    plugins: [timeGridPlugin]
+    plugins: [timeGridPlugin],
+    events: [
+      { title: 'Paseo a Jack', date: '2023-05-31' },
+      { title: 'Paseo a Coco', date: '2023-06-01' }
+    ]
   };
+  
 }
