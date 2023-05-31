@@ -1,1 +1,12 @@
-<p>navbar works!</p>
+<mat-toolbar color="primary">
+    <button mat-icon-button matTooltip="Menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span class="title">Dashboard</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/dashboard">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+        <router-outlet></router-outlet>
+    </button>
+    
+</mat-toolbar>
