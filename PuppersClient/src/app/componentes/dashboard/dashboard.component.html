@@ -1,66 +1,43 @@
 <app-navbar></app-navbar>
-<mat-drawer-container class="example-container">
-    <mat-drawer mode="side" opened>
-
-        <div class="flex-container">
-            <div class="button-container">
-              <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
-                <mat-icon color="accent">drag_indicator</mat-icon>
-              </button>
-            </div>
-            <div class="example-button-container">
-              <button mat-fab color="primary" aria-label="Example icon button with a bookmark icon">
-                <mat-icon color="accent">calendar_today</mat-icon>
-              </button>
-            </div>
-            <div class="example-button-container">
-              <button mat-fab color="primary" aria-label="Example icon button with a home icon">
-                <mat-icon color="accent">contacts</mat-icon>
-              </button>
-            </div>
-          </div>
+<div class="contenidopag">
+  <app-sidenav></app-sidenav>
+  <div class="contenidoside">
+    <mat-grid-list cols="2" rowHeight="7:1" class="pickers">
+        <mat-grid-tile class="fila1">
+          <mat-form-field>
+            <mat-label>Elige un paseador</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option value="option1">Gabriel Lorona</mat-option>
+              <mat-option value="option2">Javier Vergara</mat-option>
+              <mat-option value="option3">Josseline Astudillo</mat-option>
+              <mat-option value="option3">Gabriel Maldonado</mat-option>
+            </mat-select>
+          </mat-form-field>
 
 
 
-    </mat-drawer>
-    <mat-drawer-content>
-        <mat-grid-list cols="2" rowHeight="7:1" class="pickers">
-            <mat-grid-tile class="fila1">
-              <mat-form-field>
-                <mat-label>Elige un paseador</mat-label>
+        </mat-grid-tile>
+        <mat-grid-tile class="fila1">
+
+            <mat-form-field>
+                <mat-label>Elige una zona</mat-label>
                 <mat-select [(value)]="selected">
-                  <mat-option value="option1">Gabriel Lorona</mat-option>
-                  <mat-option value="option2">Javier Vergara</mat-option>
-                  <mat-option value="option3">Josseline Astudillo</mat-option>
-                  <mat-option value="option3">Gabriel Maldonado</mat-option>
+                  <mat-option value="option1">Ceibos</mat-option>
+                  <mat-option value="option2">Samborondon</mat-option>
+                  <mat-option value="option3">Via a la Costa</mat-option>
                 </mat-select>
               </mat-form-field>
 
 
 
-            </mat-grid-tile>
-            <mat-grid-tile class="fila1">
 
-                <mat-form-field>
-                    <mat-label>Elige una zona</mat-label>
-                    <mat-select [(value)]="selected">
-                      <mat-option value="option1">Ceibos</mat-option>
-                      <mat-option value="option2">Samborondon</mat-option>
-                      <mat-option value="option3">Via a la Costa</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-
-
-
-
-            </mat-grid-tile>
-        </mat-grid-list>
-        <div class="contentcalendar">
-            <div>
-                <app-calendar></app-calendar>
-            </div>
-
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="contentcalendar">
+        <div>
+            <app-calendar></app-calendar>
         </div>
 
-    </mat-drawer-content>
-</mat-drawer-container>
+    </div>
+  </div>
+</div>

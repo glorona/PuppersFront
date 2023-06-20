@@ -1,14 +1,21 @@
-mat-drawer {
-    margin: 16px;
-    width: 200px;
-    border-right: none;
-    background: #fff;
-    color: white;
-    border-radius: 20px;
-    border-color: rgba(0, 0, 0, 0.655);
-    padding: 16px;
-    text-align: center;
-  }
+.contenidopag{
+  margin: 16px;
+  width: 100%;
+  border-right: none;
+
+  border-radius: 20px;
+  border-color: rgba(0, 0, 0, 0.655);
+  padding: 16px;
+  text-align: center;
+  display: flex;
+
+}
+
+.contenidoside{
+  width: 100%;
+
+}
+
 
   .flex-container{
     display: flex;

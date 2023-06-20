@@ -28,6 +28,9 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { CalendarComponent } from './componentes/calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { DataboardComponent } from './componentes/databoard/databoard.component';
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +40,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     NavbarComponent,
     SidenavComponent,
     DashboardComponent,
-    CalendarComponent
+    CalendarComponent,
+    DataboardComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     MatFormFieldModule,
     MatNativeDateModule,
     MatSelectModule,
-    FullCalendarModule
+    FullCalendarModule,
+    HttpClientModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
