@@ -6,7 +6,6 @@
 .titles{
     color: white;
     padding-bottom: 20px;
-    
    
 }
 h2{
@@ -27,8 +26,10 @@ h3{
 mat-grid-list{
     background-color: black;
     color: white;
-    padding-top: 10px;
-    height: 1000px;
+    padding-top: 20px;
+    
+    height: 100%;
+    
 }
 .example-card {
     width: 80%;
@@ -42,7 +43,7 @@ mat-grid-list{
   }
 
 mat-card{
-    background-image: url(../../../assets/img/pupppy.jpeg) ;
+    background-image: url(../../../assets/img/perrito.jpg) ;
     
     background-size: cover;
     background-position: center;
@@ -54,7 +55,7 @@ img{
 }
 
 .c2{
-    background-image: url(../../../assets/img/2.jpeg) ;
+    background-image: url(../../../assets/img/descarga.jpg) ;
     
 }
 .c3{

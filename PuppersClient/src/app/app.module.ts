@@ -31,6 +31,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DataboardComponent } from './componentes/databoard/databoard.component';
 import { MatTableModule } from '@angular/material/table';
+import { PaseadorComponent } from './componentes/paseador/paseador.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { MatTableModule } from '@angular/material/table';
     SidenavComponent,
     DashboardComponent,
     CalendarComponent,
-    DataboardComponent
+    DataboardComponent,
+    PaseadorComponent
   ],
   imports: [
     BrowserModule,
