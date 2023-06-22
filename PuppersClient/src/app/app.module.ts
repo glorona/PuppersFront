@@ -32,6 +32,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DataboardComponent } from './componentes/databoard/databoard.component';
 import { MatTableModule } from '@angular/material/table';
 import { PaseadorComponent } from './componentes/paseador/paseador.component';
+import { OktaAuth } from '@okta/okta-auth-js';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,8 +72,18 @@ import { PaseadorComponent } from './componentes/paseador/paseador.component';
     FullCalendarModule,
     HttpClientModule,
     MatTableModule,
+    FormsModule,
+    FlexLayoutModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: OktaAuth,
+      useValue: new OktaAuth({
+        issuer: 'https://dev-88714069.okta.com/oauth2/default',
+        clientId: '0oaa2p4jsis1tfnvc5d7'
+      })
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
