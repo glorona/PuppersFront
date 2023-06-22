@@ -24,11 +24,15 @@ h3{
     
     
 }
-mat-grid-list{
+
+.mat-grid-tile :hover{
+    color: grey;
+}
+.mat-grid-list{
     background-color: black;
     color: white;
     padding-top: 10px;
-    height: 1000px;
+    height: 50vh;
 }
 .example-card {
     width: 80%;
@@ -48,11 +52,26 @@ mat-card{
     background-position: center;
     
     color: white;
-  }
-img{
-    opacity: 0.5;
 }
-
+.logo{
+    padding-top: 20px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+img{
+    height: 18vh;
+    
+}
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight:normal;
+    font-style: normal;
+    font-size: 40px;
+    display: contents;
+}
 .c2{
     background-image: url(../../../assets/img/2.jpeg) ;
     
@@ -60,3 +79,8 @@ img{
 .c3{
     background-image: url(../../../assets/img/3.jpeg) ;
 }
+
+.c4{
+    background-image: url(../../../assets/img/puppers.jpg);
+}
+

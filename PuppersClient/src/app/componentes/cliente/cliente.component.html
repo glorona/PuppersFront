@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div style="background-color: black; " class="titles">
     <h2>Buenas tardes Javier!</h2>
@@ -6,25 +7,30 @@
 </div>
 <mat-grid-list cols="1" rowHeight="3:1" gutterSize="35px" >
     <mat-grid-tile class="cu1">
+        
         <mat-card class="example-card" >
-            
             <mat-card-content>
-                <mat-icon >pets</mat-icon>Tu próxima reserva 
+                <mat-icon >pets</mat-icon>
+            </mat-card-content>
+            <mat-card-content>
+                Te quedan 5 paseos disponibles !
             </mat-card-content>
           </mat-card>
-          <mat-icon style="align-items: center;;">keyboard_arrow_right</mat-icon>
+          <mat-icon style="align-items: center; " class="arrow">keyboard_arrow_right</mat-icon>
     </mat-grid-tile>
     
 
 
     <mat-grid-tile>
         <mat-card class="example-card c2"  >
-            
             <mat-card-content><mat-icon>calendar_today</mat-icon>
-              Calendario
+                
+              </mat-card-content>
+            <mat-card-content>
+              Paseos que agendaste
             </mat-card-content>
           </mat-card>
-          <mat-icon>keyboard_arrow_right</mat-icon>
+          <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
     </mat-grid-tile>
 
 
@@ -32,20 +38,20 @@
     <mat-grid-tile>
 
         <mat-card class="example-card c3" >
-           
             <mat-card-content><mat-icon>add_circle</mat-icon>
-                Reservar
-                
+            
             </mat-card-content>
-            <mat-card-content>Javier realiza tu próxima reserva</mat-card-content>
+           
+            <mat-card-content>Conoce a tu paseador asignado</mat-card-content>
           </mat-card>
-          <mat-icon>keyboard_arrow_right</mat-icon>
+          <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
     </mat-grid-tile>
-
-   
-       
      
     
   </mat-grid-list>
 
-  
+<div class="logo">
+    <img src="../../../assets/img/puppets.png"> 
+</div> 
+
+
