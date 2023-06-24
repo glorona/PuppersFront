@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"homecliente",component:HomeclienteComponent, canActivate:[ClienteGuard]},
-  {path:"paseadorprofile",component:PaseadorprofileComponent, canActivate:[PaseadorGuard]},
+  {path:"paseadorprofile",component:PaseadorprofileComponent, canActivate:[ClienteGuard]},
   {path:"**",component:LoginComponent}
 ];
 

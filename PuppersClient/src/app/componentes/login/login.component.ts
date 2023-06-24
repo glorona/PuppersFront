@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.authService.loginSuccess(this.isLoggedIn);
-        this.reloadPage();
+        this.redirect();
       },
       error: err => {
         this.errorMessage = err.error.message;
@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
   redirect(): void{
     if(this.rolesjson == 'admin'){
       this.router.navigate(['/dashboard'])
-
     }
     else if(this.rolesjson == 'paseador'){
       this.router.navigate(['/paseador'])
@@ -72,5 +71,6 @@ export class LoginComponent implements OnInit {
 
   reloadPage(): void {
     window.location.reload();
+    this.redirect();
   }
 }

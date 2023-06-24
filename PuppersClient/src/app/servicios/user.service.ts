@@ -15,7 +15,7 @@ export class UserService {
 
 
   loginCliente(username: string, password: string): Observable<any>{
-    return this.http.post('http://localhost:4001/clientes/log',{username,password}, httpOptions)
+    return this.http.post('http://localhost:4001/clientes/log',{'client_user':username,'client_password':password}, httpOptions)
   }
   loginAdmin(username: string, password: string): Observable<any>{
     console.log(username)
@@ -23,7 +23,7 @@ export class UserService {
     return this.http.post('http://localhost:4001/admin/log',{'admin_username':username,'admin_password':password})
   }
   loginPaseador(username: string, password: string): Observable<any>{
-    return this.http.post('http://localhost:4001/paseadores/log',{username,password}, httpOptions)
+    return this.http.post('http://localhost:4001/paseadores/log',{'walker_user':username,'walker_password':password}, httpOptions)
   }
 
   registerCliente(cel:string, name: string, date: string, username: string, password: string, location:string, area:string): Observable<any>{
