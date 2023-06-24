@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:"dashboard",component:DashboardComponent, canActivate:[AdminGuard]},
   { path: "cliente/:id", component: ClienteComponent, canActivate:[ClienteGuard] },
   {path:"paseador",component:PaseadorComponent, canActivate:[PaseadorGuard]},
-  {path:"dashboard/data",component:DataboardComponent, canActivate:[AdminGuard]},
+  {path:"databoard",component:DataboardComponent, canActivate:[AdminGuard]},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"homecliente",component:HomeclienteComponent, canActivate:[ClienteGuard]},
