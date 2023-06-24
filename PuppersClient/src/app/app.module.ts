@@ -36,6 +36,8 @@ import { OktaAuth } from '@okta/okta-auth-js';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { HomeclienteComponent } from './componentes/homecliente/homecliente.component';
+import { PaseadorprofileComponent } from './componentes/paseadorprofile/paseadorprofile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,9 @@ import { authInterceptorProviders } from './helpers/auth.interceptor';
     DashboardComponent,
     CalendarComponent,
     DataboardComponent,
-    PaseadorComponent
+    PaseadorComponent,
+    HomeclienteComponent,
+    PaseadorprofileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div style="background-color: black; " class="titles">
+    <h2>Bienvenido!</h2>
+    <h3>Selecciona tu mascota:</h3>
+    
+</div>
+
+
+<div class="fx" >
+    <mat-form-field >
+        <mat-label >Mascotas: </mat-label>
+        <mat-select [(value)]="selected" >
+            <div *ngFor="let foto of mascotas">
+                
+                <mat-option value="admin" routerLink="/cliente/{{foto.pet_token}}">{{foto.pet_name}}</mat-option>
+                
+           
+            </div>
+        </mat-select>
+        </mat-form-field> 
+    <button class="btn btn-primary btn-block" >
+        
+      Select
+    </button>
+      
+
+      
+      
+        <img src="../../../assets/img/perrito.jpg">
+     
+</div>
+
+<div class="logo">
+    <img src="../../../assets/img/puppets.png"> 
+</div> 
+
+
+
+
+

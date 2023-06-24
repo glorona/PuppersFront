@@ -10,6 +10,9 @@ export class ClienteService {
   getClientes(){
     return this.http.get('http://localhost:4001/clientes/all')
   }
+    //  /mascotas/cliente/:client_tel 
 
-
+    getCliente(id:string){
+      return this.http.get(`http://localhost:4001/mascotas/cliente/:${id}`).pipe();
+    } 
 }

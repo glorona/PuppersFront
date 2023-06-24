@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { Mascota } from '../../interfaces/mascota';
 import { MascotaService } from '../../servicios/mascota.service';
 @Component({
-  selector: 'app-paseador',
-  templateUrl: './paseador.component.html',
-  styleUrls: ['./paseador.component.css']
+  selector: 'app-homecliente',
+  templateUrl: './homecliente.component.html',
+  styleUrls: ['./homecliente.component.css']
 })
-export class PaseadorComponent {
+export class HomeclienteComponent {
+  
   selected='';
   mascotas:Mascota[]=[];
 
