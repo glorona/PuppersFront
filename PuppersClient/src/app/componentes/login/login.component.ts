@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
       next: data => {
         this.tokenStorage.saveToken(data);
         this.tokenStorage.saveUser(data);
-
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.reloadPage();

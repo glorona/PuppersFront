@@ -35,7 +35,7 @@ import { PaseadorComponent } from './componentes/paseador/paseador.component';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
-
+import { authInterceptorProviders } from './helpers/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,13 +76,7 @@ import { FormsModule } from '@angular/forms';
     FlexLayoutModule
   ],
   providers: [
-    {
-      provide: OktaAuth,
-      useValue: new OktaAuth({
-        issuer: 'https://dev-88714069.okta.com/oauth2/default',
-        clientId: '0oaa2p4jsis1tfnvc5d7'
-      })
-    }
+    authInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })
