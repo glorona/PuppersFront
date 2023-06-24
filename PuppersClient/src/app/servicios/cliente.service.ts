@@ -13,6 +13,6 @@ export class ClienteService {
     //  /mascotas/cliente/:client_tel 
 
     getCliente(id:string){
-      return this.http.get(`http://localhost:4001/mascotas/cliente/:${id}`).pipe();
+      return this.http.get(`http://localhost:4001/clientes/${id}`);
     } 
 }

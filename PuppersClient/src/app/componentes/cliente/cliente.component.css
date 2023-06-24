@@ -24,6 +24,13 @@ h3{
     
     
 }
+.arrows{
+    display: flex;
+    color: white;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 
 .mat-grid-tile :hover{
     color: grey;

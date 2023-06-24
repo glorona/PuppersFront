@@ -47,6 +47,7 @@ export class TokenService {
 
   public getId(): any{
     const id = window.sessionStorage.getItem(USER_ID);
+    console.log(id);
     if(id){
       return id;
     }

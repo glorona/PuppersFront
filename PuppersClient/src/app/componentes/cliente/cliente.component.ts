@@ -4,6 +4,7 @@ import { MascotaService } from 'src/app/servicios/mascota.service';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente';
+import { TokenService } from 'src/app/servicios/token.service';
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
@@ -11,9 +12,10 @@ import { Cliente } from 'src/app/interfaces/cliente';
 })
 export class ClienteComponent {
  mascota !: Mascota;
+ide !: any;
 cliente !: Cliente;
 
- constructor( private route: ActivatedRoute, private peliculasSvc:MascotaService, private clienteSvc: ClienteService,private router: Router) { 
+ constructor( private route: ActivatedRoute, private peliculasSvc:MascotaService, private tokenSvc: TokenService,private clienteSvc: ClienteService,private router: Router) { 
 
   const {id} = this.route.snapshot.params;
   
@@ -32,7 +34,12 @@ cliente !: Cliente;
       });
       
 */
-
+this.ide=this.tokenSvc.getId();
+console.log(this.ide);
+this.clienteSvc.getCliente(this.ide).subscribe(cl =>{
+  this.cliente= cl as Cliente;
+  console.log(this.cliente.client_name);
+});
 
 }
 

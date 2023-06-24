@@ -24,6 +24,12 @@ h3{
     
     
 }
+.arrows{
+  display: flex;
+  color: white;
+  justify-content: flex-start;
+  align-items: center;
+}
 
 .c2{
     background-image: url(../../../assets/img/descarga.jpg);
