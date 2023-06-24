@@ -38,6 +38,10 @@ import { FormsModule } from '@angular/forms';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { HomeclienteComponent } from './componentes/homecliente/homecliente.component';
 import { PaseadorprofileComponent } from './componentes/paseadorprofile/paseadorprofile.component';
+import { PaseadorGuard } from './servicios/paseador.guard';
+import { ClienteGuard } from './servicios/cliente.guard';
+import { AuthyGuard } from './servicios/authy.guard';
+import { AdminGuard } from './servicios/admin.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +84,7 @@ import { PaseadorprofileComponent } from './componentes/paseadorprofile/paseador
     FlexLayoutModule
   ],
   providers: [
-    authInterceptorProviders
+    authInterceptorProviders, PaseadorGuard, ClienteGuard, AuthyGuard, AdminGuard
   ],
   bootstrap: [AppComponent]
 })

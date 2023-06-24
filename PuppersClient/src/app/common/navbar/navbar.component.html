@@ -11,7 +11,7 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="settings"></mat-icon>
         <mat-menu #menu="matMenu">
             <button mat-menu-item>Configuracion</button>
-            <button mat-menu-item>Cerrar Sesion</button>
+            <button mat-menu-item (click)="logout()">Cerrar Sesion</button>
         </mat-menu>
     </button>
     

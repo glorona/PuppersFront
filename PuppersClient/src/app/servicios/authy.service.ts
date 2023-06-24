@@ -15,6 +15,10 @@ export class AuthyService {
 
   }
 
+  loginSuccess(status: boolean){
+    this.logged = status;
+  }
+
   login(username: string, password:string,role:string){
     if(role == 'cliente'){
       return this.userService.loginCliente(username,password)
@@ -38,6 +42,10 @@ export class AuthyService {
 
   registerCliente(cel:string, name: string, date: string, username: string, password: string, location:string, area:string){
     return this.userService.registerCliente(cel,name,date,username,password,location,area)
+  }
+
+  getAuthStatus(){
+    return this.logged;
   }
 
 
