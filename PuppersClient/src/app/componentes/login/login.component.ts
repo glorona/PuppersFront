@@ -1,51 +1,52 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { AuthyService } from 'src/app/servicios/authy.service';
-import { filter, Subject, take, takeUntil } from 'rxjs';
+import { TokenService } from 'src/app/servicios/token.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  public loginValid = true;
-  public username = '';
-  public password = '';
+export class LoginComponent implements OnInit {
+  form: any = {
+    username: null,
+    password: null
+  };
+  selected = 'admin';
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
 
-  private _destroySub$ = new Subject<void>();
-  private readonly returnUrl: string;
+  constructor(private authService: AuthyService, private tokenStorage: TokenService) { }
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private _authService: AuthyService
-  ) {
-    this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/dashboard';
+  ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+    }
   }
 
-  public ngOnInit(): void {
-    this._authService.isAuthenticated$.pipe(
-      filter((isAuthenticated: boolean) => isAuthenticated),
-      takeUntil(this._destroySub$)
-    ).subscribe( _ => this._router.navigateByUrl(this.returnUrl));
-  }
+  onSubmit(): void {
+    const { username, password } = this.form;
 
-  public ngOnDestroy(): void {
-    this._destroySub$.next();
-  }
+    this.authService.login(username, password,this.selected).subscribe({
+      next: data => {
+        this.tokenStorage.saveToken(data);
+        this.tokenStorage.saveUser(data);
 
-  public onSubmit(): void {
-    this.loginValid = true;
-
-    this._authService.login(this.username, this.password).pipe(
-      take(1)
-    ).subscribe({
-      next: _ => {
-        this.loginValid = true;
-        this._router.navigateByUrl('/dashboard');
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.reloadPage();
       },
-      error: _ => this.loginValid = false
+      error: err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
     });
   }
 
+  reloadPage(): void {
+    window.location.reload();
+  }
 }

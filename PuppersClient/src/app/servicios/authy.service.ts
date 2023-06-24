@@ -2,47 +2,46 @@ import { Injectable , OnDestroy } from '@angular/core';
 import { BehaviorSubject, catchError, from, map, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthTransaction, OktaAuth } from '@okta/okta-auth-js';
+import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthyService implements OnDestroy {
+export class AuthyService {
 
-  private _authSub$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public get isAuthenticated$(): Observable<boolean> {
-    return this._authSub$.asObservable();
+  logged = false;
+  valor1 = "";
+
+  constructor(private userService: UserService){
+
   }
 
-  constructor(private _router: Router, private _authClient: OktaAuth) {
-    this._authClient.session.exists().then(exists => this._authSub$.next(exists));
-  }
-
-  public ngOnDestroy(): void {
-    this._authSub$.next(false);
-    this._authSub$.complete();
-  }
-
-  public login(username: string, password: string): Observable<void> {
-    return from(this._authClient.signInWithCredentials({username, password})).pipe(
-      map((t: AuthTransaction) => this.handleSignInResponse(t))
-    );
-  }
-
-  public logout(redirect: string): Observable<void> {
-    return from(this._authClient.signOut()).pipe(
-      tap( _ => (this._authSub$.next(false), this._router.navigate([redirect]))),
-      catchError(err => {
-        console.error(err);
-        throw new Error('Unable to sign out');
-      })
-    )
-  }
-
-  private handleSignInResponse(transaction: AuthTransaction): void {
-    if (transaction.status !== 'SUCCESS') {
-      throw new Error(`We cannot handle the ${transaction.status} status`);
+  login(username: string, password:string,role:string){
+    if(role == 'cliente'){
+      return this.userService.loginCliente(username,password)
     }
-
-    this._authSub$.next(true)
-    this._authClient.session.setCookieAndRedirect(transaction.sessionToken);
+    else if (role == 'paseador'){
+      return this.userService.loginPaseador(username,password)
+    }
+    else{
+      return this.userService.loginAdmin(username,password)
+    }
   }
+
+  registerAdmin(username: string, password:string){
+    return this.userService.registerAdmin(username,password)
+
+  }
+  
+  registerPaseador(ced: string, cel: string, date: string, username: string, password: string){
+    return this.userService.registerPaseador(ced,cel,date,username,password)
+  }
+
+  registerCliente(cel:string, name: string, date: string, username: string, password: string, location:string, area:string){
+    return this.userService.registerCliente(cel,name,date,username,password,location,area)
+  }
+
+
+
+
+  
 }

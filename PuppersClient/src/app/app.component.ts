@@ -8,22 +8,5 @@ import { AuthyService } from './servicios/authy.service';
 })
 export class AppComponent {
   title = 'PuppersClient';
-  public isAuthenticated = false;
-  private _destroySub$ = new Subject<void>();
-
-  constructor(private _authService: AuthyService) { }
-
-  public ngOnInit(): void {
-    this._authService.isAuthenticated$.pipe(
-      takeUntil(this._destroySub$)
-    ).subscribe((isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated);
-  }
-
-  public ngOnDestroy(): void {
-    this._destroySub$.next();
-  }
-
-  public logout(): void {
-    this._authService.logout('/').pipe(take(1));
-  }
+  
 }

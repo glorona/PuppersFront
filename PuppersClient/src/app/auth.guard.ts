@@ -5,14 +5,7 @@ import { map, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard  {
   
-  constructor(private _authService: AuthyService, private _router: Router) {}
-
-  public canActivate(): Observable<boolean | UrlTree> {
-    return this._authService.isAuthenticated$
-      .pipe(
-        map((s: boolean) => s ? true: this._router.parseUrl('/login'))
-      );
-  }
+  
 }
