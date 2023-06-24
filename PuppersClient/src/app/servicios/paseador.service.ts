@@ -8,6 +8,6 @@ export class PaseadorService {
   constructor(private http: HttpClient) { }
 
   getPaseadores(){
-    return this.http.get('http://localhost:4001/paseadores/all')
+    return this.http.get('https://puppersappback-production.up.railway.app/paseadores/all')
   }
 }

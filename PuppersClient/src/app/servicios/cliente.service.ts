@@ -8,11 +8,11 @@ export class ClienteService {
   constructor(private http: HttpClient) { }
 
   getClientes(){
-    return this.http.get('http://localhost:4001/clientes/all')
+    return this.http.get('https://puppersappback-production.up.railway.app/clientes/all')
   }
     //  /mascotas/cliente/:client_tel 
 
     getCliente(id:string){
-      return this.http.get(`http://localhost:4001/clientes/${id}`);
+      return this.http.get(`https://puppersappback-production.up.railway.app/clientes/${id}`);
     } 
 }

@@ -14,10 +14,10 @@ getMascotas() : Observable<Mascota[]>{
   }*/
 
   getMascotas(){
-    return this.http.get('http://localhost:4001/mascotas/all').pipe();
+    return this.http.get('https://puppersappback-production.up.railway.app/mascotas/all').pipe();
   }
   getMascota(id:string){
-    return this.http.get(`http://localhost:4001/mascotas/${id}`).pipe();
+    return this.http.get(`https://puppersappback-production.up.railway.app/mascotas/${id}`).pipe();
   } 
 
 }

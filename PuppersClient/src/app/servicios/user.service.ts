@@ -15,25 +15,27 @@ export class UserService {
 
 
   loginCliente(username: string, password: string): Observable<any>{
-    return this.http.post('http://localhost:4001/clientes/log',{'client_user':username,'client_password':password}, httpOptions)
+    console.log(username)
+    console.log(password)
+    return this.http.post('https://puppersappback-production.up.railway.app/clientes/log',{'client_user':username,'client_password':password}, httpOptions)
   }
   loginAdmin(username: string, password: string): Observable<any>{
     console.log(username)
     console.log(password)
-    return this.http.post('http://localhost:4001/admin/log',{'admin_username':username,'admin_password':password})
+    return this.http.post('https://puppersappback-production.up.railway.app/admin/log',{'admin_username':username,'admin_password':password})
   }
   loginPaseador(username: string, password: string): Observable<any>{
-    return this.http.post('http://localhost:4001/paseadores/log',{'walker_user':username,'walker_password':password}, httpOptions)
+    return this.http.post('https://puppersappback-production.up.railway.app/paseadores/log',{'walker_user':username,'walker_password':password}, httpOptions)
   }
 
   registerCliente(cel:string, name: string, date: string, username: string, password: string, location:string, area:string): Observable<any>{
-    return this.http.post('http://localhost:4001/clientes/add',{cel, name, date,username,password, location, area}, httpOptions)
+    return this.http.post('https://puppersappback-production.up.railway.app/clientes/add',{cel, name, date,username,password, location, area}, httpOptions)
   }
   registerAdmin(username: string, password: string): Observable<any>{
-    return this.http.post('http://localhost:4001/admin/add',{username,password}, httpOptions)
+    return this.http.post('https://puppersappback-production.up.railway.app/admin/add',{username,password}, httpOptions)
   }
 
   registerPaseador(ced: string, cel: string, date: string, username: string, password: string): Observable<any>{
-    return this.http.post('http://localhost:4001/paseadores/add',{ced, cel, date, username,password}, httpOptions)
+    return this.http.post('https://puppersappback-production.up.railway.app/paseadores/add',{ced, cel, date, username,password}, httpOptions)
   }
 }

@@ -12,7 +12,7 @@ export class HomeclienteComponent {
   
   selected='';
   mascotas:Mascota[]=[];
-  ide : any;
+  ide = '';
 
   constructor(private mascotaService: MascotaService, private tokenSvc: TokenService){
    mascotaService.getMascotas().subscribe(respuesta => {
