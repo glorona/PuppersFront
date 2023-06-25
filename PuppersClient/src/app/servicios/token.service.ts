@@ -36,7 +36,6 @@ export class TokenService {
   public saveID(id: any): void{
     window.sessionStorage.removeItem(USER_ID);
     window.sessionStorage.setItem(USER_ID,id);
-    console.log("Llamada a saveid")
 
   }
 
