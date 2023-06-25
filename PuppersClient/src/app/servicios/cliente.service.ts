@@ -13,6 +13,6 @@ export class ClienteService {
     //  /mascotas/cliente/:client_tel 
 
     getCliente(id:string){
-      return this.http.get(`https://puppersappback-production.up.railway.app/clientes/${id}`);
+      return this.http.get(`https://puppersappback-production.up.railway.app/clientes/${id}`).pipe();
     } 
 }

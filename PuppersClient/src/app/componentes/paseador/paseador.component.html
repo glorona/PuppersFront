@@ -1,7 +1,8 @@
 <app-navbar></app-navbar>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<div style="background-color: black; " class="titles">
+<div style="background-color: black; " class="titles" *ngFor="let p of paseador">
     <h2>Actividad: Paseo</h2>
+    <h3>Hola {{p.walker_name}} !</h3>
     <h3>¿Listo para el paseo?</h3>
     
 </div>
@@ -12,7 +13,7 @@
             <mat-card-content>
                 
             </mat-card-content>
-            <mat-card-content>Escoge la mascota</mat-card-content>
+            <mat-card-content>Selecciona tú mascota</mat-card-content>
             <mat-form-field >
               <mat-label >Mascotas: </mat-label>
               <mat-select [(value)]="selected" >

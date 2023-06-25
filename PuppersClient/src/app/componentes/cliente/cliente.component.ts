@@ -11,18 +11,18 @@ import { TokenService } from 'src/app/servicios/token.service';
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent {
- mascota !: Mascota;
+ mascota : Mascota[]=[];
 ide !: any;
-cliente !: Cliente;
-
- constructor( private route: ActivatedRoute, private peliculasSvc:MascotaService, private tokenSvc: TokenService,private clienteSvc: ClienteService,private router: Router) { 
+cliente : Cliente[]=[];
+walker ='';
+ constructor( private route: ActivatedRoute, private mascotasSvc:MascotaService, private tokenSvc: TokenService,private clienteSvc: ClienteService,private router: Router) { 
 
   const {id} = this.route.snapshot.params;
   
   
-    this.peliculasSvc.getMascota(id).subscribe(peli=>{
+    this.mascotasSvc.getMascota(id).subscribe(peli=>{
       
-      this.mascota = peli as Mascota;
+      this.mascota = peli as Mascota[];
       console.log(this.mascota)
 
       
@@ -37,9 +37,15 @@ cliente !: Cliente;
 this.ide=this.tokenSvc.getId();
 console.log(this.ide);
 this.clienteSvc.getCliente(this.ide).subscribe(cl =>{
-  this.cliente= cl as Cliente;
-  console.log(this.cliente.client_name);
+  this.cliente= cl as Cliente[];
+  console.log(this.cliente);
 });
+
+mascotasSvc.getMascotabyClient(this.ide).subscribe(respuesta => {
+  this.mascota = respuesta as Array<Mascota>;
+  this.walker=(this.mascota[0].walker_ID);
+
+  });
 
 }
 

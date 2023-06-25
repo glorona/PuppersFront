@@ -1,26 +1,24 @@
 <app-navbar></app-navbar>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<div style="background-color: black; " class="arrows">
+<div style="background-color: black; " class="arrows" *ngFor="let p of paseador">
       <div>
-        <span class="material-icons"  routerLink="/cliente/:id" style="color:white; font-size: 56px; transform: rotate(0deg); -webkit-text-stroke-width: 4px;"> arrow_back </span>
+        <span class="material-icons"  routerLink="/cliente/{{ide}}" style="color:white; font-size: 56px; transform: rotate(0deg); -webkit-text-stroke-width: 4px;"> arrow_back </span>
   
       </div>
-      <div class="titles">
-        <h2>Gabriel Loroña</h2>
+      <div class="titles" >
+        <h2>{{p.walker_name}} </h2>
         <h3>¡Es tu paseador asignado!</h3>
       </div>
     
     
 </div>
-<mat-grid-list cols="1" rowHeight="3:1" gutterSize="40px" >
+<mat-grid-list cols="1" rowHeight="3:1" gutterSize="40px" *ngFor="let p of paseador">
     <mat-grid-tile class="cu1">
-        <mat-card class="example-card" >
+        <mat-card class="example-card">
             
-            <mat-card-content>
-                
-            </mat-card-content>
-            <mat-card-content>Edad: 25 años</mat-card-content>
-            <mat-card-content>Teléfono: 0961212788</mat-card-content>
+            
+            <mat-card-content  >
+              Teléfono: {{p.walker_tel}} </mat-card-content>
           </mat-card>
         
     </mat-grid-tile>

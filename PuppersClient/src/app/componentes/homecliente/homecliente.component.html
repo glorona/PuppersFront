@@ -2,8 +2,8 @@
 
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<div style="background-color: black; " class="titles">
-    <h2>Bienvenido!</h2>
+<div style="background-color: black; " class="titles" *ngFor="let c of cliente" >
+    <h2>Hola {{c.client_name}} ! </h2>
     <h3>Selecciona tu mascota:</h3>
     
 </div>

@@ -10,4 +10,9 @@ export class PaseadorService {
   getPaseadores(){
     return this.http.get('https://puppersappback-production.up.railway.app/paseadores/all')
   }
+  getPaseador(id:String){
+    return this.http.get(`https://puppersappback-production.up.railway.app/paseadores/${id}`)
+  
+  }
+  
 }

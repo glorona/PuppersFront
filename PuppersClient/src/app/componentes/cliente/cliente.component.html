@@ -4,8 +4,8 @@
   <div>
     <span class="material-icons"  routerLink="/homecliente" style="color:white; font-size: 56px; transform: rotate(0deg); -webkit-text-stroke-width: 4px;"> arrow_back </span>
   </div>
-  <div class="titles">
-    <h2>Buenas tardes Javier!</h2>
+  <div class="titles" *ngFor="let c of cliente">
+    <h2> {{c.client_name}} </h2>
     <h3>Estos son tus detalles para el día de hoy</h3>
   </div> 
     
@@ -17,11 +17,11 @@
             <mat-card-content>
                 <mat-icon >pets</mat-icon>
             </mat-card-content>
-            <mat-card-content>
-                Te quedan 5 paseos disponibles !
+            <mat-card-content *ngFor="let m of mascota">
+                Te quedan {{m.service}} (paseos) disponibles ! 
             </mat-card-content>
           </mat-card>
-          <mat-icon style="align-items: center; " class="arrow">keyboard_arrow_right</mat-icon>
+          
     </mat-grid-tile>
     
 
@@ -32,10 +32,10 @@
                 
               </mat-card-content>
             <mat-card-content>
-              Paseos que agendaste
+              Agenda de paseos
             </mat-card-content>
           </mat-card>
-          <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
+          
     </mat-grid-tile>
 
 
@@ -47,7 +47,7 @@
             
             </mat-card-content>
            
-            <mat-card-content>Conoce a tu paseador asignado</mat-card-content>
+            <mat-card-content routerLink="/paseadorprofile/{{walker}}">Conoce a tu paseador asignado</mat-card-content>
           </mat-card>
           <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
     </mat-grid-tile>
