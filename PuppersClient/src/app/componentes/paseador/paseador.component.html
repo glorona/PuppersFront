@@ -17,13 +17,13 @@
             <mat-form-field >
               <mat-label >Mascotas: </mat-label>
               <mat-select [(value)]="selected" >
-                  <div *ngFor="let foto of mascotas">
-                      
-                      <mat-option value="admin" >{{foto.pet_name}}</mat-option>
-                      
-                 
-                  </div>
-              </mat-select>
+                <div *ngFor="let foto of mascotas">
+
+                    <mat-option value="{{foto.pet_token}" >{{foto.pet_name}}</mat-option>
+
+
+                </div>
+            </mat-select>
               </mat-form-field> 
            
           </mat-card>

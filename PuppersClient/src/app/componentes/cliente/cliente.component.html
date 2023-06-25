@@ -18,7 +18,7 @@
                 <mat-icon >pets</mat-icon>
             </mat-card-content>
             <mat-card-content *ngFor="let m of mascota">
-                Te quedan {{m.service}} (paseos) disponibles ! 
+                En su plan de 30 paseos, le quedan {{m.service}} paseos disponibles! 
             </mat-card-content>
           </mat-card>
           
@@ -42,7 +42,7 @@
 
     <mat-grid-tile>
 
-        <mat-card class="example-card c3" routerLink="/paseadorprofile" >
+        <mat-card class="example-card c3" routerLink="/paseadorprofile/{{walker}}" >
             <mat-card-content><mat-icon>add_circle</mat-icon>
             
             </mat-card-content>

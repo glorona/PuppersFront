@@ -16,6 +16,7 @@ export class PaseadorComponent {
   paseador: Paseador[]=[];
   ide =''
   idepaseador=''
+  
   constructor(private mascotaService: MascotaService,private tokenSvc: TokenService,private paseadorSvc: PaseadorService){
     this.ide= tokenSvc.getId();
    mascotaService.getMascotabyWalker(this.ide).subscribe(respuesta => {
@@ -31,7 +32,11 @@ export class PaseadorComponent {
       this.paseador = res as Paseador[];
     });
 
-
-
+    
+    
   }
+
+
+
+
 }
