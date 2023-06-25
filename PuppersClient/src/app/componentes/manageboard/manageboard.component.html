@@ -1,1 +1,24 @@
-<p>manageboard works!</p>
+<app-navbar></app-navbar>
+<div class="contenidopag">
+    <app-sidenav></app-sidenav>
+    <div class="contenidoside">
+        <mat-grid-list cols="1" rowHeight="10:1" class="pickers">
+            <mat-grid-tile class="fila1">
+              <mat-form-field>
+                <mat-label>Datos a mostrar:</mat-label>
+                <mat-select [(value)]="selected">
+                  <mat-option value="option0">Selecciona una opcion</mat-option>
+                  <mat-option value="option1">Todos los paseadores</mat-option>
+                  <mat-option value="option2">Todas las mascotas</mat-option>
+                  <mat-option value="option3">Todos los clientes</mat-option>
+                    
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+        
+
+    </div>
+
+
+</div>

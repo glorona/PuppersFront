@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./manageboard.component.css']
 })
 export class ManageboardComponent {
+  selected = 'option0';
 
 }
