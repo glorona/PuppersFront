@@ -11,8 +11,10 @@ import { PaseadorprofileComponent } from './componentes/paseadorprofile/paseador
 import { PaseadorGuard } from './servicios/paseador.guard';
 import { AdminGuard } from './servicios/admin.guard';
 import { ClienteGuard } from './servicios/cliente.guard';
+import { ManageboardComponent } from './componentes/manageboard/manageboard.component';
 const routes: Routes = [
   {path:"dashboard",component:DashboardComponent, canActivate:[AdminGuard]},
+  {path:"manageboard",component:ManageboardComponent,canActivate:[AdminGuard]},
   { path: "cliente/:id", component: ClienteComponent, canActivate:[ClienteGuard] },
   {path:"paseador",component:PaseadorComponent, canActivate:[PaseadorGuard]},
   {path:"databoard",component:DataboardComponent, canActivate:[AdminGuard]},

@@ -42,6 +42,7 @@ import { PaseadorGuard } from './servicios/paseador.guard';
 import { ClienteGuard } from './servicios/cliente.guard';
 import { AuthyGuard } from './servicios/authy.guard';
 import { AdminGuard } from './servicios/admin.guard';
+import { ManageboardComponent } from './componentes/manageboard/manageboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,8 @@ import { AdminGuard } from './servicios/admin.guard';
     DataboardComponent,
     PaseadorComponent,
     HomeclienteComponent,
-    PaseadorprofileComponent
+    PaseadorprofileComponent,
+    ManageboardComponent
   ],
   imports: [
     BrowserModule,
