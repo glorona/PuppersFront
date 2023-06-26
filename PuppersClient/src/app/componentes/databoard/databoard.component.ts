@@ -121,6 +121,7 @@ export class DataboardComponent {
 
   obtenerDatosVista(){
     if(this.selected == "option1"){
+      this.queryReady = false;
       this.areaClientes = true;
       this.localizacionClientes = false;
       this.mascotaPaseador = false;
@@ -129,6 +130,7 @@ export class DataboardComponent {
       console.log("Opcion1");
     }
     else if (this.selected == "option2"){
+      this.queryReady = false;
       this.areaClientes = false;
       this.localizacionClientes = true;
       this.mascotaPaseador = false;
@@ -137,6 +139,7 @@ export class DataboardComponent {
       console.log("Opcion2");
     }
     else if (this.selected == "option3"){
+      this.queryReady = false;
       this.areaClientes = false;
       this.localizacionClientes = false;
       this.mascotaPaseador = true;
@@ -145,6 +148,7 @@ export class DataboardComponent {
       console.log("Opcion 3");
     }
     else if (this.selected == "option4"){
+      this.queryReady = false;
       this.areaClientes = false;
       this.localizacionClientes = false;
       this.mascotaPaseador = false;
