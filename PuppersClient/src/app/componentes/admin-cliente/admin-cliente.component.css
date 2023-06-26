@@ -6,7 +6,6 @@
     border-radius: 20px;
     border-color: rgba(0, 0, 0, 0.655);
     padding: 16px;
-    text-align: center;
     display: flex;
   
   }
@@ -15,6 +14,18 @@
 width: 100%;
 padding: 3px;
 
+}
+
+.botontext{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 25px;
+}
+
+.botontext h5{
+    padding-top: 7px;
+    padding-left: 7px;
 }
 
 

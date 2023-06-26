@@ -43,6 +43,9 @@ import { ClienteGuard } from './servicios/cliente.guard';
 import { AuthyGuard } from './servicios/authy.guard';
 import { AdminGuard } from './servicios/admin.guard';
 import { ManageboardComponent } from './componentes/manageboard/manageboard.component';
+import { AdminClienteComponent } from './componentes/admin-cliente/admin-cliente.component';
+import { AdminPaseadorComponent } from './componentes/admin-paseador/admin-paseador.component';
+import { AdminMascotaComponent } from './componentes/admin-mascota/admin-mascota.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +60,10 @@ import { ManageboardComponent } from './componentes/manageboard/manageboard.comp
     PaseadorComponent,
     HomeclienteComponent,
     PaseadorprofileComponent,
-    ManageboardComponent
+    ManageboardComponent,
+    AdminClienteComponent,
+    AdminPaseadorComponent,
+    AdminMascotaComponent
   ],
   imports: [
     BrowserModule,

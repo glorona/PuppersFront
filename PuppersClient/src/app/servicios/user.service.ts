@@ -15,13 +15,10 @@ export class UserService {
 
 
   loginCliente(username: string, password: string): Observable<any>{
-    console.log(username)
-    console.log(password)
+
     return this.http.post('https://puppersappback-production.up.railway.app/clientes/log',{'client_user':username,'client_password':password}, httpOptions)
   }
   loginAdmin(username: string, password: string): Observable<any>{
-    console.log(username)
-    console.log(password)
     return this.http.post('https://puppersappback-production.up.railway.app/admin/log',{'admin_username':username,'admin_password':password})
   }
   loginPaseador(username: string, password: string): Observable<any>{

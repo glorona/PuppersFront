@@ -12,9 +12,15 @@ import { PaseadorGuard } from './servicios/paseador.guard';
 import { AdminGuard } from './servicios/admin.guard';
 import { ClienteGuard } from './servicios/cliente.guard';
 import { ManageboardComponent } from './componentes/manageboard/manageboard.component';
+import { AdminClienteComponent } from './componentes/admin-cliente/admin-cliente.component';
+import { AdminPaseadorComponent } from './componentes/admin-paseador/admin-paseador.component';
+import { AdminMascotaComponent } from './componentes/admin-mascota/admin-mascota.component';
 const routes: Routes = [
   {path:"dashboard",component:DashboardComponent, canActivate:[AdminGuard]},
   {path:"manageboard",component:ManageboardComponent,canActivate:[AdminGuard]},
+  {path:"adminCliente/:id",component:AdminClienteComponent,canActivate:[AdminGuard]},
+  {path:"adminPaseador/:id",component:AdminPaseadorComponent,canActivate:[AdminGuard]},
+  {path:"adminMascota/:id",component:AdminMascotaComponent,canActivate:[AdminGuard]},
   { path: "cliente/:id", component: ClienteComponent, canActivate:[ClienteGuard] },
   {path:"paseador",component:PaseadorComponent, canActivate:[PaseadorGuard]},
   {path:"databoard",component:DataboardComponent, canActivate:[AdminGuard]},

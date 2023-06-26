@@ -14,5 +14,9 @@ export class PaseadorService {
     return this.http.get(`https://puppersappback-production.up.railway.app/paseadores/${id}`)
   
   }
+
+  getMascotasPaseador(id: String){
+    return this.http.get(`https://puppersappback-production.up.railway.app/mascotasQueries/paseadores/${id}`);
+  }
   
 }

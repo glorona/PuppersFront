@@ -24,6 +24,9 @@ getMascotas() : Observable<Mascota[]>{
   }
   getMascotabyWalker(id:string){
     return this.http.get(`https://puppersappback-production.up.railway.app/mascotas/paseador/${id}`).pipe();
-  
+  }
+
+  getAllMascotasData(){
+    return this.http.get('https://puppersappback-production.up.railway.app/mascotasQueries/clientes/paseadores/all')
   }
 }

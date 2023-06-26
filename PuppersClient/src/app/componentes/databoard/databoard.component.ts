@@ -17,11 +17,12 @@ export class DataboardComponent {
   paseadores: Paseador[] = [];
   mascotas: Mascota[] = [];
   clientes: Cliente[] = [];
-  paseador: boolean = false;
-  cliente: boolean = false;
-  mascota: boolean = false;
-
+  areaClientes: boolean = false;
+  localizacionClientes: boolean = false;
+  mascotaPaseador: boolean = false;
+  mascotaDueno: boolean = false;
   constructor(private cliService:ClienteService, mascotaService:MascotaService, paseadorService: PaseadorService ){
+    
     cliService.getClientes().subscribe(respuesta => {
       this.clientes = respuesta as Cliente[];
     })
@@ -41,32 +42,47 @@ export class DataboardComponent {
 
   obtenerDatosVista(){
     if(this.selected == "option1"){
-      this.cliente = false;
-      this.paseador = true;
-      this.mascota = false;
+      this.areaClientes = true;
+      this.localizacionClientes = false;
+      this.mascotaPaseador = false;
+      this.mascotaDueno = false;
       this.listamostrar = this.paseadores;
       console.log("Opcion1");
       this.displayedColumns = ['ID', 'name', 'tel', 'ced','date'];
     }
     else if (this.selected == "option2"){
-      this.mascota = true;
-      this.paseador = false;
+      this.areaClientes = false;
+      this.localizacionClientes = true;
+      this.mascotaPaseador = false;
+      this.mascotaDueno = false;
       this.listamostrar = this.mascotas;
       console.log("Opcion2");
       this.displayedColumns = ['ID', 'name', 'raza', 'fecharenovar','servicio'];
     }
     else if (this.selected == "option3"){
-      this.cliente = true;
-      this.paseador = false;
-      this.mascota = false;
+      this.areaClientes = false;
+      this.localizacionClientes = false;
+      this.mascotaPaseador = true;
+      this.mascotaDueno = false;
       this.listamostrar = this.clientes;
       console.log("Opcion 3");
       this.displayedColumns = ['ID', 'name', 'tel', 'area','date'];
     }
+    else if (this.selected == "option4"){
+      this.areaClientes = false;
+      this.localizacionClientes = false;
+      this.mascotaPaseador = true;
+      this.mascotaDueno = false;
+      this.listamostrar = this.clientes;
+      console.log("Opcion 4");
+      this.displayedColumns = ['ID', 'name', 'tel', 'area','date'];
+
+    }
     else{
-      this.cliente = false;
-      this.paseador = false;
-      this.mascota = false;
+      this.areaClientes = false;
+      this.localizacionClientes = false;
+      this.mascotaPaseador = false;
+      this.mascotaDueno = false;
 
     }
 
