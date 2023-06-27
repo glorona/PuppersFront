@@ -9,6 +9,9 @@
             <h5>Volver</h5>
         </div>
         <h4>Informacion de {{mascotaInfo.pet_name}}</h4>
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" routerLink="/editMascota/{{mascotaInfo.pet_token}}" >Editar</button>
+        </div>
         <mat-divider></mat-divider>
         <mat-list>
             <div mat-subheader>Datos</div>

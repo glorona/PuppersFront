@@ -9,6 +9,9 @@
             <h5>Volver</h5>
         </div>
         <h4>Informacion de {{clienteInfo.client_name}}</h4>
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" routerLink="/editCliente/{{clienteInfo.client_tel}}" >Editar</button>
+        </div>
         <mat-divider></mat-divider>
         <mat-list>
             <div mat-subheader>Datos</div>
