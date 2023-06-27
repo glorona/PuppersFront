@@ -31,18 +31,6 @@ export class AuthyService {
     }
   }
 
-  registerAdmin(username: string, password:string){
-    return this.userService.registerAdmin(username,password)
-
-  }
-  
-  registerPaseador(ced: string, cel: string, date: string, username: string, password: string){
-    return this.userService.registerPaseador(ced,cel,date,username,password)
-  }
-
-  registerCliente(cel:string, name: string, date: string, username: string, password: string, location:string, area:string){
-    return this.userService.registerCliente(cel,name,date,username,password,location,area)
-  }
 
   getAuthStatus(){
     return this.logged;

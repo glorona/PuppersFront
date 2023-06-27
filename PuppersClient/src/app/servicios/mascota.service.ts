@@ -29,4 +29,12 @@ getMascotas() : Observable<Mascota[]>{
   getAllMascotasData(){
     return this.http.get('https://puppersappback-production.up.railway.app/mascotasQueries/clientes/paseadores/all')
   }
+
+  registerMascota(tel:string, walker:string,name:string,breed:string,service:string,renovation_date:string){
+    return this.http.post('https://puppersappback-production.up.railway.app/mascotas/mascotas/add',{'client_tel':tel,'walker_id':walker,'pet_name':name,'pet_breed':breed,'service':service,'renovation_date':renovation_date})
+  }
+
+  deleteMascota(id:string){
+    
+  }
 }

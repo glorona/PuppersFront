@@ -1,1 +1,60 @@
-<p>create-paseador works!</p>
+<app-navbar></app-navbar>
+<div class="contenidopag">
+    <app-sidenav></app-sidenav>
+    <div class="contenidoside">
+        <div class="botontext">
+            <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon" routerLink="/manageboard">
+              <mat-icon color="accent">arrow_back</mat-icon>
+            </button>
+            <h5>Volver</h5>
+        </div>
+        <h4>Nuevo Paseador</h4>
+        <mat-divider></mat-divider>
+
+        <div class="form">
+            <mat-form-field>
+                <mat-label>Nombre y Apellido del paseador: </mat-label>
+                <input matInput placeholder="Maria Espinal" [formControl]="nombre" [value]="nombre" required>
+                <mat-error *ngIf="nombre.invalid">{{getErrorNombre()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Usuario del paseador: </mat-label>
+                <input matInput placeholder="marlil" [formControl]="username" [value]="username" required>
+                <mat-error *ngIf="username.invalid">{{getErrorUsername()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Numero de telefono: </mat-label>
+                <input matInput placeholder="0992329405" [formControl]="telefono" [value]="telefono" required>
+                <mat-error *ngIf="telefono.invalid">{{getErrorCel()}}</mat-error>
+              </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Numero de cedula: </mat-label>
+              <input matInput placeholder="0926806043" [formControl]="cedula" [value]="cedula" required>
+              <mat-error *ngIf="cedula.invalid">{{getErrorCed()}}</mat-error>
+            </mat-form-field>
+
+
+
+            
+            <mat-error *ngIf="messageError">{{errorForm()}}</mat-error>
+            <div class="example-button-row">
+                <button mat-raised-button color="primary" (click)="onSubmit()">Crear</button>
+                <button mat-raised-button color="accent" routerLink="/manageboard">Cancelar</button>
+            </div>
+
+
+            
+        </div>
+        
+        
+        
+
+        
+
+    </div>
+
+
+</div>

@@ -52,6 +52,7 @@ import { CreateClienteComponent } from './componentes/create-cliente/create-clie
 import { EditMascotaComponent } from './componentes/edit-mascota/edit-mascota.component';
 import { EditPaseadorComponent } from './componentes/edit-paseador/edit-paseador.component';
 import { EditClienteComponent } from './componentes/edit-cliente/edit-cliente.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,7 +102,8 @@ import { EditClienteComponent } from './componentes/edit-cliente/edit-cliente.co
     HttpClientModule,
     MatTableModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule
   ],
   providers: [
     authInterceptorProviders, PaseadorGuard, ClienteGuard, AuthyGuard, AdminGuard

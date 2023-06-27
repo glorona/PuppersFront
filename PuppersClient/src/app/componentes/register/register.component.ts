@@ -23,17 +23,7 @@ export class RegisterComponent {
   onSubmit(): void {
     const { username, password} = this.form;
 
-    this.authService.registerAdmin(username, password).subscribe({
-      next: data => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-      },
-      error: err => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-      }
-    });
+    
   }
 
 }

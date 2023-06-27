@@ -27,4 +27,15 @@ export class ClienteService {
   getClientesLocation(loc: string){
     return this.http.get(`https://puppersappback-production.up.railway.app/mascotasQueries/clientes/location/${loc}`);
   }
+
+  registerCliente(cel:string, name: string, date: string, username: string, password: string, location:string, area:string){
+    return this.http.post('https://puppersappback-production.up.railway.app/clientes/add',{'client_tel':cel, 'client_name':name, 'start_date':date,'client_user':username,'client_password':password, 'location':location, 'area':area})
+  }
+
+  deleteCliente(id:string){
+
+    //return this.http.delete()
+
+  }
+
 }

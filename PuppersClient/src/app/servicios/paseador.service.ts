@@ -18,5 +18,14 @@ export class PaseadorService {
   getMascotasPaseador(id: String){
     return this.http.get(`https://puppersappback-production.up.railway.app/mascotasQueries/paseadores/${id}`);
   }
+
+  registerPaseador(ced: string, cel: string, name:string, date: string, username: string, password: string){
+    return this.http.post('https://puppersappback-production.up.railway.app/paseadores/add',{'walker_id':ced, 'walker_tel':cel, 'start_date':date, 'walker_user':username,'walker_password':password})
+  }
+
+  deletePaseador(id: string){
+    
+
+  }
   
 }
