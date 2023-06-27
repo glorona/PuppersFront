@@ -2,7 +2,7 @@
   <div class="card card-container">
     <img
       id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+      src="../../../assets/img/puppers.jpg"
       class="profile-img-card"
     />
     <form
@@ -13,7 +13,7 @@
       novalidate
     >
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="username">Usuario</label>
         <input
           type="text"
           class="form-control"
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">Contraseña</label>
         <input
           type="password"
           class="form-control"
@@ -64,7 +64,7 @@
         </mat-form-field>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block">
+        <button mat-raised-button color="primary" class="btn btn-primary btn-block">
           Login
         </button>
       </div>
@@ -82,5 +82,6 @@
     <div class="alert alert-success" *ngIf="isLoggedIn">
       Logged in as {{ rolesjson }}.
     </div>
+
   </div>
 </div>
