@@ -25,7 +25,7 @@ walker ='';
       this.mascota = peli as Mascota[];
       console.log(this.mascota)
 
-      
+      this.walker=(this.mascota[0].walker_ID);
        });
 /*
        this.clienteSvc.getCliente(this.mascota.client_tel).subscribe(cl =>{
@@ -41,11 +41,7 @@ this.clienteSvc.getCliente(this.ide).subscribe(cl =>{
   console.log(this.cliente);
 });
 
-mascotasSvc.getMascotabyClient(this.ide).subscribe(respuesta => {
-  this.mascota = respuesta as Array<Mascota>;
-  this.walker=(this.mascota[0].walker_ID);
 
-  });
 
 }
 

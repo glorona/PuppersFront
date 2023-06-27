@@ -39,7 +39,7 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"homecliente",component:HomeclienteComponent, canActivate:[ClienteGuard]},
-  {path:"paseadorprofile/:id",component:PaseadorprofileComponent, canActivate:[ClienteGuard]},
+  {path:"paseadorprofile/:id/:pet",component:PaseadorprofileComponent, canActivate:[ClienteGuard]},
   {path:"**",component:LoginComponent}
 ];
 

@@ -50,7 +50,7 @@
             
             </mat-card-content>
            
-            <mat-card-content routerLink="/paseadorprofile/{{walker}}">Conoce a tu paseador asignado</mat-card-content>
+            <mat-card-content *ngFor="let m of mascota" routerLink="/paseadorprofile/{{walker}}/{{m.pet_token}}">Conoce a tu paseador asignado</mat-card-content>
           </mat-card>
           <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
     </mat-grid-tile>
