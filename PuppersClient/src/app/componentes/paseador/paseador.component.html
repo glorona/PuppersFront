@@ -18,13 +18,16 @@
               <mat-label >Mascotas: </mat-label>
               <mat-select [(value)]="selected" >
                 <div *ngFor="let foto of mascotas">
-
-                    <mat-option value="{{foto.pet_token}" >{{foto.pet_name}}</mat-option>
+                    
+                    <mat-option value="{{foto.pet_token}}" (click)="obtenerDatosVista()" > {{foto.pet_name}} </mat-option>
 
 
                 </div>
             </mat-select>
-              </mat-form-field> 
+              </mat-form-field>
+              
+              <mat-card-content> Datos Mascota:</mat-card-content>
+              <mat-card-content> Datos:</mat-card-content>
            
           </mat-card>
         
