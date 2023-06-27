@@ -33,7 +33,7 @@ const routes: Routes = [
   {path:"addMascota",component:CreateMascotaComponent,canActivate:[AdminGuard]},
   {path:"addPaseador",component:CreatePaseadorComponent,canActivate:[AdminGuard]},
   {path:"addCliente",component:CreateClienteComponent,canActivate:[AdminGuard]},
-  { path: "cliente/:id", component: ClienteComponent, canActivate:[ClienteGuard] },
+  {path:"cliente/:id", component: ClienteComponent, canActivate:[ClienteGuard] },
   {path:"paseador",component:PaseadorComponent, canActivate:[PaseadorGuard]},
   {path:"databoard",component:DataboardComponent, canActivate:[AdminGuard]},
   {path:"login",component:LoginComponent},
