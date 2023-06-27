@@ -11,11 +11,11 @@
 }
 h2{
     padding: 25px;
-    font-size: 5vh;
+    font-size: 3.8vh;
 
 }
 h3{
-    font-size: 3vh;
+    font-size: 3.5vh;
     padding-left: 20px;
     
 }
@@ -32,7 +32,7 @@ h3{
 }
 
 .c2{
-    background-image: url(../../../assets/img/descarga.jpg);
+    background-image: url(../../../assets/img/paseador.jpg);
 }
 
 
@@ -59,12 +59,17 @@ h3{
 
 }
 
-  mat-card-content{
-    font-size: 4vh;
-  }
+  
+mat-card-content{
+  font-size: 3.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
 
 mat-card{
-    background-image: url(../../../assets/img/pupppy.jpeg) ;
+    background-image: url(../../../assets/img/perritos.jpg) ;
     
     background-size: cover;
     background-position: center;

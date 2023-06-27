@@ -13,7 +13,7 @@
             <mat-card-content>
                 
             </mat-card-content>
-            <mat-card-content>Selecciona tú mascota</mat-card-content>
+            <mat-card-content class="select">Selecciona tú mascota</mat-card-content>
             <mat-form-field >
               <mat-label >Mascotas: </mat-label>
               <mat-select [(value)]="selected" >
@@ -26,8 +26,8 @@
             </mat-select>
               </mat-form-field>
               
-              <mat-card-content> Datos Mascota:</mat-card-content>
-              <mat-card-content> Datos:</mat-card-content>
+              
+             
            
           </mat-card>
         
@@ -37,13 +37,12 @@
 
     <mat-grid-tile>
         <mat-card class="example-card c2"  >
+          <div *ngIf="selected">
+            <mat-card-content> <strong>Datos del Cliente</strong></mat-card-content>
+            <mat-card-content *ngFor="let c of cliente"> Área: {{c.location}},{{c.area}} <br>Teléfono: {{c.client_tel}} </mat-card-content>
+            <mat-card-content *ngFor="let m of mascota"><strong>Raza de la mascota:</strong> {{m.pet_breed}}  </mat-card-content>
+          </div>
             
-            <mat-card-content>
-              Marcar recepción de mascota
-            </mat-card-content>
-            <button class="btn btn-primary btn-block">
-              Marcar
-            </button>
           </mat-card>
           
     </mat-grid-tile>
@@ -55,6 +54,14 @@
           
           <mat-card-content>
             Marcar finalización del paseo
+          </mat-card-content>
+          <button class="btn btn-primary btn-block">
+            Marcar
+          </button>
+
+
+          <mat-card-content>
+            Marcar recepción de mascota
           </mat-card-content>
           <button class="btn btn-primary btn-block">
             Marcar

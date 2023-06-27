@@ -16,7 +16,9 @@ h2{
 }
 h3{
     font-size: 3vh;
-    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
 }
 .fontcolor{
@@ -53,7 +55,7 @@ h3{
   }
 
 mat-card{
-    background-image: url(../../../assets/img/pupppy.jpeg) ;
+    background-image: url(../../../assets/img/homecliente.jpg) ;
     
     background-size: cover;
     background-position: center;

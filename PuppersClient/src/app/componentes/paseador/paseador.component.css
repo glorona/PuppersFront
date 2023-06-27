@@ -10,12 +10,15 @@
 }
 h2{
     padding: 25px;
-    font-size: 5vh;
+    font-size: 4.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 h3{
-    font-size: 3vh;
-    padding-left: 20px;
+    font-size: 3.5vh;
+    padding-left: 10%;
     
 }
 .fontcolor{
@@ -35,15 +38,18 @@ mat-grid-list{
     width: 80%;
     height: 95%;
     align-items: center;
+    justify-content: centers;
     
     
   }
+  
 mat-form-field{
     width: 50%;
 }
 
   mat-card-content{
-    font-size: 4vh;
+    font-size: 3vh;
+    padding: 10px;
   }
 
 mat-card{
@@ -60,6 +66,7 @@ img{
 
 .c2{
     background-image: url(../../../assets/img/descarga.jpg) ;
+    
     
 }
 .c3{
@@ -86,3 +93,4 @@ button{
     border-color: white;
     
   }
+

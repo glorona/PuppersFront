@@ -5,8 +5,11 @@
     <span class="material-icons"  routerLink="/homecliente" style="color:white; font-size: 56px; transform: rotate(0deg); -webkit-text-stroke-width: 4px;"> arrow_back </span>
   </div>
   <div class="titles" *ngFor="let c of cliente">
-    <h2> {{c.client_name}} </h2>
-    <h3>Estos son tus detalles para el día de hoy</h3>
+    <h2>Hola {{c.client_name}} !</h2>
+    <div *ngFor="let m of mascota" class="">
+      <h3>Estos son los detalles de {{m.pet_name}}:</h3>
+    </div>
+   
   </div> 
     
 </div>
@@ -18,10 +21,10 @@
                 <mat-icon >pets</mat-icon>
             </mat-card-content>
             <mat-card-content *ngFor="let m of mascota">
-                En su plan de 30 paseos, le quedan {{m.service}} paseos disponibles! 
+                En su plan de {{m.service}} paseos, le quedan 30 paseos disponibles 
             </mat-card-content>
           </mat-card>
-          
+          <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
     </mat-grid-tile>
     
 
@@ -35,7 +38,7 @@
               Agenda de paseos
             </mat-card-content>
           </mat-card>
-          
+          <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
     </mat-grid-tile>
 
 

@@ -7,7 +7,7 @@
       </div>
       <div class="titles" >
         <h2>{{p.walker_name}} </h2>
-        <h3>¡Es tu paseador asignado!</h3>
+        <h3 *ngFor="let m of mascota">¡Es el paseador asignado para {{m.pet_name}}!</h3>
       </div>
     
     
@@ -16,8 +16,9 @@
     <mat-grid-tile class="cu1">
         <mat-card class="example-card">
             
-            
+            <mat-card-content><strong>Contacto:</strong></mat-card-content>
             <mat-card-content  >
+              
               Teléfono: {{p.walker_tel}} </mat-card-content>
           </mat-card>
         
@@ -27,7 +28,7 @@
 
     <mat-grid-tile>
         <mat-card class="example-card c2"  >
-            
+          <mat-card-content><strong>Información Adicional:</strong></mat-card-content>
             <mat-card-content>
               Total de paseos realizados: 15
             </mat-card-content>

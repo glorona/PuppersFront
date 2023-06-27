@@ -15,7 +15,7 @@ export class PaseadorprofileComponent {
   paseador : Paseador[]=[]
   ide=''
   idepaseador=''
-  mascotas:Mascota[]=[]
+  mascota:Mascota[]=[]
   constructor( private route: ActivatedRoute, private router: Router, private tokenSvc: TokenService, private paseadorSvc:PaseadorService, private mascotasSvc: MascotaService){
     const {id} = this.route.snapshot.params;
 
@@ -26,6 +26,10 @@ export class PaseadorprofileComponent {
       this.paseador = res as Paseador[];
       
       
+    });
+
+    mascotasSvc.getMascotabyClient(this.ide).subscribe(res=>{
+        this.mascota= res as Mascota[];
     });
   }
 }

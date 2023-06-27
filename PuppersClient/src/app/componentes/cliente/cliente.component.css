@@ -11,18 +11,22 @@
 }
 h2{
     padding: 25px;
-    font-size: 5vh;
+    font-size: 4vh;
 
 }
+.h2t{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 h3{
-    font-size: 3vh;
-    padding-left: 20px;
-    
+    font-size: 3.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .fontcolor{
     color: white;
-    
-    
 }
 .arrows{
     display: flex;
@@ -49,7 +53,11 @@ h3{
   }
 
   mat-card-content{
-    font-size: 4vh;
+    font-size: 3.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
   }
 
 mat-card{
