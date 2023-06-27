@@ -15,7 +15,13 @@
             </mat-grid-tile>
         </mat-grid-list>
         <div class="tabla" *ngIf="cliente">
-            <h3>Clientes</h3>
+            <div class="botontext">
+              <h3>Clientes</h3>
+              <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon" routerLink="/addCliente">
+                <mat-icon color="accent">add_circle_outline</mat-icon>
+              </button>
+            </div>
+            
             <table mat-table [dataSource]="listamostrar" class="mat-elevation-z0">
 
                 <!--- Note that these columns can be defined in any order.
@@ -66,7 +72,12 @@
 
         </div>
         <div class="tabla" *ngIf="paseador">
-            <h3>Paseadores</h3>
+            <div class="botontext">
+              <h3>Paseadores</h3>
+              <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon" routerLink="/addPaseador">
+                <mat-icon color="accent">add_circle_outline</mat-icon>
+              </button>
+            </div>
             <table mat-table [dataSource]="listamostrar" class="mat-elevation-z0">
 
                 <!--- Note that these columns can be defined in any order.
@@ -109,7 +120,13 @@
             </table>
         </div>
         <div class="tabla" *ngIf="mascota">
-            <h3>Mascotas</h3>
+
+            <div class="botontext">
+              <h3>Mascotas</h3>
+              <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon" routerLink="/addMascota">
+                <mat-icon color="accent">add_circle_outline</mat-icon>
+              </button>
+            </div>
             <table mat-table [dataSource]="listamostrar" class="mat-elevation-z0">
                 <!-- Position Column -->
                 <ng-container matColumnDef="name">

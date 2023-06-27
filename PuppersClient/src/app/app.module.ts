@@ -46,6 +46,12 @@ import { ManageboardComponent } from './componentes/manageboard/manageboard.comp
 import { AdminClienteComponent } from './componentes/admin-cliente/admin-cliente.component';
 import { AdminPaseadorComponent } from './componentes/admin-paseador/admin-paseador.component';
 import { AdminMascotaComponent } from './componentes/admin-mascota/admin-mascota.component';
+import { CreateMascotaComponent } from './componentes/create-mascota/create-mascota.component';
+import { CreatePaseadorComponent } from './componentes/create-paseador/create-paseador.component';
+import { CreateClienteComponent } from './componentes/create-cliente/create-cliente.component';
+import { EditMascotaComponent } from './componentes/edit-mascota/edit-mascota.component';
+import { EditPaseadorComponent } from './componentes/edit-paseador/edit-paseador.component';
+import { EditClienteComponent } from './componentes/edit-cliente/edit-cliente.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +69,13 @@ import { AdminMascotaComponent } from './componentes/admin-mascota/admin-mascota
     ManageboardComponent,
     AdminClienteComponent,
     AdminPaseadorComponent,
-    AdminMascotaComponent
+    AdminMascotaComponent,
+    CreateMascotaComponent,
+    CreatePaseadorComponent,
+    CreateClienteComponent,
+    EditMascotaComponent,
+    EditPaseadorComponent,
+    EditClienteComponent
   ],
   imports: [
     BrowserModule,
