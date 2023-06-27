@@ -16,14 +16,16 @@ export class AdminPaseadorComponent {
   mascotasAsignadas: Mascota[] = [];
   paseador: Paseador[] = [];
   paseadorInfo!: Paseador;
+  id_s!: string;
 
-  constructor(private route:ActivatedRoute, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService){
+  constructor(private route:ActivatedRoute, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
   }
 
   ngOnInit(){
 
     const {id} = this.route.snapshot.params;
+    this.id_s = id;
 
     this.paseadorService.getPaseador(id).subscribe(respuesta2 =>{
       this.paseador = respuesta2 as Paseador[];
@@ -33,6 +35,15 @@ export class AdminPaseadorComponent {
     this.mascotaService.getMascotabyWalker(id).subscribe(respuesta =>{
       this.mascotasAsignadas = respuesta as Mascota[];
       console.log(this.mascotasAsignadas)
+    })
+
+  }
+
+  del(){
+
+    this.paseadorService.deletePaseador(this.id_s).subscribe(respuesta2 =>{
+      console.log("Borrado!")
+      this.router.navigate(['/manageboard'])
     })
 
   }

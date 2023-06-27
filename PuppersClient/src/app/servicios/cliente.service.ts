@@ -34,7 +34,7 @@ export class ClienteService {
 
   deleteCliente(id:string){
 
-    //return this.http.delete()
+    return this.http.delete(`https://puppersappback-production.up.railway.app/clientes/delete/${id}`)
 
   }
 

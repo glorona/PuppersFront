@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { Mascota } from 'src/app/interfaces/mascota';
 import { Paseador } from 'src/app/interfaces/paseador';
@@ -17,19 +17,19 @@ export class AdminMascotaComponent {
   mascota: Mascota[] = [];
   dueno: Cliente[] = [];
   paseador: Paseador[] = [];
-  
+  id_s!: string;
   duenoInfo!: Cliente;
   paseadorInfo!: Paseador;
   mascotaInfo!: Mascota;
 
-  constructor(private route:ActivatedRoute, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService){
+  constructor(private route:ActivatedRoute, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
   }
 
   ngOnInit(){
 
     const {id} = this.route.snapshot.params;
-
+    this.id_s = id;
     this.mascotaService.getMascota(id).subscribe(respuesta2 =>{
       this.mascota = respuesta2 as Mascota[];
       this.mascotaInfo = this.mascota[0];
@@ -50,6 +50,15 @@ export class AdminMascotaComponent {
       this.paseadorInfo = this.paseador[0];
       console.log(this.paseadorInfo)
     })
+  }
+
+  del(){
+
+    this.mascotaService.deleteMascota(this.id_s).subscribe(respuesta2 =>{
+      console.log("Borrado!")
+      this.router.navigate(['/manageboard'])
+    })
+
   }
 
 

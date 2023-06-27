@@ -35,6 +35,7 @@ getMascotas() : Observable<Mascota[]>{
   }
 
   deleteMascota(id:string){
-    
+    return this.http.delete(`https://puppersappback-production.up.railway.app/mascotas/delete/${id}`)
+
   }
 }
