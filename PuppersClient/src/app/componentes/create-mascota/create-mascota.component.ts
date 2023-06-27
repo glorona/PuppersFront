@@ -51,6 +51,15 @@ export class CreateMascotaComponent {
       this.paseadores = respuesta as Paseador[];
     })
 
+    this.nombre.valueChanges.subscribe(value =>{
+      this.nombre.setValue(value,{emitEvent:false})
+      this.mascotaname = this.nombre.value;
+    })
+    this.breed.valueChanges.subscribe(value =>{
+      this.breed.setValue(value,{emitEvent:false})
+      this.breedmasc = this.breed.value;
+    })
+
 
 
   }

@@ -20,7 +20,7 @@ export class PaseadorService {
   }
 
   registerPaseador(ced: string, cel: string, name:string, date: string, username: string, password: string){
-    return this.http.post('https://puppersappback-production.up.railway.app/paseadores/add',{'walker_id':ced, 'walker_tel':cel, 'start_date':date, 'walker_user':username,'walker_password':password})
+    return this.http.post('https://puppersappback-production.up.railway.app/paseadores/add',{'walker_ID':ced, 'walker_tel':cel, 'walker_name':name, 'start_date':date, 'walker_user':username,'walker_password':password})
   }
 
   deletePaseador(id: string){

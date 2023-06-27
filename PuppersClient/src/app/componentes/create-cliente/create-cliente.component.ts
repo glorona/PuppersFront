@@ -34,6 +34,20 @@ export class CreateClienteComponent {
       }
     })
 
+    this.telefono.valueChanges.subscribe(value =>{
+      this.telefono.setValue(value,{emitEvent:false})
+      this.telclient = this.telefono.value;
+    })
+
+    this.nombre.valueChanges.subscribe(value =>{
+      this.nombre.setValue(value,{emitEvent:false})
+      this.nomclient = this.nombre.value;
+    })
+    this.username.valueChanges.subscribe(value =>{
+      this.username.setValue(value,{emitEvent:false})
+      this.userclient = this.username.value;
+    })
+
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);

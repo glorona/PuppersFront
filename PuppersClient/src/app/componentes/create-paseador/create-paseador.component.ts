@@ -4,6 +4,7 @@ import { Cliente } from 'src/app/interfaces/cliente';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
 const now = new Date();
+
 @Component({
   selector: 'app-create-paseador',
   templateUrl: './create-paseador.component.html',
@@ -18,7 +19,22 @@ export class CreatePaseadorComponent {
   selectedArea = 'default';
   selectedLocation = 'default';
   constructor(private paseadorService:PaseadorService, private router:Router){
-
+    this.telefono.valueChanges.subscribe(value =>{
+      this.telefono.setValue(value,{emitEvent:false})
+      this.telpaseador = this.telefono.value;
+    })
+    this.cedula.valueChanges.subscribe(value =>{
+      this.cedula.setValue(value,{emitEvent:false})
+      this.cedpaseador = this.cedula.value;
+    })
+    this.nombre.valueChanges.subscribe(value =>{
+      this.nombre.setValue(value,{emitEvent:false})
+      this.nompaseador = this.nombre.value;
+    })
+    this.username.valueChanges.subscribe(value =>{
+      this.username.setValue(value,{emitEvent:false})
+      this.userpaseador = this.username.value;
+    })
   }
 
   telefono = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(12)]);
@@ -103,7 +119,7 @@ export class CreatePaseadorComponent {
   }
 
   onSubmit(){
-
+    console.log(this.cedpaseador);
     if(this.telefono.invalid || this.nombre.invalid || this.cedula.invalid || this.username.invalid){
       console.log("Error!");
       this.errorForm();
@@ -111,8 +127,8 @@ export class CreatePaseadorComponent {
     else{
       this.messageError = false;
       this.paseadorService.registerPaseador(this.cedpaseador,this.telpaseador,this.nompaseador,this.fechaString,this.userpaseador,this.cedpaseador).subscribe(respuesta =>{  
-        console.log("Insertado!")
-        this.router.navigate(['/manageboard'])
+        console.log(respuesta)
+        //this.router.navigate(['/manageboard'])
       })
     }
 
