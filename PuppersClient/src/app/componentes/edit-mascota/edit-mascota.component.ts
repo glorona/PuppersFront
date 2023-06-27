@@ -81,6 +81,7 @@ export class EditMascotaComponent {
     this.mascotaService.getMascota(id).subscribe(respuesta2 =>{
       this.mascota = respuesta2 as Mascota[];
       this.mascotaInfo = this.mascota[0];
+      this.selectedService = this.mascotaInfo.service;
       this.getData();
 
       this.breed.setValue(this.mascotaInfo.pet_breed,{emitEvent:false});
@@ -95,6 +96,7 @@ export class EditMascotaComponent {
     this.clienteService.getCliente(this.mascotaInfo.client_tel).subscribe(respuesta =>{
       this.dueno = respuesta as Cliente[];
       this.duenoInfo = this.dueno[0];
+      this.selectedCliente = this.duenoInfo.client_tel;
     })
 
     this.paseadorService.getPaseador(this.mascotaInfo.walker_ID).subscribe(respuesta =>{
@@ -145,15 +147,15 @@ export class EditMascotaComponent {
 
   onSubmit(){
 
-    if( this.nombre.invalid || this.breed.invalid || this.selectedCliente == 'default' || this.selectedPaseador == 'default' || this.selectedService){
+    if(this.selectedCliente == 'default' || this.selectedPaseador == 'default' || this.selectedService == 'default'){
       console.log("Error!");
       this.errorForm();
     }
     else{
       this.messageError = false;
-      this.mascotaService.registerMascota(this.selectedCliente,this.selectedPaseador,this.mascotaname,this.breedmasc,this.selectedService,this.fechaString).subscribe(respuesta =>{
+      this.mascotaService.updateMascota(this.mascotaInfo.pet_token,this.selectedPaseador,this.mascotaname,this.breedmasc,this.selectedService,this.fechaString).subscribe(respuesta =>{
           
-        console.log("Insertado!")
+        console.log("Actualizado!")
         this.router.navigate(['/manageboard'])
       })
     }

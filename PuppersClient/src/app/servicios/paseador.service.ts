@@ -27,5 +27,12 @@ export class PaseadorService {
 
     return this.http.delete(`https://puppersappback-production.up.railway.app/paseadores/delete/${id}`)
   }
+
+  updatePaseador(ced: string, cel: string, name:string, date: string){
+
+    return this.http.put('https://puppersappback-production.up.railway.app/paseadores/update',{'walker_ID':ced, 'walker_tel':cel, 'walker_name':name, 'start_date':date})
+  }
+
+
   
 }

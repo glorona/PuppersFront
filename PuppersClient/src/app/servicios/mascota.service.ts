@@ -31,11 +31,17 @@ getMascotas() : Observable<Mascota[]>{
   }
 
   registerMascota(tel:string, walker:string,name:string,breed:string,service:string,renovation_date:string){
-    return this.http.post('https://puppersappback-production.up.railway.app/mascotas/mascotas/add',{'client_tel':tel,'walker_id':walker,'pet_name':name,'pet_breed':breed,'service':service,'renovation_date':renovation_date})
+    return this.http.post('https://puppersappback-production.up.railway.app/mascotas/add',{'client_tel':tel,'walker_ID':walker,'pet_name':name,'pet_breed':breed,'service':service,'renovation_date':renovation_date})
   }
 
   deleteMascota(id:string){
     return this.http.delete(`https://puppersappback-production.up.railway.app/mascotas/delete/${id}`)
+
+  }
+
+  updateMascota(id:number,walker:string,name:string,breed:string,service:string,renovation_date:string){
+
+    return this.http.put('https://puppersappback-production.up.railway.app/mascotas/update',{'pet_token':id,'walker_ID':walker,'pet_name':name,'pet_breed':breed,'service':service,'renovation_date':renovation_date})
 
   }
 }
