@@ -45,12 +45,12 @@
 
     <mat-grid-tile>
 
-        <mat-card class="example-card c3" routerLink="/paseadorprofile/{{walker}}" >
+        <mat-card class="example-card c3" *ngFor="let m of mascota" routerLink="/paseadorprofile/{{walker}}/{{m.pet_token}}" >
             <mat-card-content><mat-icon>add_circle</mat-icon>
             
             </mat-card-content>
            
-            <mat-card-content *ngFor="let m of mascota" routerLink="/paseadorprofile/{{walker}}/{{m.pet_token}}">Conoce a tu paseador asignado</mat-card-content>
+            <mat-card-content >Conoce a tu paseador asignado</mat-card-content>
           </mat-card>
           <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
     </mat-grid-tile>
