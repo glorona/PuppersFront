@@ -38,4 +38,10 @@ export class ClienteService {
 
   }
 
+  updateCliente(cel:string, name: string, date: string, location:string, area:string){
+
+    return this.http.put('https://puppersappback-production.up.railway.app/clientes/update',{'client_tel':cel, 'client_name':name, 'start_date':date, 'location':location, 'area':area})
+
+  }
+
 }
