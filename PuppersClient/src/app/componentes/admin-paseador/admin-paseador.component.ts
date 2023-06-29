@@ -6,6 +6,7 @@ import { PaseadorService } from 'src/app/servicios/paseador.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/servicios/token.service';
 import { Paseador } from 'src/app/interfaces/paseador';
+
 @Component({
   selector: 'app-admin-paseador',
   templateUrl: './admin-paseador.component.html',

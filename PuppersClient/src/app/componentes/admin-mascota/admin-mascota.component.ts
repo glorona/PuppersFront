@@ -6,7 +6,6 @@ import { Paseador } from 'src/app/interfaces/paseador';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { MascotaService } from 'src/app/servicios/mascota.service';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
-
 @Component({
   selector: 'app-admin-mascota',
   templateUrl: './admin-mascota.component.html',
