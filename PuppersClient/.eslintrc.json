@@ -40,7 +40,16 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/adjacent-overload-signatures": "error",
+        "@typescript-eslint/array-type": "error",
+        "@typescript-eslint/ban-tslint-comment": "error",
+        "@typescript-eslint/class-literal-property-style": "error",
+        "@typescript-eslint/consistent-generic-constructors": "error",
+        "semi": ["error", "always"],
+        "@typescript-eslint/no-explicit-any": ["error", {  "fixToUnknown": true}],
+        "curly": "error" 
+      }
     }
   ]
 }
