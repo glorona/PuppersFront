@@ -32,10 +32,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DataboardComponent } from './componentes/databoard/databoard.component';
 import { MatTableModule } from '@angular/material/table';
 import { PaseadorComponent } from './componentes/paseador/paseador.component';
-import { OktaAuth } from '@okta/okta-auth-js';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
-import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { HomeclienteComponent } from './componentes/homecliente/homecliente.component';
 import { PaseadorprofileComponent } from './componentes/paseadorprofile/paseadorprofile.component';
 import { PaseadorGuard } from './servicios/paseador.guard';
@@ -106,7 +104,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [
-    authInterceptorProviders, PaseadorGuard, ClienteGuard, AuthyGuard, AdminGuard
+     PaseadorGuard, ClienteGuard, AuthyGuard, AdminGuard
   ],
   bootstrap: [AppComponent]
 })

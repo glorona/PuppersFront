@@ -9,20 +9,32 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
+  address_test = "http://localhost:4001"
+  address_prod = "https://puppersappback-production.up.railway.app"
+  address = ""
+  TEST = true;
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) { 
+    if(this.TEST){
+      this.address = this.address_test;
+    }
+    else{
+      this.address = this.address_prod;
+    }
+  }
 
 
 
   loginCliente(username: string, password: string): Observable<any>{
 
-    return this.http.post('https://puppersappback-production.up.railway.app/clientes/log',{'client_user':username,'client_password':password}, httpOptions)
+    return this.http.post(this.address+'/clientes/log',{'client_user':username,'client_password':password}, httpOptions)
   }
   loginAdmin(username: string, password: string): Observable<any>{
-    return this.http.post('https://puppersappback-production.up.railway.app/admin/log',{'admin_username':username,'admin_password':password})
+    return this.http.post(this.address+'/admin/log',{'admin_username':username,'admin_password':password})
   }
   loginPaseador(username: string, password: string): Observable<any>{
-    return this.http.post('https://puppersappback-production.up.railway.app/paseadores/log',{'walker_user':username,'walker_password':password}, httpOptions)
+    return this.http.post(this.address+'/paseadores/log',{'walker_user':username,'walker_password':password}, httpOptions)
   }
 
 }

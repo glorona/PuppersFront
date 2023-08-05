@@ -1,36 +1,52 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { TokenService } from './token.service';
 @Injectable({
   providedIn: 'root'
 })
 export class PaseadorService {
+  address_test = "http://localhost:4001"
+  address_prod = "https://puppersappback-production.up.railway.app"
+  address = ""
+  TEST = true;
+  tokenusr: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private token: TokenService) {
+    this.tokenusr = token.getToken();
+    if(this.TEST){
+      this.address = this.address_test;
+    }
+    else{
+      this.address = this.address_prod;
+    }
+
+
+   }
 
   getPaseadores(){
-    return this.http.get('https://puppersappback-production.up.railway.app/paseadores/all')
+    return this.http.get(this.address+'/paseadores/all',{headers:{'auth':this.tokenusr}})
   }
-  getPaseador(id:String){
-    return this.http.get(`https://puppersappback-production.up.railway.app/paseadores/${id}`)
+  getPaseador(id:string){
+    return this.http.get(this.address+`/paseadores/${id}`,{headers:{'auth':this.tokenusr}})
   
   }
 
-  getMascotasPaseador(id: String){
-    return this.http.get(`https://puppersappback-production.up.railway.app/mascotasQueries/paseadores/${id}`);
+  getMascotasPaseador(id: string){
+    return this.http.get(this.address+`/mascotasQueries/paseadores/${id}`,{headers:{'auth':this.tokenusr}});
   }
 
   registerPaseador(ced: string, cel: string, name:string, date: string, username: string, password: string){
-    return this.http.post('https://puppersappback-production.up.railway.app/paseadores/add',{'walker_ID':ced, 'walker_tel':cel, 'walker_name':name, 'start_date':date, 'walker_user':username,'walker_password':password})
+    return this.http.post(this.address+'/paseadores/add',{'walker_ID':ced, 'walker_tel':cel, 'walker_name':name, 'start_date':date, 'walker_user':username,'walker_password':password},{headers:{'auth':this.tokenusr}})
   }
 
   deletePaseador(id: string){
 
-    return this.http.delete(`https://puppersappback-production.up.railway.app/paseadores/delete/${id}`)
+    return this.http.delete(this.address+`/paseadores/delete/${id}`,{headers:{'auth':this.tokenusr}})
   }
 
   updatePaseador(ced: string, cel: string, name:string, date: string){
 
-    return this.http.put('https://puppersappback-production.up.railway.app/paseadores/update',{'walker_ID':ced, 'walker_tel':cel, 'walker_name':name, 'start_date':date})
+    return this.http.put(this.address+'/paseadores/update',{'walker_ID':ced, 'walker_tel':cel, 'walker_name':name, 'start_date':date},{headers:{'auth':this.tokenusr}})
   }
 
 
