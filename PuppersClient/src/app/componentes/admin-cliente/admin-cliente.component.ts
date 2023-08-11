@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Area } from 'src/app/interfaces/area';
 import { Cliente } from 'src/app/interfaces/cliente';
+import { Localizacion } from 'src/app/interfaces/localizacion';
 import { Mascota } from 'src/app/interfaces/mascota';
 import { Paseador } from 'src/app/interfaces/paseador';
+import { ArealocationService } from 'src/app/servicios/arealocation.service';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { MascotaService } from 'src/app/servicios/mascota.service';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
@@ -16,8 +19,9 @@ export class AdminClienteComponent {
   mascotasAsignadas: Mascota[] = [];
   cliente: Cliente[] = [];
   clienteInfo!: Cliente;
+  loc!: Localizacion;
   id_s!: string;
-  constructor(private route:ActivatedRoute, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
+  constructor(private route:ActivatedRoute,private aloc:ArealocationService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
   }
 
@@ -33,6 +37,11 @@ export class AdminClienteComponent {
     this.mascotaService.getMascotabyClient(id).subscribe(respuesta =>{
       this.mascotasAsignadas = respuesta as Mascota[];
       console.log(this.mascotasAsignadas)
+    })
+
+    this.aloc.getLocation(this.clienteInfo.location_id).subscribe(respuesta =>{
+      this.loc = respuesta as Localizacion;
+
     })
 
   }

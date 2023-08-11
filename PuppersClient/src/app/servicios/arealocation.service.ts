@@ -37,11 +37,11 @@ export class ArealocationService {
 
 
 
-  getLocation(){
+  getLocations(){
     return this.http.get(this.address+'/locations/all',{headers:{'auth':this.tokenusr}})
   }
 
-  getLocations(id:number){
+  getLocation(id:number){
     return this.http.get(this.address+`/locations/${id}`,{headers:{'auth':this.tokenusr}})
   }
 
