@@ -8,7 +8,7 @@ export class ClienteService {
   address_test = "http://localhost:4001"
   address_prod = "https://puppersappback-production.up.railway.app"
   address = ""
-  TEST = true;
+  TEST = false;
   tokenusr: any;
 
   constructor(private http: HttpClient,private token: TokenService) {
@@ -31,6 +31,8 @@ export class ClienteService {
       return this.http.get(this.address+`/clientes/${id}`,{headers:{'auth':this.tokenusr}}).pipe();
   }
   
+
+  //Cambiar queries
   getClientesArea(){
     return this.http.get(this.address+'/mascotasQueries/clientes/all',{headers:{'auth':this.tokenusr}});
   }
@@ -43,8 +45,8 @@ export class ClienteService {
     return this.http.get(this.address+`/mascotasQueries/clientes/location/${loc}`,{headers:{'auth':this.tokenusr}});
   }
 
-  registerCliente(cel:string, name: string, date: string, username: string, password: string, location:string, area:string){
-    return this.http.post(this.address+'/clientes/add',{'client_tel':cel, 'client_name':name, 'start_date':date,'client_user':username,'client_password':password, 'location':location, 'area':area},{headers:{'auth':this.tokenusr}})
+  registerCliente(cel:string, id:string, name: string, date: string, email:string, username: string, password: string, location:number, adlink:string){
+    return this.http.post(this.address+'/clientes/add',{'client_tel':cel, "client_ID":id, 'client_name':name, 'start_date':date,'client_email':email,'client_user':username,'client_password':password, 'location_id':location, 'address_link':adlink},{headers:{'auth':this.tokenusr}})
   }
 
   deleteCliente(id:string){
@@ -53,10 +55,8 @@ export class ClienteService {
 
   }
 
-  updateCliente(cel:string, name: string, date: string, location:string, area:string){
-
-    return this.http.put(this.address+'/clientes/update',{'client_tel':cel, 'client_name':name, 'start_date':date, 'location':location, 'area':area},{headers:{'auth':this.tokenusr}})
-
+  updateCliente(cel:string, id:string, name: string, date: string, email:string, location:number, adlink:string){
+    return this.http.put(this.address+'/clientes/update',{'client_tel':cel, "client_ID":id, 'client_name':name, 'start_date':date,'client_email':email, 'location_id':location, 'address_link':adlink},{headers:{'auth':this.tokenusr}})
   }
 
 }

@@ -18,12 +18,12 @@ export class PaseadorGuard implements CanActivate {
 	canActivate(
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot): boolean | Promise<boolean> {
-    var isAuthenticated = false;
+    let isAuthenticated = false;
     if (this.tokSer.getToken()) {
       isAuthenticated = true;
     }
-    var roles = this.tokSer.getRoles();
-    var hasAccess = false;
+    const roles = this.tokSer.getRoles();
+    let hasAccess = false;
 		if (!isAuthenticated) {
 			this.router.navigate(['/login']);
 		}

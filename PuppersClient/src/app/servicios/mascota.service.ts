@@ -10,7 +10,7 @@ export class MascotaService {
   address_test = "http://localhost:4001"
   address_prod = "https://puppersappback-production.up.railway.app"
   address = ""
-  TEST = true;
+  TEST = false;
   tokenusr: any;
 
   constructor(private http: HttpClient,private token: TokenService) {
@@ -26,7 +26,7 @@ export class MascotaService {
   getMascotas(){
     return this.http.get(this.address+'/mascotas/all',{headers:{'auth':this.tokenusr}}).pipe();
   }
-  getMascota(id:string){
+  getMascota(id:number){
     return this.http.get(this.address+`/mascotas/${id}`,{headers:{'auth':this.tokenusr}}).pipe();
   } 
   getMascotabyClient(id:string){
@@ -36,22 +36,23 @@ export class MascotaService {
     return this.http.get(this.address+`/mascotas/paseador/${id}`,{headers:{'auth':this.tokenusr}}).pipe();
   }
 
+  //Query cambiar
   getAllMascotasData(){
     return this.http.get(this.address+'/mascotasQueries/clientes/paseadores/all',{headers:{'auth':this.tokenusr}})
   }
 
-  registerMascota(tel:string, walker:string,name:string,breed:string,service:string,renovation_date:string){
-    return this.http.post(this.address+'/mascotas/add',{'client_tel':tel,'walker_ID':walker,'pet_name':name,'pet_breed':breed,'service':service,'renovation_date':renovation_date},{headers:{'auth':this.tokenusr}})
+  registerMascota(id:string,name:string,breed:string,service:string,renovation_date:string){
+    return this.http.post(this.address+'/mascotas/add',{'client_ID':id,'pet_name':name,'pet_breed':breed,'service':service,'renovation_date':renovation_date},{headers:{'auth':this.tokenusr}})
   }
 
-  deleteMascota(id:string){
+  deleteMascota(id:number){
     return this.http.delete(this.address+`/mascotas/delete/${id}`,{headers:{'auth':this.tokenusr}})
 
   }
 
-  updateMascota(id:number,walker:string,name:string,breed:string,service:string,renovation_date:string){
+  updateMascota(id:number,name:string,breed:string,service:string,renovation_date:string){
 
-    return this.http.put(this.address+'/mascotas/update',{'pet_token':id,'walker_ID':walker,'pet_name':name,'pet_breed':breed,'service':service,'renovation_date':renovation_date},{headers:{'auth':this.tokenusr}})
+    return this.http.put(this.address+'/mascotas/update',{'pet_token':id,'pet_name':name,'pet_breed':breed,'service':service,'renovation_date':renovation_date},{headers:{'auth':this.tokenusr}})
 
   }
 }

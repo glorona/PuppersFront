@@ -12,7 +12,7 @@ export class UserService {
   address_test = "http://localhost:4001"
   address_prod = "https://puppersappback-production.up.railway.app"
   address = ""
-  TEST = true;
+  TEST = false;
 
 
   constructor(private http: HttpClient) { 
