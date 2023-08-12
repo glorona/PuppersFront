@@ -15,6 +15,7 @@ export class ClienteComponent {
 ide !: any;
 cliente : Cliente[]=[];
 walker ='';
+service='';
  constructor( private route: ActivatedRoute, private mascotasSvc:MascotaService, private tokenSvc: TokenService,private clienteSvc: ClienteService,private router: Router) { 
 
   const {id} = this.route.snapshot.params;
@@ -24,16 +25,11 @@ walker ='';
       
       this.mascota = peli as Mascota[];
       console.log(this.mascota)
+      // necesito acceder a walker id solo con id de mascota
+      //this.walker=(this.mascota[0].walker_ID);
 
-      this.walker=(this.mascota[0].walker_ID);
        });
-/*
-       this.clienteSvc.getCliente(this.mascota.client_tel).subscribe(cl =>{
-        this.cliente= cl as Cliente;
-        console.log(this.cliente);
-      });
-      
-*/
+
 this.ide=this.tokenSvc.getId();
 console.log(this.ide);
 this.clienteSvc.getCliente(this.ide).subscribe(cl =>{

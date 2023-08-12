@@ -39,7 +39,9 @@
         <mat-card class="example-card c2"  >
           <div *ngIf="selected">
             <mat-card-content> <strong>Datos del Cliente</strong></mat-card-content>
-            <mat-card-content *ngFor="let c of cliente"> Área: {{c.location}},{{c.area}} <br>Teléfono: {{c.client_tel}} </mat-card-content>
+            <mat-card-content *ngFor="let l of location"> Localización :{{l.location_name}} </mat-card-content>
+            <mat-card-content *ngFor="let a of area"> Área : {{a.area_name}} </mat-card-content>
+            <mat-card-content *ngFor="let c of cliente"> Teléfono: {{c.client_tel}} </mat-card-content>
             <mat-card-content *ngFor="let m of mascota"><strong>Raza de la mascota:</strong> {{m.pet_breed}}  </mat-card-content>
           </div>
             
