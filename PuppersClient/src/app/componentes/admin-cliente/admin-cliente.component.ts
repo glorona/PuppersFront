@@ -20,6 +20,7 @@ export class AdminClienteComponent {
   cliente: Cliente[] = [];
   clienteInfo!: Cliente;
   loc!: Localizacion;
+  area!: Area;
   id_s!: string;
   constructor(private route:ActivatedRoute,private aloc:ArealocationService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
@@ -42,6 +43,10 @@ export class AdminClienteComponent {
     this.aloc.getLocation(this.clienteInfo.location_id).subscribe(respuesta =>{
       this.loc = respuesta as Localizacion;
 
+    })
+
+    this.aloc.getArea(this.loc.area_id).subscribe(respuesta =>{
+      this.area = respuesta as Area;
     })
 
   }

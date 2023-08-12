@@ -16,7 +16,7 @@ export class AdminMascotaComponent {
   mascota: Mascota[] = [];
   dueno: Cliente[] = [];
   paseador: Paseador[] = [];
-  id_s!: string;
+  id_s!: number;
   duenoInfo!: Cliente;
   paseadorInfo!: Paseador;
   mascotaInfo!: Mascota;
@@ -28,7 +28,7 @@ export class AdminMascotaComponent {
   ngOnInit(){
 
     const {id} = this.route.snapshot.params;
-    this.id_s = id;
+    this.id_s = parseInt(id);
     this.mascotaService.getMascota(id).subscribe(respuesta2 =>{
       this.mascota = respuesta2 as Mascota[];
       this.mascotaInfo = this.mascota[0];
@@ -38,7 +38,7 @@ export class AdminMascotaComponent {
   }
 
   getData(){
-    this.clienteService.getCliente(this.mascotaInfo.client_tel).subscribe(respuesta =>{
+    this.clienteService.getCliente(this.mascotaInfo.client_ID).subscribe(respuesta =>{
       this.dueno = respuesta as Cliente[];
       this.duenoInfo = this.dueno[0];
       console.log(this.duenoInfo)
