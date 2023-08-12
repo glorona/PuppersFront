@@ -19,9 +19,39 @@
             </mat-form-field>
 
             <mat-form-field>
+                <mat-label>Tipo de sangre:</mat-label>
+        
+                <mat-select [(value)]="selectedbt">
+                  <mat-option value="default">Selecciona un tipo de sangre</mat-option>
+                  <div *ngFor="let ts of tipoSangre">
+                    <mat-option value={{ts}}>{{ts}}</mat-option>
+                  </div>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
                 <mat-label>Usuario del paseador: </mat-label>
                 <input matInput placeholder="marlil" [formControl]="username" [value]="username" required>
                 <mat-error *ngIf="username.invalid">{{getErrorUsername()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Direccion del paseador: </mat-label>
+                <input matInput placeholder="Bosques de la Costa" [formControl]="addr" [value]="addr" required>
+                <mat-error *ngIf="addr.invalid">{{getErrorAddr()}}</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field>
+                <mat-label>Link de direccion Google Maps del paseador: </mat-label>
+                <input matInput placeholder="https://goo.gl/maps/ewBM4pmCVJDWVGHL6" [formControl]="linkadd" [value]="linkadd" required>
+                <mat-error *ngIf="linkadd.invalid">{{getErrorLink()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Foto del paseador: </mat-label>
+                <input matInput placeholder="https://file.io/31331" [formControl]="photo" [value]="photo" required>
+                <mat-error *ngIf="photo.invalid">{{getErrorPhoto()}}</mat-error>
             </mat-form-field>
 
             <mat-form-field>

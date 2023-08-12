@@ -8,6 +8,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
 import { Paseador } from 'src/app/interfaces/paseador';
 import { MascotaService } from 'src/app/servicios/mascota.service';
+import { ArealocationService } from 'src/app/servicios/arealocation.service';
+import { Area } from 'src/app/interfaces/area';
+import { Localizacion } from 'src/app/interfaces/localizacion';
 const now = new Date();
 @Component({
   selector: 'app-create-mascota',
@@ -18,37 +21,19 @@ export class CreateMascotaComponent {
   fecha = now;
   fechaString = this.fechaformat(this.fecha);
   clientes: Cliente[] = [];
-  areas: string[] = [];
-  localizaciones: string[] = [];
-  selectedArea = 'default';
-  selectedLocation = 'default';
   selectedPaseador = 'default';
   selectedCliente = 'default';
   selectedService = 'default';
   paseadores: Paseador[] = [];
   nombre = new FormControl('',[Validators.required]);
   breed = new FormControl('',[Validators.required]);
-  formValid: boolean = false;
-  messageError: boolean = false;
+  formValid = false;
+  messageError = false;
   mascotaname: any = this.nombre.value;
   breedmasc: any = this.breed.value;
-  constructor(private paseadorService:PaseadorService,private cliService:ClienteService, private router:Router, private mascotaService:MascotaService){
+  constructor(private paseadorService:PaseadorService, private aloc:ArealocationService,private cliService:ClienteService, private router:Router, private mascotaService:MascotaService){
     cliService.getClientes().subscribe(respuesta => {
       this.clientes = respuesta as Cliente[];
-      for(var cliente of this.clientes){
-        if(!(this.areas.includes(cliente.area))){
-          this.areas.push(cliente.area)
-  
-        }
-        if(!(this.localizaciones.includes(cliente.location))){
-          this.localizaciones.push(cliente.location);
-  
-        }
-      }
-    })
-
-    paseadorService.getPaseadores().subscribe(respuesta =>{
-      this.paseadores = respuesta as Paseador[];
     })
 
     this.nombre.valueChanges.subscribe(value =>{
@@ -78,7 +63,7 @@ export class CreateMascotaComponent {
 
 
   getErrorNombre(){
-    var msg = ''
+    let msg = ''
     if (this.nombre.hasError('required')){
       
       msg = 'Debe ingresar un nombre';
@@ -89,7 +74,7 @@ export class CreateMascotaComponent {
   }
 
   getErrorbreed(){
-    var msg = ''
+    let msg = ''
     if (this.breed.hasError('required')){
       
       msg = 'Debe ingresar una raza';
@@ -108,13 +93,13 @@ export class CreateMascotaComponent {
 
   onSubmit(){
 
-    if( this.nombre.invalid || this.breed.invalid || this.selectedCliente == 'default' || this.selectedPaseador == 'default' || this.selectedService){
+    if( this.nombre.invalid || this.breed.invalid || this.selectedCliente == 'default' || this.selectedService){
       console.log("Error!");
       this.errorForm();
     }
     else{
       this.messageError = false;
-      this.mascotaService.registerMascota(this.selectedCliente,this.selectedPaseador,this.mascotaname,this.breedmasc,this.selectedService,this.fechaString).subscribe(respuesta =>{
+      this.mascotaService.registerMascota(this.selectedCliente,this.mascotaname,this.breedmasc,this.selectedService,this.fechaString).subscribe(respuesta =>{
           
         console.log("Insertado!")
         this.router.navigate(['/manageboard'])

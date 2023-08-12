@@ -14,10 +14,8 @@ export class CreatePaseadorComponent {
   fecha = now;
   fechaString = this.fechaformat(this.fecha);
   clientes: Cliente[] = [];
-  areas: string[] = [];
-  localizaciones: string[] = [];
-  selectedArea = 'default';
-  selectedLocation = 'default';
+  tipoSangre = ["A+","A-","B+","B-","AB+","AB-","O+","O-"]
+  selectedbt = "default";
   constructor(private paseadorService:PaseadorService, private router:Router){
     this.telefono.valueChanges.subscribe(value =>{
       this.telefono.setValue(value,{emitEvent:false})
@@ -35,19 +33,41 @@ export class CreatePaseadorComponent {
       this.username.setValue(value,{emitEvent:false})
       this.userpaseador = this.username.value;
     })
+
+    this.addr.valueChanges.subscribe(value =>{
+      this.addr.setValue(value,{emitEvent:false})
+      this.addrpaseador = this.addr.value;
+    })
+
+    this.linkadd.valueChanges.subscribe(value =>{
+      this.linkadd.setValue(value,{emitEvent:false})
+      this.linkaddpaseador = this.linkadd.value;
+    })
+
+    this.photo.valueChanges.subscribe(value =>{
+      this.photo.setValue(value,{emitEvent:false})
+      this.photopaseador = this.photo.value;
+    })
+
+
   }
 
   telefono = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(12)]);
   cedula = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(12)]);
   nombre = new FormControl('',[Validators.required]);
   username = new FormControl('',[Validators.required]);
-  formValid: boolean = false;
-  messageError: boolean = false;
+  addr = new FormControl('',[Validators.required]);
+  linkadd = new FormControl('',[Validators.required]);
+  photo = new FormControl('',[Validators.required]);
+  formValid= false;
+  messageError = false;
   telpaseador: any = this.telefono.value;
   nompaseador: any = this.nombre.value;
   userpaseador: any = this.username.value;
   cedpaseador: any = this.cedula.value;
-
+  addrpaseador: any = this.addr.value;
+  linkaddpaseador: any = this.linkadd.value;
+  photopaseador: any = this.photo.value;
   padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
   }
@@ -61,7 +81,7 @@ export class CreatePaseadorComponent {
   }
 
   getErrorCel(){
-    var msg = ''
+    let msg = ''
     if (this.telefono.hasError('required')){
       
       msg = 'Debe ingresar un telefono';
@@ -75,7 +95,7 @@ export class CreatePaseadorComponent {
   }
 
   getErrorCed(){
-    var msg = ''
+    let msg = ''
     if (this.cedula.hasError('required')){
       
       msg = 'Debe ingresar un numero de cedula';
@@ -89,7 +109,7 @@ export class CreatePaseadorComponent {
   }
 
   getErrorNombre(){
-    var msg = ''
+    let msg = ''
     if (this.nombre.hasError('required')){
       
       msg = 'Debe ingresar un nombre y apellido';
@@ -100,7 +120,7 @@ export class CreatePaseadorComponent {
   }
 
   getErrorUsername(){
-    var msg = ''
+    let msg = ''
     if (this.username.hasError('required')){
       
       msg = 'Debe ingresar un usuario';
@@ -109,6 +129,40 @@ export class CreatePaseadorComponent {
     return msg;
 
   }
+
+  getErrorAddr(){
+    let msg = ''
+    if (this.addr.hasError('required')){
+      
+      msg = 'Debe ingresar una localizacion';
+    }
+
+    return msg;
+
+  }
+
+  getErrorLink(){
+    let msg = ''
+    if (this.linkadd.hasError('required')){
+      
+      msg = 'Debe ingresar un link';
+    }
+
+    return msg;
+
+  }
+
+  getErrorPhoto(){
+    let msg = ''
+    if (this.photo.hasError('required')){
+      
+      msg = 'Debe ingresar una foto';
+    }
+
+    return msg;
+
+  }
+
 
   
 
@@ -120,13 +174,13 @@ export class CreatePaseadorComponent {
 
   onSubmit(){
     console.log(this.cedpaseador);
-    if(this.telefono.invalid || this.nombre.invalid || this.cedula.invalid || this.username.invalid){
+    if(this.telefono.invalid || this.nombre.invalid || this.cedula.invalid || this.username.invalid || this.addr.invalid || this.photo.invalid || this.linkadd.invalid){
       console.log("Error!");
       this.errorForm();
     }
     else{
       this.messageError = false;
-      this.paseadorService.registerPaseador(this.cedpaseador,this.telpaseador,this.nompaseador,this.fechaString,this.userpaseador,this.cedpaseador).subscribe(respuesta =>{  
+      this.paseadorService.registerPaseador(this.cedpaseador,this.telpaseador,this.nompaseador,this.fechaString,this.userpaseador,this.cedpaseador,this.addrpaseador,this.linkaddpaseador,this.photopaseador,this.selectedbt).subscribe(respuesta =>{  
         console.log(respuesta)
         //this.router.navigate(['/manageboard'])
       })
