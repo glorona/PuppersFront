@@ -30,6 +30,24 @@ export class ServicioService {
     return this.http.get(this.address+`/servicios/${id}`,{headers:{'auth':this.tokenusr}})
   }
 
+  getServicioMascota(id:number){
+    return this.http.get(this.address+`/servicios/mascotas/${id}`,{headers:{'auth':this.tokenusr}})
+  }
+
+  getServiciosMascota(id:number){
+    return this.http.get(this.address+`/servicios/mascotas/all/${id}`,{headers:{'auth':this.tokenusr}})
+  }
+
+  getServiciosPaseador(id:string){
+    return this.http.get(this.address+`/servicios/paseadores/${id}`,{headers:{'auth':this.tokenusr}})
+  }
+
+  getServiciosPaseadorMascota(id:number,walid:string){
+    return this.http.get(this.address+`/servicios/mascota/paseador/${id}/${walid}`,{headers:{'auth':this.tokenusr}})
+  }
+
+
+
   addServicio(ptoken:number,fid:number,wid:string){
     return this.http.post(this.address+'/servicios/add',{"pet_token":ptoken,"franja_id":fid,"walker_ID":wid},{headers:{'auth':this.tokenusr}})
 
