@@ -50,9 +50,9 @@ export class MascotaService {
 
   }
 
-  updateMascota(id:number,name:string,breed:string,service:string,renovation_date:string){
+  updateMascota(id:number,cid:string,name:string,breed:string,service:string,renovation_date:string){
 
-    return this.http.put(this.address+'/mascotas/update',{'pet_token':id,'pet_name':name,'pet_breed':breed,'service':service,'renovation_date':renovation_date},{headers:{'auth':this.tokenusr}})
+    return this.http.put(this.address+'/mascotas/update',{'pet_token':id,"client_ID":cid,'pet_name':name,'pet_breed':breed,'service':service,'renovation_date':renovation_date},{headers:{'auth':this.tokenusr}})
 
   }
 }

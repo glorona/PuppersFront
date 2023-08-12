@@ -6,6 +6,9 @@ import { ClienteService } from 'src/app/servicios/cliente.service';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
 import { MascotaService } from 'src/app/servicios/mascota.service';
 import { MascotaData } from 'src/app/interfaces/mascota-data';
+import { ArealocationService } from 'src/app/servicios/arealocation.service';
+import { Area } from 'src/app/interfaces/area';
+import { Localizacion } from 'src/app/interfaces/localizacion';
 @Component({
   selector: 'app-databoard',
   templateUrl: './databoard.component.html',
@@ -27,27 +30,17 @@ export class DataboardComponent {
   clientesQueryLista!: any;
   paseadoresQuery: any[] = [];
   paseadoresQueryLista!: any;
-  localizaciones: string[] = [];
-  areas: string[] = []
-  areaClientes: boolean = false;
-  localizacionClientes: boolean = false;
-  mascotaPaseador: boolean = false;
-  mascotaDueno: boolean = false;
-  queryReady: boolean = false;
-  constructor(private cliService:ClienteService, private mascotaService:MascotaService, private paseadorService: PaseadorService ){
+  localizaciones: Localizacion[] = [];
+  areas: Area[] = []
+  areaClientes = false;
+  localizacionClientes = false;
+  mascotaPaseador = false;
+  mascotaDueno = false;
+  queryReady = false;
+  constructor(private cliService:ClienteService, private aloc:ArealocationService, private mascotaService:MascotaService, private paseadorService: PaseadorService ){
     
     cliService.getClientes().subscribe(respuesta => {
       this.clientes = respuesta as Cliente[];
-      for(var cliente of this.clientes){
-        if(!(this.areas.includes(cliente.area))){
-          this.areas.push(cliente.area)
-
-        }
-        if(!(this.localizaciones.includes(cliente.location))){
-          this.localizaciones.push(cliente.location);
-
-        }
-      }
     })
 
     mascotaService.getMascotas().subscribe(respuesta =>{
@@ -58,6 +51,14 @@ export class DataboardComponent {
       this.paseadores = respuesta as Paseador[];
     })
 
+    aloc.getAreas().subscribe(respuesta =>{
+      this.areas = respuesta as Area[];
+    })
+
+    aloc.getLocations().subscribe(respuesta =>{
+      this.localizaciones = respuesta as Localizacion[];
+    })
+
 
 
 
@@ -66,6 +67,7 @@ export class DataboardComponent {
 
   queryArea(area: string){
     console.log(area);
+    /*
     this.cliService.getClientesAreaSpec(area).subscribe(respuesta =>{
       this.clientes = respuesta as any[];
       this.clientesQueryLista = this.clientes[0];
@@ -74,12 +76,14 @@ export class DataboardComponent {
       this.queryReady = true;
       console.log("Query ready")
     })
+    */
 
 
 
   }
 
   queryLocation(loc:string){
+    /*
     this.cliService.getClientesLocation(loc).subscribe(respuesta =>{
       this.clientes = respuesta as any[];
       this.clientesQueryLista = this.clientes[0];
@@ -88,10 +92,12 @@ export class DataboardComponent {
       this.queryReady = true;
       console.log("Query ready")
     })
+    */
     
   }
 
   queryPaseadores(id:string){
+    /*
     this.paseadorService.getMascotasPaseador(id).subscribe(respuesta =>{
       this.paseadoresQuery = respuesta as any[];
       this.paseadoresQueryLista = this.paseadoresQuery[0];
@@ -102,11 +108,13 @@ export class DataboardComponent {
 
       
     })
+    */
     
   }
 
   queryMascotasDuenos(){
     //this.obtenerDatosVista();
+    /*
     this.mascotaService.getAllMascotasData().subscribe(respuesta =>{
       this.mascotasData = respuesta as MascotaData[];
       this.mascotaLista = this.mascotasData[0];
@@ -116,6 +124,7 @@ export class DataboardComponent {
       console.log("Query ready");
 
     })
+    */
   }
 
 

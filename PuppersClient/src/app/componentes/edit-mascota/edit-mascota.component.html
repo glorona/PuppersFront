@@ -44,18 +44,6 @@
                     </div>
                   </mat-select>
             </mat-form-field>
-
-
-            <mat-form-field>
-                <mat-label>Paseador de la mascota:</mat-label>
-        
-                <mat-select [(value)]="selectedPaseador">
-                  <mat-option value="default">Selecciona un Paseador</mat-option>
-                  <div *ngFor="let paseador of paseadores">
-                    <mat-option value={{paseador.walker_ID}}>{{paseador.walker_name}}</mat-option>
-                  </div>
-                </mat-select>
-            </mat-form-field>
             <mat-error *ngIf="messageError">{{errorForm()}}</mat-error>
             <div class="example-button-row">
                 <button mat-raised-button color="primary" (click)="onSubmit()">Confirmar</button>

@@ -3,9 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { Mascota } from 'src/app/interfaces/mascota';
 import { Paseador } from 'src/app/interfaces/paseador';
+import { Servicio } from 'src/app/interfaces/servicio';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { MascotaService } from 'src/app/servicios/mascota.service';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
+import { ServicioService } from 'src/app/servicios/servicio.service';
 @Component({
   selector: 'app-admin-mascota',
   templateUrl: './admin-mascota.component.html',
@@ -16,12 +18,14 @@ export class AdminMascotaComponent {
   mascota: Mascota[] = [];
   dueno: Cliente[] = [];
   paseador: Paseador[] = [];
+  servicio: Servicio[] = [];
   id_s!: number;
   duenoInfo!: Cliente;
   paseadorInfo!: Paseador;
   mascotaInfo!: Mascota;
+  servicioInfo!: Servicio;
 
-  constructor(private route:ActivatedRoute, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
+  constructor(private route:ActivatedRoute, private serv:ServicioService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
   }
 
@@ -32,6 +36,11 @@ export class AdminMascotaComponent {
     this.mascotaService.getMascota(id).subscribe(respuesta2 =>{
       this.mascota = respuesta2 as Mascota[];
       this.mascotaInfo = this.mascota[0];
+    })
+
+    this.serv.getServicioMascota(this.mascotaInfo.pet_token).subscribe(respuesta =>{
+      this.servicio = respuesta as Servicio[];
+      this.servicioInfo = this.servicio[0];
       this.getData();
     })
 
@@ -44,11 +53,14 @@ export class AdminMascotaComponent {
       console.log(this.duenoInfo)
     })
 
-    this.paseadorService.getPaseador(this.mascotaInfo.walker_ID).subscribe(respuesta =>{
+    this.paseadorService.getPaseador(this.servicioInfo.walker_ID).subscribe(respuesta =>{
       this.paseador = respuesta as Paseador[];
       this.paseadorInfo = this.paseador[0];
       console.log(this.paseadorInfo)
     })
+
+
+    
   }
 
   del(){

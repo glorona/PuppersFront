@@ -16,10 +16,10 @@ export class EditPaseadorComponent {
   fecha = now;
   fechaString = this.fechaformat(this.fecha);
   clientes: Cliente[] = [];
-  areas: string[] = [];
-  localizaciones: string[] = [];
   selectedArea = 'default';
   selectedLocation = 'default';
+  tipoSangre = ["A+","A-","B+","B-","AB+","AB-","O+","O-"]
+  selectedbt = "default";
   constructor(private mascotaService:MascotaService, private route:ActivatedRoute,private paseadorService:PaseadorService, private router:Router){
     this.telefono.valueChanges.subscribe(value =>{
       this.telefono.setValue(value,{emitEvent:false})
@@ -37,18 +37,39 @@ export class EditPaseadorComponent {
       this.username.setValue(value,{emitEvent:false})
       this.userpaseador = this.username.value;
     })
+
+    this.addr.valueChanges.subscribe(value =>{
+      this.addr.setValue(value,{emitEvent:false})
+      this.addrpaseador = this.addr.value;
+    })
+
+    this.linkadd.valueChanges.subscribe(value =>{
+      this.linkadd.setValue(value,{emitEvent:false})
+      this.linkaddpaseador = this.linkadd.value;
+    })
+
+    this.photo.valueChanges.subscribe(value =>{
+      this.photo.setValue(value,{emitEvent:false})
+      this.photopaseador = this.photo.value;
+    })
   }
 
   telefono = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(12)]);
   cedula = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(12)]);
   nombre = new FormControl('',[Validators.required]);
   username = new FormControl('',[Validators.required]);
-  formValid: boolean = false;
-  messageError: boolean = false;
+  addr = new FormControl('',[Validators.required]);
+  linkadd = new FormControl('',[Validators.required]);
+  photo = new FormControl('',[Validators.required]);
+  formValid= false;
+  messageError = false;
   telpaseador: any = this.telefono.value;
   nompaseador: any = this.nombre.value;
   userpaseador: any = this.username.value;
   cedpaseador: any = this.cedula.value;
+  addrpaseador: any = this.addr.value;
+  linkaddpaseador: any = this.linkadd.value;
+  photopaseador: any = this.photo.value;
   paseador: Paseador[] = [];
   paseadorInfo!: Paseador;
   mascotasAsignadas: Mascota[] = [];
@@ -64,10 +85,17 @@ export class EditPaseadorComponent {
       this.cedula.setValue(this.paseadorInfo.walker_ID,{emitEvent:false})
       this.nombre.setValue(this.paseadorInfo.walker_name,{emitEvent:false})
       this.username.setValue(this.paseadorInfo.walker_user,{emitEvent:false})
+      this.linkadd.setValue(this.paseadorInfo.walker_linkaddress,{emitEvent:false})
+      this.addr.setValue(this.paseadorInfo.walker_address,{emitEvent:false})
+      this.photo.setValue(this.paseadorInfo.walker_photoURL,{emitEvent:false})
       this.userpaseador = this.username.value;
       this.nompaseador = this.nombre.value;
       this.cedpaseador = this.cedula.value;
       this.telpaseador = this.telefono.value;
+      this.addrpaseador = this.addr.value;
+      this.linkaddpaseador = this.linkadd.value;
+      this.photopaseador = this.photo.value;
+      this.selectedbt = this.paseadorInfo.walker_bloodtype;
     })
 
     this.mascotaService.getMascotabyWalker(id).subscribe(respuesta =>{
@@ -90,7 +118,7 @@ export class EditPaseadorComponent {
   }
 
   getErrorCel(){
-    var msg = ''
+    let msg = ''
     if (this.telefono.hasError('required')){
       
       msg = 'Debe ingresar un telefono';
@@ -104,7 +132,7 @@ export class EditPaseadorComponent {
   }
 
   getErrorCed(){
-    var msg = ''
+    let msg = ''
     if (this.cedula.hasError('required')){
       
       msg = 'Debe ingresar un numero de cedula';
@@ -118,7 +146,7 @@ export class EditPaseadorComponent {
   }
 
   getErrorNombre(){
-    var msg = ''
+    let msg = ''
     if (this.nombre.hasError('required')){
       
       msg = 'Debe ingresar un nombre y apellido';
@@ -129,7 +157,7 @@ export class EditPaseadorComponent {
   }
 
   getErrorUsername(){
-    var msg = ''
+    let msg = ''
     if (this.username.hasError('required')){
       
       msg = 'Debe ingresar un usuario';
@@ -138,6 +166,40 @@ export class EditPaseadorComponent {
     return msg;
 
   }
+
+  getErrorAddr(){
+    let msg = ''
+    if (this.addr.hasError('required')){
+      
+      msg = 'Debe ingresar una localizacion';
+    }
+
+    return msg;
+
+  }
+
+  getErrorLink(){
+    let msg = ''
+    if (this.linkadd.hasError('required')){
+      
+      msg = 'Debe ingresar un link';
+    }
+
+    return msg;
+
+  }
+
+  getErrorPhoto(){
+    let msg = ''
+    if (this.photo.hasError('required')){
+      
+      msg = 'Debe ingresar una foto';
+    }
+
+    return msg;
+
+  }
+
 
   
 
@@ -149,13 +211,13 @@ export class EditPaseadorComponent {
 
   onSubmit(){
     console.log(this.cedpaseador);
-    if(this.telefono.invalid || this.nombre.invalid || this.cedula.invalid || this.username.invalid){
+    if(this.telefono.invalid || this.nombre.invalid || this.cedula.invalid || this.username.invalid || this.addr.invalid || this.photo.invalid || this.linkadd.invalid){
       console.log("Error!");
       this.errorForm();
     }
     else{
       this.messageError = false;
-      this.paseadorService.updatePaseador(this.cedpaseador,this.telpaseador,this.nompaseador,this.fechaString).subscribe(respuesta =>{  
+      this.paseadorService.updatePaseador(this.cedpaseador,this.telpaseador,this.nompaseador,this.fechaString,this.addrpaseador,this.linkaddpaseador,this.photopaseador,this.selectedbt).subscribe(respuesta =>{  
         console.log(respuesta)
         this.router.navigate(['/manageboard'])
       })

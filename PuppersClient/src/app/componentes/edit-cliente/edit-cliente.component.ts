@@ -7,6 +7,9 @@ import { Cliente } from 'src/app/interfaces/cliente';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Mascota } from 'src/app/interfaces/mascota';
 import { MascotaService } from 'src/app/servicios/mascota.service';
+import { Area } from 'src/app/interfaces/area';
+import { Localizacion } from 'src/app/interfaces/localizacion';
+import { ArealocationService } from 'src/app/servicios/arealocation.service';
 const now = new Date();
 @Component({
   selector: 'app-edit-cliente',
@@ -18,27 +21,29 @@ export class EditClienteComponent {
   fecha = now;
   fechaString = this.fechaformat(this.fecha);
   clientes: Cliente[] = [];
-  areas: string[] = [];
-  localizaciones: string[] = [];
-  selectedArea = 'default';
-  selectedLocation = 'default';
+  areas: Area[] = [];
+  localizaciones: Localizacion[] = [];
+  areaCl: Area[] = [];
+  locaCl: Localizacion[] = [];
+  selectedArea = 0;
+  selectedLocation = 0;
   id_s = '';
   mascotasAsignadas: Mascota[] = [];
   cliente: Cliente[] = [];
   clienteInfo!: Cliente;
-  constructor(private route:ActivatedRoute,private mascotaService:MascotaService, private cliService:ClienteService, private router:Router){
+  locaClInfo!: Localizacion;
+  areaClInfo!: Area;
+  constructor(private route:ActivatedRoute,private aloc:ArealocationService,private mascotaService:MascotaService, private cliService:ClienteService, private router:Router){
     cliService.getClientes().subscribe(respuesta => {
       this.clientes = respuesta as Cliente[];
-      for(var cliente of this.clientes){
-        if(!(this.areas.includes(cliente.area))){
-          this.areas.push(cliente.area)
-  
-        }
-        if(!(this.localizaciones.includes(cliente.location))){
-          this.localizaciones.push(cliente.location);
-  
-        }
-      }
+    })
+
+    aloc.getAreas().subscribe(respuesta =>{
+      this.areas = respuesta as Area[];
+    })
+
+    aloc.getLocations().subscribe(respuesta =>{
+      this.localizaciones = respuesta as Localizacion[];
     })
 
     this.telefono.valueChanges.subscribe(value =>{
@@ -55,6 +60,21 @@ export class EditClienteComponent {
       this.userclient = this.username.value;
     })
 
+    this.email.valueChanges.subscribe(value =>{
+      this.email.setValue(value,{emitEvent:false})
+      this.emailclient = this.email.value;
+    })
+
+    this.cedula.valueChanges.subscribe(value =>{
+      this.cedula.setValue(value,{emitEvent:false})
+      this.cedclient = this.cedula.value;
+    })
+
+    this.link.valueChanges.subscribe(value =>{
+      this.link.setValue(value,{emitEvent:false})
+      this.linkclient = this.link.value;
+    })
+
   }
 
   ngOnInit(){
@@ -66,12 +86,29 @@ export class EditClienteComponent {
       this.clienteInfo = this.cliente[0];
       this.telefono.setValue(this.clienteInfo.client_tel,{emitEvent:false});
       this.nombre.setValue(this.clienteInfo.client_name,{emitEvent:false});
-      this.username.setValue(this.clienteInfo.client_user,{emitEvent:false})
-      this.selectedLocation = this.clienteInfo.location;
-      this.selectedArea = this.clienteInfo.area;
+      this.username.setValue(this.clienteInfo.client_user,{emitEvent:false});
+      this.link.setValue(this.clienteInfo.address_link,{emitEvent:false});
+      this.email.setValue(this.clienteInfo.client_email,{emitEvent:false});
+      this.cedula.setValue(this.clienteInfo.client_ID,{emitEvent:false});
+
+    })
+
+    this.aloc.getLocation(this.clienteInfo.location_id).subscribe(respuesta =>{
+      this.locaCl = respuesta as Localizacion[];
+      this.locaClInfo = this.locaCl[0];
+      this.selectedLocation = this.locaClInfo.location_id;
+    })
+
+    this.aloc.getArea(this.locaClInfo.area_id).subscribe(respuesta =>{
+      this.areaCl = respuesta as Area[];
+      this.areaClInfo = this.areaCl[0];
+      this.selectedArea = this.areaClInfo.area_id;
       this.telclient = this.telefono.value;
       this.nomclient = this.nombre.value;
       this.userclient = this.username.value;
+      this.emailclient = this.email.value;
+      this.cedclient = this.cedula.value;
+      this.linkclient = this.link.value;
     })
 
     this.mascotaService.getMascotabyClient(id).subscribe(respuesta =>{
@@ -82,14 +119,19 @@ export class EditClienteComponent {
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
-  telefono = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(12)]);
+  telefono = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(11)]);
+  cedula = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(11)]);
   nombre = new FormControl('',[Validators.required]);
   username = new FormControl('',[Validators.required]);
-  formValid: boolean = false;
-  messageError: boolean = false;
+  link = new FormControl('', [Validators.required, Validators.minLength(30)]);
+  formValid = false;
+  messageError = false;
   telclient: any = this.telefono.value;
   nomclient: any = this.nombre.value;
   userclient: any = this.username.value;
+  emailclient: any = this.email.value;
+  cedclient: any = this.cedula.value;
+  linkclient: any = this.link.value;
 
   padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
@@ -111,7 +153,7 @@ export class EditClienteComponent {
   }
 
   getErrorCel(){
-    var msg = ''
+    let msg = ''
     if (this.telefono.hasError('required')){
       
       msg = 'Debe ingresar un telefono';
@@ -125,7 +167,7 @@ export class EditClienteComponent {
   }
 
   getErrorNombre(){
-    var msg = ''
+    let msg = ''
     if (this.nombre.hasError('required')){
       
       msg = 'Debe ingresar un nombre y apellido';
@@ -136,7 +178,7 @@ export class EditClienteComponent {
   }
 
   getErrorUsername(){
-    var msg = ''
+    let msg = ''
     if (this.username.hasError('required')){
       
       msg = 'Debe ingresar un usuario';
@@ -144,6 +186,34 @@ export class EditClienteComponent {
 
     return msg;
 
+  }
+
+  getErrorLink(){
+    let msg = ''
+    if (this.link.hasError('required')){
+      
+      msg = 'Debe ingresar un link';
+    }
+
+    if(this.link.hasError('minlength')){
+      msg = 'Formato Invalido de link';
+    }
+
+    return msg;
+  }
+  
+  getErrorCed(){
+    let msg = ''
+    if (this.cedula.hasError('required')){
+      
+      msg = 'Debe ingresar una cedula';
+    }
+
+    if(this.cedula.hasError('maxlength') || this.cedula.hasError('minlength')){
+      msg = 'Formato Invalido de cedula';
+    }
+
+    return msg;
   }
 
   errorForm(){
@@ -154,13 +224,13 @@ export class EditClienteComponent {
 
   onSubmit(){
 
-    if(this.selectedArea == 'default' || this.selectedLocation == 'default'){
+    if(this.selectedArea == 0 || this.selectedLocation == 0){
       console.log("Error!");
       this.errorForm();
     }
     else{
       this.messageError = false;
-      this.cliService.updateCliente(this.telclient,this.nomclient,this.fechaString,this.selectedLocation,this.selectedArea).subscribe(respuesta =>{
+      this.cliService.updateCliente(this.telclient,this.cedclient,this.nomclient,this.fechaString,this.emailclient,this.selectedLocation,this.linkclient).subscribe(respuesta =>{
           
         console.log("Insertado!")
         this.router.navigate(['/manageboard'])

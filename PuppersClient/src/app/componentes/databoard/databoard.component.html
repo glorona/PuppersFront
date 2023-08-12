@@ -27,7 +27,7 @@
                     <mat-select [(value)]="selectedArea">
                       <mat-option value="default">Selecciona un Area</mat-option>
                       <div *ngFor="let area of areas">
-                        <mat-option value={{area}} (click)="queryArea(area)">{{area}}</mat-option>
+                        <mat-option value={{area}} (click)="queryArea(area.area_name)">{{area}}</mat-option>
                       </div>
                     </mat-select>
                   </mat-form-field>
@@ -91,7 +91,7 @@
                   <mat-select [(value)]="selectedLocation">
                     <mat-option value="default">Selecciona una Localizacion</mat-option>
                     <div *ngFor="let localizacion of localizaciones">
-                      <mat-option value={{localizacion}} (click)="queryLocation(localizacion)">{{localizacion}}</mat-option>
+                      <mat-option value={{localizacion}} (click)="queryLocation(localizacion.location_name)">{{localizacion}}</mat-option>
                     </div>
                   </mat-select>
                 </mat-form-field>

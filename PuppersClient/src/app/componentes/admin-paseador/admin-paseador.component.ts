@@ -6,6 +6,7 @@ import { PaseadorService } from 'src/app/servicios/paseador.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/servicios/token.service';
 import { Paseador } from 'src/app/interfaces/paseador';
+import { ServicioService } from 'src/app/servicios/servicio.service';
 
 @Component({
   selector: 'app-admin-paseador',
@@ -19,7 +20,7 @@ export class AdminPaseadorComponent {
   paseadorInfo!: Paseador;
   id_s!: string;
 
-  constructor(private route:ActivatedRoute, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
+  constructor(private route:ActivatedRoute, private serv:ServicioService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
   }
 

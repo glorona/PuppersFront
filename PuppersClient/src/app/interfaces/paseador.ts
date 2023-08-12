@@ -4,6 +4,7 @@ export interface Paseador {
     walker_tel: string
     walker_user: string
     walker_address: string
+    walker_linkaddress:string
     walker_photoURL: string
     walker_bloodtype: string
     walker_ID: string

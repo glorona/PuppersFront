@@ -21,7 +21,7 @@
             <mat-form-field>
               <mat-label>Email del cliente: </mat-label>
               <input matInput placeholder="marespi@gmail.com" [formControl]="email" [value]="email" required>
-              <mat-error *ngIf="email.invalid">{{getErrorCel()}}</mat-error>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
 
             <mat-form-field>
@@ -33,7 +33,7 @@
             <mat-form-field>
               <mat-label>Numero de cedula: </mat-label>
               <input matInput placeholder="0926805034" [formControl]="cedula" [value]="cedula" required>
-              <mat-error *ngIf="cedula.invalid">{{getErrorCel()}}</mat-error>
+              <mat-error *ngIf="cedula.invalid">{{getErrorCed()}}</mat-error>
             </mat-form-field>
 
 
@@ -47,7 +47,7 @@
                 <mat-label>Area:</mat-label>
         
                 <mat-select [(value)]="selectedArea">
-                  <mat-option value="default">Selecciona un Area</mat-option>
+                  <mat-option value=0>Selecciona un Area</mat-option>
                   <div *ngFor="let area of areas">
                     <mat-option value={{area.area_id}}>{{area.area_name}}</mat-option>
                   </div>

@@ -19,6 +19,17 @@
             </mat-form-field>
 
             <mat-form-field>
+                <mat-label>Tipo de sangre:</mat-label>
+        
+                <mat-select [(value)]="selectedbt" [disabled]="true">
+                  <mat-option value="default">Selecciona un tipo de sangre</mat-option>
+                  <div *ngFor="let ts of tipoSangre">
+                    <mat-option value={{ts}}>{{ts}}</mat-option>
+                  </div>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
                 <mat-label>Usuario del paseador: </mat-label>
                 <input matInput value={{userpaseador}} disabled>
                 <mat-error *ngIf="username.invalid">{{getErrorUsername()}}</mat-error>
@@ -35,6 +46,26 @@
               <input matInput value={{cedpaseador}} disabled>
               <mat-error *ngIf="cedula.invalid">{{getErrorCed()}}</mat-error>
             </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Direccion del paseador: </mat-label>
+                <input matInput value={{addrpaseador}} disabled>
+                <mat-error *ngIf="addr.invalid">{{getErrorAddr()}}</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field>
+                <mat-label>Link de direccion Google Maps del paseador: </mat-label>
+                <input matInput value={{linkaddpaseador}} disabled>
+                <mat-error *ngIf="linkadd.invalid">{{getErrorLink()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Foto del paseador: </mat-label>
+                <input matInput value={{photopaseador}} disabled>
+                <mat-error *ngIf="photo.invalid">{{getErrorPhoto()}}</mat-error>
+            </mat-form-field>
+
 
 
 

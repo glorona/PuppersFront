@@ -27,16 +27,14 @@ export class EditMascotaComponent {
   clientes: Cliente[] = [];
   areas: string[] = [];
   localizaciones: string[] = [];
-  selectedArea = 'default';
-  selectedLocation = 'default';
   selectedPaseador = 'default';
   selectedCliente = 'default';
   selectedService = 'default';
   paseadores: Paseador[] = [];
   nombre = new FormControl('',[Validators.required]);
   breed = new FormControl('',[Validators.required]);
-  formValid: boolean = false;
-  messageError: boolean = false;
+  formValid = false;
+  messageError = false;
   mascotaname: any = this.nombre.value;
   breedmasc: any = this.breed.value;
 
@@ -44,16 +42,7 @@ export class EditMascotaComponent {
   constructor(private route:ActivatedRoute, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
     clienteService.getClientes().subscribe(respuesta => {
       this.clientes = respuesta as Cliente[];
-      for(var cliente of this.clientes){
-        if(!(this.areas.includes(cliente.area))){
-          this.areas.push(cliente.area)
-  
-        }
-        if(!(this.localizaciones.includes(cliente.location))){
-          this.localizaciones.push(cliente.location);
-  
-        }
-      }
+      
     })
 
     paseadorService.getPaseadores().subscribe(respuesta =>{
@@ -93,16 +82,10 @@ export class EditMascotaComponent {
   }
 
   getData(){
-    this.clienteService.getCliente(this.mascotaInfo.client_tel).subscribe(respuesta =>{
+    this.clienteService.getCliente(this.mascotaInfo.client_ID).subscribe(respuesta =>{
       this.dueno = respuesta as Cliente[];
       this.duenoInfo = this.dueno[0];
       this.selectedCliente = this.duenoInfo.client_tel;
-    })
-
-    this.paseadorService.getPaseador(this.mascotaInfo.walker_ID).subscribe(respuesta =>{
-      this.paseador = respuesta as Paseador[];
-      this.paseadorInfo = this.paseador[0];
-      this.selectedPaseador = this.paseadorInfo.walker_ID;
     })
   }
   padTo2Digits(num: number) {
@@ -117,7 +100,7 @@ export class EditMascotaComponent {
     ].join('-'))
   }
   getErrorNombre(){
-    var msg = ''
+    let msg = ''
     if (this.nombre.hasError('required')){
       
       msg = 'Debe ingresar un nombre';
@@ -128,7 +111,7 @@ export class EditMascotaComponent {
   }
 
   getErrorbreed(){
-    var msg = ''
+    let msg = ''
     if (this.breed.hasError('required')){
       
       msg = 'Debe ingresar una raza';
@@ -147,13 +130,13 @@ export class EditMascotaComponent {
 
   onSubmit(){
 
-    if(this.selectedCliente == 'default' || this.selectedPaseador == 'default' || this.selectedService == 'default'){
+    if(this.nombre.invalid || this.breed.invalid || this.selectedCliente == 'default' || this.selectedService == 'default'){
       console.log("Error!");
       this.errorForm();
     }
     else{
       this.messageError = false;
-      this.mascotaService.updateMascota(this.mascotaInfo.pet_token,this.selectedPaseador,this.mascotaname,this.breedmasc,this.selectedService,this.fechaString).subscribe(respuesta =>{
+      this.mascotaService.updateMascota(this.mascotaInfo.pet_token,this.duenoInfo.client_ID,this.mascotaname,this.breedmasc,this.selectedService,this.fechaString).subscribe(respuesta =>{
           
         console.log("Actualizado!")
         this.router.navigate(['/manageboard'])
