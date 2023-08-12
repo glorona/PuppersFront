@@ -62,6 +62,11 @@ export class CreateClienteComponent {
       this.cedclient = this.cedula.value;
     })
 
+    this.link.valueChanges.subscribe(value =>{
+      this.link.setValue(value,{emitEvent:false})
+      this.linkclient = this.link.value;
+    })
+
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -69,6 +74,7 @@ export class CreateClienteComponent {
   cedula = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(11)]);
   nombre = new FormControl('',[Validators.required]);
   username = new FormControl('',[Validators.required]);
+  link = new FormControl('', [Validators.required, Validators.minLength(30)]);
   formValid = false;
   messageError = false;
   telclient: any = this.telefono.value;
@@ -76,6 +82,7 @@ export class CreateClienteComponent {
   userclient: any = this.username.value;
   emailclient: any = this.email.value;
   cedclient: any = this.cedula.value;
+  linkclient: any = this.link.value;
   padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
   }
@@ -107,6 +114,22 @@ export class CreateClienteComponent {
 
     return msg;
   }
+
+
+  getErrorLink(){
+    let msg = ''
+    if (this.link.hasError('required')){
+      
+      msg = 'Debe ingresar un link';
+    }
+
+    if(this.link.hasError('minlength')){
+      msg = 'Formato Invalido de link';
+    }
+
+    return msg;
+  }
+
 
   getErrorCed(){
     let msg = ''
@@ -152,13 +175,13 @@ export class CreateClienteComponent {
 
   onSubmit(){
 
-    if(this.telefono.invalid || this.nombre.invalid || this.username.invalid || this.selectedArea == 'default' || this.selectedLocation == 'default'){
+    if(this.telefono.invalid || this.link.invalid || this.nombre.invalid || this.cedula.invalid || this.username.invalid || this.selectedArea == 0 || this.selectedLocation == 0){
       console.log("Error!");
       this.errorForm();
     }
     else{
       this.messageError = false;
-      this.cliService.registerCliente(this.telclient, this.cedclient,this.nomclient,this.fechaString,this.userclient,this.cedclient,this.selectedLocation).subscribe(respuesta =>{
+      this.cliService.registerCliente(this.telclient, this.cedclient,this.nomclient,this.fechaString,this.emailclient,this.userclient,this.cedclient,this.selectedLocation,this.linkclient).subscribe(respuesta =>{
           
         console.log("Insertado!")
         this.router.navigate(['/manageboard'])

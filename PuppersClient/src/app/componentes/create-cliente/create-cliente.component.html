@@ -59,11 +59,17 @@
                 <mat-label>Localizacion:</mat-label>
         
                 <mat-select [(value)]="selectedLocation">
-                  <mat-option value="default">Selecciona una Localizacion</mat-option>
+                  <mat-option value=0>Selecciona una Localizacion</mat-option>
                   <div *ngFor="let location of localizaciones">
                     <mat-option value={{location.location_id}}>{{location.location_name}}</mat-option>
                   </div>
                 </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Link de Google maps: </mat-label>
+              <input matInput placeholder="https://goo.gl/maps/ewBM4pmCVJDWVGHL6" [formControl]="link" [value]="link" required>
+              <mat-error *ngIf="link.invalid">{{getErrorLink()}}</mat-error>
             </mat-form-field>
             <mat-error *ngIf="messageError">{{errorForm()}}</mat-error>
             <div class="example-button-row">
