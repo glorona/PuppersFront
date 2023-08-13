@@ -21,9 +21,9 @@ export class ManageboardComponent {
   mascotas1: Mascota[] = [];
   mascotalista!: MascotaData;
   clientes: Cliente[] = [];
-  paseador: boolean = false;
-  cliente: boolean = false;
-  mascota: boolean = false;
+  paseador = false;
+  cliente = false;
+  mascota = false;
 
   constructor(private cliService:ClienteService, mascotaService:MascotaService, paseadorService: PaseadorService ){
     cliService.getClientes().subscribe(respuesta => {
