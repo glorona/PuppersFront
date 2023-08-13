@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthyService } from 'src/app/servicios/authy.service';
 import { TokenService } from 'src/app/servicios/token.service';
-import {
-	ActivatedRouteSnapshot,
-	CanActivate,
-	Router,
-	RouterStateSnapshot,
-	UrlTree
-} from "@angular/router";
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

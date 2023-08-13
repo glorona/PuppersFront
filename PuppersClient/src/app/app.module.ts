@@ -50,6 +50,10 @@ import { EditMascotaComponent } from './componentes/edit-mascota/edit-mascota.co
 import { EditPaseadorComponent } from './componentes/edit-paseador/edit-paseador.component';
 import { EditClienteComponent } from './componentes/edit-cliente/edit-cliente.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ImageuploadComponent } from './common/imageupload/imageupload.component';
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +78,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     EditMascotaComponent,
     EditPaseadorComponent,
     EditClienteComponent,
+    ImageuploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +105,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTableModule,
     FormsModule,
     FlexLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
   ],
   providers: [
      PaseadorGuard, ClienteGuard, AuthyGuard, AdminGuard

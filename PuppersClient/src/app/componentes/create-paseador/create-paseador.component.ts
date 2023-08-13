@@ -4,6 +4,7 @@ import { Cliente } from 'src/app/interfaces/cliente';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
 const now = new Date();
+import {AngularFireStorage} from "@angular/fire/compat/storage"
 
 @Component({
   selector: 'app-create-paseador',
@@ -16,7 +17,7 @@ export class CreatePaseadorComponent {
   clientes: Cliente[] = [];
   tipoSangre = ["A+","A-","B+","B-","AB+","AB-","O+","O-"]
   selectedbt = "default";
-  constructor(private paseadorService:PaseadorService, private router:Router){
+  constructor(private paseadorService:PaseadorService, private fireStorage:AngularFireStorage, private router:Router){
     this.telefono.valueChanges.subscribe(value =>{
       this.telefono.setValue(value,{emitEvent:false})
       this.telpaseador = this.telefono.value;
@@ -44,12 +45,6 @@ export class CreatePaseadorComponent {
       this.linkaddpaseador = this.linkadd.value;
     })
 
-    this.photo.valueChanges.subscribe(value =>{
-      this.photo.setValue(value,{emitEvent:false})
-      this.photopaseador = this.photo.value;
-    })
-
-
   }
 
   telefono = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(12)]);
@@ -58,7 +53,6 @@ export class CreatePaseadorComponent {
   username = new FormControl('',[Validators.required]);
   addr = new FormControl('',[Validators.required]);
   linkadd = new FormControl('',[Validators.required]);
-  photo = new FormControl('',[Validators.required]);
   formValid= false;
   messageError = false;
   telpaseador: any = this.telefono.value;
@@ -67,7 +61,7 @@ export class CreatePaseadorComponent {
   cedpaseador: any = this.cedula.value;
   addrpaseador: any = this.addr.value;
   linkaddpaseador: any = this.linkadd.value;
-  photopaseador: any = this.photo.value;
+  photopaseador = "";
   padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
   }
@@ -92,6 +86,16 @@ export class CreatePaseadorComponent {
     }
 
     return msg;
+  }
+
+  async onFileChange(event:any){
+    const file = event.target.files[0]
+    if(file){
+      const path = `puppers/${file.name}`
+      const uploadTask =await this.fireStorage.upload(path,file)
+      this.photopaseador = await uploadTask.ref.getDownloadURL()
+      console.log(this.photopaseador)
+    }
   }
 
   getErrorCed(){
@@ -152,17 +156,6 @@ export class CreatePaseadorComponent {
 
   }
 
-  getErrorPhoto(){
-    let msg = ''
-    if (this.photo.hasError('required')){
-      
-      msg = 'Debe ingresar una foto';
-    }
-
-    return msg;
-
-  }
-
 
   
 
@@ -174,7 +167,7 @@ export class CreatePaseadorComponent {
 
   onSubmit(){
     console.log(this.cedpaseador);
-    if(this.telefono.invalid || this.nombre.invalid || this.cedula.invalid || this.username.invalid || this.addr.invalid || this.photo.invalid || this.linkadd.invalid){
+    if(this.telefono.invalid || this.nombre.invalid || this.cedula.invalid || this.username.invalid || this.addr.invalid || this.linkadd.invalid){
       console.log("Error!");
       this.errorForm();
     }

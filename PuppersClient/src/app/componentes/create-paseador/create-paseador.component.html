@@ -48,11 +48,7 @@
                 <mat-error *ngIf="linkadd.invalid">{{getErrorLink()}}</mat-error>
             </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Foto del paseador: </mat-label>
-                <input matInput placeholder="https://file.io/31331" [formControl]="photo" [value]="photo" required>
-                <mat-error *ngIf="photo.invalid">{{getErrorPhoto()}}</mat-error>
-            </mat-form-field>
+            
 
             <mat-form-field>
                 <mat-label>Numero de telefono: </mat-label>
@@ -65,6 +61,9 @@
               <input matInput placeholder="0926806043" [formControl]="cedula" [value]="cedula" required>
               <mat-error *ngIf="cedula.invalid">{{getErrorCed()}}</mat-error>
             </mat-form-field>
+
+            <label>Foto del paseador: </label><br>
+            <input type="file" (change)="onFileChange($event)" required>
 
 
 

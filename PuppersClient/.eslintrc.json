@@ -46,9 +46,17 @@
         "@typescript-eslint/ban-tslint-comment": "error",
         "@typescript-eslint/class-literal-property-style": "error",
         "@typescript-eslint/consistent-generic-constructors": "error",
-        "semi": ["error", "always"],
-        "@typescript-eslint/no-explicit-any": ["error", {  "fixToUnknown": true}],
-        "curly": "error" 
+        "semi": [
+          "error",
+          "always"
+        ],
+        "@typescript-eslint/no-explicit-any": [
+          "error",
+          {
+            "fixToUnknown": true
+          }
+        ],
+        "curly": "error"
       }
     }
   ]
