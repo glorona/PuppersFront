@@ -13,13 +13,21 @@
     
 </div>
 <mat-grid-list cols="1" rowHeight="3:1" gutterSize="40px" *ngFor="let p of paseador">
-    <mat-grid-tile class="cu1">
-        <mat-card class="example-card">
+   
+  
+  
+  <mat-grid-tile >
+
+        
+          
+        
+
+        <mat-card class="example-card cu1">
             
-            <mat-card-content><strong>Contacto:</strong></mat-card-content>
-            <mat-card-content  >
-              
-              Teléfono: {{p.walker_tel}} </mat-card-content>
+            <img class="profile-img-card" src="../../../assets/img/profile.png">
+            <mat-card-content>          
+              Teléfono: {{p.walker_tel}} <br> Dirección : {{p.walker_address}} <br> Tipo de sangre : {{p.walker_bloodtype}}</mat-card-content>
+
           </mat-card>
         
     </mat-grid-tile>
@@ -30,7 +38,7 @@
         <mat-card class="example-card c2"  >
           <mat-card-content><strong>Información Adicional:</strong></mat-card-content>
             <mat-card-content>
-              Total de paseos realizados: 15
+              Total de paseos realizados: *reemplazar*
             </mat-card-content>
           </mat-card>
           

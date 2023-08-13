@@ -21,7 +21,7 @@
                 <mat-icon >pets</mat-icon>
             </mat-card-content>
             <mat-card-content *ngFor="let m of mascota">
-                En su plan de {{m.service}} paseos, le quedan 30 paseos disponibles 
+                En su plan de {{m.service}} paseos, le quedan 30 paseos disponibles cambiar
             </mat-card-content>
           </mat-card>
           <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
@@ -34,8 +34,8 @@
             <mat-card-content><mat-icon>calendar_today</mat-icon>
                 
               </mat-card-content>
-            <mat-card-content>
-              Agenda de paseos
+            <mat-card-content *ngFor="let f of franja">
+              Franja Horaria: {{f.convertido}}
             </mat-card-content>
           </mat-card>
           <mat-icon class="arrow">keyboard_arrow_right</mat-icon>

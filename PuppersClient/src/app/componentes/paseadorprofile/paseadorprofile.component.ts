@@ -7,6 +7,7 @@ import { TokenService } from 'src/app/servicios/token.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { ClienteService } from 'src/app/servicios/cliente.service';
+import { PaseoService } from 'src/app/servicios/paseo.service';
 
 @Component({
   selector: 'app-paseadorprofile',
@@ -19,7 +20,8 @@ export class PaseadorprofileComponent {
   idepaseador=''
   mascota:Mascota[]=[]
   cliente: Cliente[]=[]
-  constructor( private route: ActivatedRoute, private router: Router, private tokenSvc: TokenService, private paseadorSvc:PaseadorService, private mascotasSvc: MascotaService,private clienteSvc:ClienteService){
+  cuentapaseos=0;
+  constructor( private route: ActivatedRoute,private paseoSvc:PaseoService, private router: Router, private tokenSvc: TokenService, private paseadorSvc:PaseadorService, private mascotasSvc: MascotaService,private clienteSvc:ClienteService){
     const {id,pet} = this.route.snapshot.params;
     console.log(id)
     this.ide=tokenSvc.getId();
@@ -30,7 +32,10 @@ export class PaseadorprofileComponent {
       
       
     });
-
+    /*
+    paseoSvc.getPaseosCountPaseador(id).subscribe(conteo=>{
+      console.log(conteo)
+    });*/
     mascotasSvc.getMascota(pet).subscribe(res=>{
         this.mascota= res as Mascota[];
     });

@@ -5,6 +5,11 @@ import { ClienteService } from 'src/app/servicios/cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { TokenService } from 'src/app/servicios/token.service';
+import { ServicioService } from 'src/app/servicios/servicio.service';
+import { Servicio } from 'src/app/interfaces/servicio';
+import { FranjaService } from 'src/app/servicios/franja.service';
+import { FranjaHoraria } from 'src/app/interfaces/franja-horaria';
+import { PaseadorService } from 'src/app/servicios/paseador.service';
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
@@ -14,9 +19,11 @@ export class ClienteComponent {
  mascota : Mascota[]=[];
 ide !: any;
 cliente : Cliente[]=[];
+servicio : Servicio[]=[];
 walker ='';
 service='';
- constructor( private route: ActivatedRoute, private mascotasSvc:MascotaService, private tokenSvc: TokenService,private clienteSvc: ClienteService,private router: Router) { 
+franja: FranjaHoraria[]=[];
+ constructor( private route: ActivatedRoute,private paseadorSvc : PaseadorService,private franjaSv : FranjaService, private servicioSv: ServicioService,private mascotasSvc:MascotaService, private tokenSvc: TokenService,private clienteSvc: ClienteService,private router: Router) { 
 
   const {id} = this.route.snapshot.params;
   
@@ -28,6 +35,17 @@ service='';
       // necesito acceder a walker id solo con id de mascota
       //this.walker=(this.mascota[0].walker_ID);
 
+      //servicio para extraer la franja
+servicioSv.getServicioMascota(id).subscribe(s=>{
+  this.servicio= s as Servicio[];
+  this.walker=this.servicio[0].walker_ID;
+  
+  //this.servicio[0].franja_id
+  
+  franjaSv.getFranja(this.servicio[0].franja_id).subscribe(f=>{
+    this.franja= (f as FranjaHoraria[])
+  });
+});
        });
 
 this.ide=this.tokenSvc.getId();

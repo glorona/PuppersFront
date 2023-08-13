@@ -25,13 +25,16 @@ export class PaseadorComponent {
   mascota : Mascota[]=[]
   cliente : Cliente[]=[]
   location : Localizacion[]=[]
+  location2=''
   cedula = ''
   area : Area[]=[]
+  mascotabreed=''
+  areaname='';
   constructor(private mascotaService: MascotaService,private tokenSvc: TokenService,private paseadorSvc: PaseadorService, private clienteSvc : ClienteService,private locationSvc : ArealocationService){
     this.ide= tokenSvc.getId();
    mascotaService.getMascotabyWalker(this.ide).subscribe(respuesta => {
     this.mascotas = respuesta as Array<Mascota>;
-    console.log(this.mascotas);
+    this.mascotabreed= this.mascotas[0].pet_breed;
     });
 
 
@@ -50,8 +53,8 @@ export class PaseadorComponent {
   obtenerDatosVista(){
       console.log(this.selected);
       this.mascotaService.getMascota(this.selected).subscribe(res =>{
-          this.mascota = res as Mascota[];
-          console.log("mascota")
+      this.mascota = res as Mascota[];
+      console.log("mascota")
       console.log(this.mascota)
       
       this.cedula = (this.mascota[0].client_ID);
@@ -62,8 +65,10 @@ export class PaseadorComponent {
         
         this.locationSvc.getLocation(this.cliente[0].location_id).subscribe(l=>{
           this.location= l as Localizacion[];
+          this.location2=this.location[0].location_name;
           this.locationSvc.getArea(this.location[0].area_id).subscribe(a=>{
             this.area = a as Area[];
+            this.areaname= this.area[0].area_name
           });
         });
 

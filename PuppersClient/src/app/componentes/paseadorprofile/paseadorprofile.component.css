@@ -10,12 +10,12 @@
    
 }
 h2{
-    padding: 25px;
+    padding: 3vh;
     font-size: 3.8vh;
 
 }
 h3{
-    font-size: 3.5vh;
+    font-size: 2.9vh;
     padding-left: 20px;
     
 }
@@ -35,7 +35,10 @@ h3{
     background-image: url(../../../assets/img/paseador.jpg);
 }
 
-
+.cu1{
+  display: flex;
+   flex-direction: row;
+}
 .mat-grid-tile :hover{
     color: grey;
 }
@@ -61,11 +64,11 @@ h3{
 
   
 mat-card-content{
-  font-size: 3.5vh;
+  font-size: 2.9vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px;
+  padding: 10px;
 }
 
 mat-card{
@@ -145,9 +148,9 @@ label {
   }
 
   .profile-img-card {
-    width: 80%;
-    height: 90px;
-    margin: 0 auto 10px;
-    display: block;
+    width: 35vw;
+    height: auto;
+    margin: 15px;
+    border-radius: 10%;
 
   }

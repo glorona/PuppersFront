@@ -10,9 +10,7 @@
     <mat-grid-tile class="cu1">
         <mat-card class="example-card" >
             
-            <mat-card-content>
-                
-            </mat-card-content>
+            
             <mat-card-content class="select">Selecciona tú mascota</mat-card-content>
             <mat-form-field >
               <mat-label >Mascotas: </mat-label>
@@ -20,13 +18,15 @@
                 <div *ngFor="let foto of mascotas">
                     
                     <mat-option value="{{foto.pet_token}}" (click)="obtenerDatosVista()" > {{foto.pet_name}} </mat-option>
-
+                    
 
                 </div>
+                
             </mat-select>
+            
               </mat-form-field>
               
-              
+              <mat-card-content *ngIf="selected">Raza: {{mascotabreed}}</mat-card-content>
              
            
           </mat-card>
@@ -38,11 +38,9 @@
     <mat-grid-tile>
         <mat-card class="example-card c2"  >
           <div *ngIf="selected">
-            <mat-card-content> <strong>Datos del Cliente</strong></mat-card-content>
-            <mat-card-content *ngFor="let l of location"> Localización :{{l.location_name}} </mat-card-content>
-            <mat-card-content *ngFor="let a of area"> Área : {{a.area_name}} </mat-card-content>
-            <mat-card-content *ngFor="let c of cliente"> Teléfono: {{c.client_tel}} </mat-card-content>
-            <mat-card-content *ngFor="let m of mascota"><strong>Raza de la mascota:</strong> {{m.pet_breed}}  </mat-card-content>
+
+            <mat-card-content *ngFor="let c of cliente"> Detalle del cliente<br>Nombre: {{c.client_name }}<br>Teléfono: {{c.client_tel}} <br>Localización: {{location2}} <br>Área: {{areaname}}</mat-card-content>
+           
           </div>
             
           </mat-card>
@@ -55,7 +53,7 @@
       <mat-card class="example-card c3"  >
           
           <mat-card-content>
-            Marcar finalización del paseo
+            Marcar recepción de Mascota
           </mat-card-content>
           <button class="btn btn-primary btn-block">
             Marcar
@@ -63,7 +61,7 @@
 
 
           <mat-card-content>
-            Marcar recepción de mascota
+            Marcar finalización del paseo
           </mat-card-content>
           <button class="btn btn-primary btn-block">
             Marcar

@@ -10,14 +10,14 @@
 }
 h2{
     padding: 25px;
-    font-size: 4.5vh;
+    font-size: 3vh;
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
 h3{
-    font-size: 3.5vh;
+    font-size: 2.9vh;
     padding-left: 10%;
     
 }
@@ -38,7 +38,7 @@ mat-grid-list{
     width: 80%;
     height: 95%;
     align-items: center;
-    justify-content: centers;
+    justify-content: center;
     
     
   }
@@ -48,7 +48,7 @@ mat-form-field{
 }
 
   mat-card-content{
-    font-size: 3vh;
+    font-size: 2.9vh;
     padding: 10px;
   }
 
