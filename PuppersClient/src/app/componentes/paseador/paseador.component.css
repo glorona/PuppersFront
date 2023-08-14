@@ -1,6 +1,9 @@
 *{
     
     font-family:Georgia, 'Times New Roman', Times, serif ;
+    
+    
+    
         
 }
 .titles{
@@ -36,7 +39,7 @@ mat-grid-list{
 }
 .example-card {
     width: 80%;
-    height: 95%;
+    height: 100%;
     align-items: center;
     justify-content: center;
     
@@ -85,12 +88,22 @@ img{
    
     
 }
+input{
+    justify-content: center;
+}
 
 button{
-    width: 40%;
+    width: 30%;
     background-color: white;
     color: black;
-    border-color: white;
+    border-color:white;
+    margin-bottom: 10px;
+
     
   }
+
+.btn:hover{
+    background-color: #5F0731;
+    border-color: #5F0731;
+}
 

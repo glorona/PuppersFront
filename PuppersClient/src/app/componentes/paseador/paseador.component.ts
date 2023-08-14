@@ -10,6 +10,11 @@ import { ClienteService } from 'src/app/servicios/cliente.service';
 import { ArealocationService } from 'src/app/servicios/arealocation.service';
 import { Localizacion } from 'src/app/interfaces/localizacion';
 import { Area } from 'src/app/interfaces/area';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { PaseoService } from 'src/app/servicios/paseo.service';
+import { ServicioService } from 'src/app/servicios/servicio.service';
+import { Servicio } from 'src/app/interfaces/servicio';
+import { Paseo } from 'src/app/interfaces/paseo';
 @Component({
   selector: 'app-paseador',
   templateUrl: './paseador.component.html',
@@ -30,11 +35,15 @@ export class PaseadorComponent {
   area : Area[]=[]
   mascotabreed=''
   areaname='';
-  constructor(private mascotaService: MascotaService,private tokenSvc: TokenService,private paseadorSvc: PaseadorService, private clienteSvc : ClienteService,private locationSvc : ArealocationService){
+  mostrar=false;
+  photopaseo=''
+  servicio :Servicio[]=[] 
+  paseo : Paseo[]=[]
+  constructor(private fireStorage:AngularFireStorage,paseoSvc : PaseoService,private mascotaService: MascotaService,private tokenSvc: TokenService,private paseadorSvc: PaseadorService, private clienteSvc : ClienteService,private locationSvc : ArealocationService,private servicioSvc:ServicioService){
     this.ide= tokenSvc.getId();
    mascotaService.getMascotabyWalker(this.ide).subscribe(respuesta => {
     this.mascotas = respuesta as Array<Mascota>;
-    this.mascotabreed= this.mascotas[0].pet_breed;
+    
     });
 
 
@@ -47,6 +56,7 @@ export class PaseadorComponent {
 
     
     
+    
   }
 
 
@@ -54,6 +64,7 @@ export class PaseadorComponent {
       console.log(this.selected);
       this.mascotaService.getMascota(this.selected).subscribe(res =>{
       this.mascota = res as Mascota[];
+      this.mascotabreed= this.mascota[0].pet_breed;
       console.log("mascota")
       console.log(this.mascota)
       
@@ -82,7 +93,22 @@ export class PaseadorComponent {
 
     }
 
-
+onSubmitInicio(){
+  this.mostrar=true;
+  this.servicioSvc.getServiciosPaseadorMascota(this.mascota[0].pet_token,this.paseador[0].walker_ID).subscribe(ser=>{
+    this.servicio=ser as Servicio[];
+    console.log(this.servicio);
+  });
+}
+async onFileChange(event:any){
+  const file = event.target.files[0]
+  if(file){
+    const path = `puppers/${file.name}`
+    const uploadTask =await this.fireStorage.upload(path,file)
+    this.photopaseo = await uploadTask.ref.getDownloadURL()
+    console.log(this.photopaseo)
+  }
+}
 
 
 }

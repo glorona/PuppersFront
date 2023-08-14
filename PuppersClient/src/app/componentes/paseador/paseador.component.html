@@ -11,7 +11,7 @@
         <mat-card class="example-card" >
             
             
-            <mat-card-content class="select">Selecciona tú mascota</mat-card-content>
+            <mat-card-content class="select"><mat-icon >pets</mat-icon> Selecciona tú mascota</mat-card-content>
             <mat-form-field >
               <mat-label >Mascotas: </mat-label>
               <mat-select [(value)]="selected" >
@@ -26,7 +26,7 @@
             
               </mat-form-field>
               
-              <mat-card-content *ngIf="selected">Raza: {{mascotabreed}}</mat-card-content>
+              
              
            
           </mat-card>
@@ -39,7 +39,7 @@
         <mat-card class="example-card c2"  >
           <div *ngIf="selected">
 
-            <mat-card-content *ngFor="let c of cliente"> Detalle del cliente<br>Nombre: {{c.client_name }}<br>Teléfono: {{c.client_tel}} <br>Localización: {{location2}} <br>Área: {{areaname}}</mat-card-content>
+            <mat-card-content *ngFor="let c of cliente"> <mat-icon >pets</mat-icon> Datos del cliente<br>Nombre: {{c.client_name }}<br>Teléfono: {{c.client_tel}} <br>Raza de la mascota: {{mascotabreed}}<br>Localización: {{areaname}}, {{location2}}  </mat-card-content>
            
           </div>
             
@@ -53,23 +53,34 @@
       <mat-card class="example-card c3"  >
           
           <mat-card-content>
-            Marcar recepción de Mascota
+            <mat-icon >pets</mat-icon> Marcar recepción de Mascota
           </mat-card-content>
-          <button class="btn btn-primary btn-block">
-            Marcar
+          <button class="btn btn-primary btn-block" (click)="onSubmitInicio()">
+            Iniciar paseo
           </button>
 
+          
+          
+          <mat-card-content *ngIf="mostrar"><mat-icon >pets</mat-icon> Foto del paseo:</mat-card-content>
+          <input type="file" *ngIf="mostrar" accept=".jpg, .png, .jpeg" required (change)="onFileChange($event)">
 
-          <mat-card-content>
-            Marcar finalización del paseo
-          </mat-card-content>
-          <button class="btn btn-primary btn-block">
-            Marcar
-          </button>
+          
         </mat-card>
         
   </mat-grid-tile>
   
+  <mat-grid-tile>
+    <mat-card class="example-card c3"  >
+
+  <mat-card-content>
+    <mat-icon >pets</mat-icon> Marcar finalización del paseo
+  </mat-card-content>
+  <button class="btn btn-primary btn-block">
+    Finalizar paseo
+  </button>
+</mat-card>
+        
+</mat-grid-tile>
 
  
   </mat-grid-list> 
