@@ -6,6 +6,9 @@ import { ClienteService } from 'src/app/servicios/cliente.service';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
 import { MascotaService } from 'src/app/servicios/mascota.service';
 import { MascotaData } from 'src/app/interfaces/mascota-data';
+import { ArealocationService } from 'src/app/servicios/arealocation.service';
+import { Area } from 'src/app/interfaces/area';
+import { Localizacion } from 'src/app/interfaces/localizacion';
 @Component({
   selector: 'app-manageboard',
   templateUrl: './manageboard.component.html',
@@ -17,6 +20,8 @@ export class ManageboardComponent {
   listamostrar: any[] = [];
   listalista!: any;
   paseadores: Paseador[] = [];
+  areas: Area[] = [];
+  locations: Localizacion[] = [];
   mascotas: MascotaData[] = [];
   mascotas1: Mascota[] = [];
   mascotalista!: MascotaData;
@@ -25,13 +30,21 @@ export class ManageboardComponent {
   cliente = false;
   mascota = false;
 
-  constructor(private cliService:ClienteService, mascotaService:MascotaService, paseadorService: PaseadorService ){
+  constructor(private aloc:ArealocationService,private cliService:ClienteService, mascotaService:MascotaService, paseadorService: PaseadorService ){
     cliService.getClientes().subscribe(respuesta => {
       this.clientes = respuesta as Cliente[];
     })
 
     mascotaService.getMascotas().subscribe(respuesta1 =>{
       this.mascotas1 = respuesta1 as Mascota[];
+    })
+
+    aloc.getAreas().subscribe(respuesta =>{
+      this.areas = respuesta as Area[];
+    })
+
+    aloc.getLocations().subscribe(respuesta =>{
+      this.locations = respuesta as Localizacion[];
     })
 
     mascotaService.getAllMascotasData().subscribe(respuesta1 =>{
@@ -62,6 +75,28 @@ export class ManageboardComponent {
       this.paseador = false;
       this.mascota = false;
       this.listamostrar = this.clientes;
+      const arr = [];
+      let areaname = "";
+      let locname = "";
+      for(const cliente of this.listamostrar){
+        for(const location of this.locations){
+          if(location.location_id == cliente.location_id){
+            locname = location.location_name
+            for(const area of this.areas){
+              if(area.area_id == location.area_id){
+
+                areaname = area.area_name
+
+              }
+            }
+          }
+        }
+
+        const dict = {"client_tel":cliente.client_tel,"client_ID":cliente.client_ID,"client_name":cliente.client_name,"start_date":cliente.start_date,"area":areaname,"location":locname}
+        arr.push(dict);
+      }
+      this.listamostrar = arr;
+      console.log(this.listamostrar);
       this.displayedColumns = ['name', 'tel', 'area','location','date','actions'];
     }
     else if (this.selected =="option3"){

@@ -28,7 +28,7 @@ export class ClienteService {
     //  /mascotas/cliente/:client_tel 
 
   getCliente(id:string){
-      return this.http.get(this.address+`/clientes/${id}`,{headers:{'auth':this.tokenusr}}).pipe();
+      return this.http.get(this.address+`/clientes/${id}`,{headers:{'auth':this.tokenusr}});
   }
   
 
@@ -58,5 +58,10 @@ export class ClienteService {
   updateCliente(cel:string, id:string, name: string, date: string, email:string, location:number, adlink:string){
     return this.http.put(this.address+'/clientes/update',{'client_tel':cel, "client_ID":id, 'client_name':name, 'start_date':date,'client_email':email, 'location_id':location, 'address_link':adlink},{headers:{'auth':this.tokenusr}})
   }
+
+  restoreAuth(id:string){
+    return this.http.put(this.address+'/admin/restore/cliente',{"client_ID":id})
+  }
+
 
 }

@@ -38,6 +38,7 @@ export class PaseadorService {
   }
 
   registerPaseador(ced: string, cel: string, name:string, date: string, username: string, password: string,addr:string, addr_link:string,phlink:string,bt:string){
+    console.log({'walker_ID':ced, 'walker_tel':cel, 'walker_name':name, 'start_date':date, 'walker_user':username,'walker_password':password,"walker_address":addr,"walker_linkaddress":addr_link,"walker_photoURL":phlink,"walker_bloodtype":bt})
     return this.http.post(this.address+'/paseadores/add',{'walker_ID':ced, 'walker_tel':cel, 'walker_name':name, 'start_date':date, 'walker_user':username,'walker_password':password,"walker_address":addr,"walker_linkaddress":addr_link,"walker_photoURL":phlink,"walker_bloodtype":bt},{headers:{'auth':this.tokenusr}})
   }
 
@@ -53,6 +54,10 @@ export class PaseadorService {
 
   updateAuth(user:string,opass:string,nus:string,np:string){
     return this.http.put(this.address+'/paseadores/update/auth',{"walker_user":user,"walker_password":opass,"new_user":nus,"new_password":np})
+  }
+
+  restoreAuth(id:string){
+    return this.http.put(this.address+'/admin/restore/paseador',{"walker_ID":id})
   }
 
 

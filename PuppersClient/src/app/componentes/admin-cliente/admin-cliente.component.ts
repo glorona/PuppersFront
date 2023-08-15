@@ -19,9 +19,13 @@ export class AdminClienteComponent {
   mascotasAsignadas: Mascota[] = [];
   cliente: Cliente[] = [];
   clienteInfo!: Cliente;
-  loc!: Localizacion;
-  area!: Area;
+  loc: Localizacion[] = [];
+  locInfo!: Localizacion;
+  area: Area[] = [];
+  areaInfo!: Area;
   id_s!: string;
+  dataready = false;
+  locationready = false;
   constructor(private route:ActivatedRoute,private aloc:ArealocationService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
   }
@@ -32,15 +36,48 @@ export class AdminClienteComponent {
     this.id_s = id;
     this.clienteService.getCliente(id).subscribe(respuesta2 =>{
       this.cliente = respuesta2 as Cliente[];
-      this.clienteInfo = this.cliente[0];
+      if(this.cliente.length > 0){
+        this.clienteInfo = this.cliente[0];
+        this.dataready = true;
+        console.log(this.clienteInfo)
+      }
+
+      this.mascotaService.getMascotabyClient(id).subscribe(respuesta =>{
+        this.mascotasAsignadas = respuesta as Mascota[];
+        console.log(this.mascotasAsignadas)
+  
+      })
+
+      this.aloc.getLocation(this.clienteInfo.location_id).subscribe(respuesta =>{
+        this.loc = respuesta as Localizacion[];
+        if(this.loc.length > 0){
+          this.locInfo = this.loc[0]
+          this.locationready = true;
+          this.aloc.getArea(this.locInfo.area_id).subscribe(respuesta =>{
+            this.area = respuesta as Area[];
+            this.areaInfo = this.area[0];
+          })
+        }
+
+        
+  
+      })
+      
+  
     })
 
-    this.mascotaService.getMascotabyClient(id).subscribe(respuesta =>{
-      this.mascotasAsignadas = respuesta as Mascota[];
-      console.log(this.mascotasAsignadas)
+
+
+    
+
+  }
+
+
+  restorePass(){
+    this.clienteService.restoreAuth(this.clienteInfo.client_ID).subscribe(respuesta =>{
+      alert("Se ha restaurado la contraseña")
+      this.router.navigate(['/manageboard'])
     })
-
-
   }
 
   del(){

@@ -48,10 +48,17 @@ export class AdminPaseadorComponent {
 
   }
 
+  restorePass(){
+    this.paseadorService.restoreAuth(this.paseadorInfo.walker_ID).subscribe(respuesta =>{
+      alert("Se ha restaurado la contraseña")
+      this.router.navigate(['/manageboard'])
+    })
+  }
+
   del(){
 
     this.paseadorService.deletePaseador(this.id_s).subscribe(respuesta2 =>{
-      console.log("Borrado!")
+      alert("Se ha borrado el paseador.")
       this.router.navigate(['/manageboard'])
     })
 

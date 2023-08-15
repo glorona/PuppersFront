@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="contenidopag">
     <app-sidenav></app-sidenav>
-    <div class="contenidoside">
+    <div class="contenidoside" *ngIf="locationready">
         <div class="botontext">
             <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon" routerLink="/manageboard">
               <mat-icon color="accent">arrow_back</mat-icon>
@@ -29,6 +29,16 @@
                 <mat-icon matListItemIcon>perm_identity</mat-icon>
                 <div matListItemTitle>{{clienteInfo.client_user}}</div>
                 <div matListItemLine>Usuario</div>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon matListItemIcon>location_city</mat-icon>
+                <div matListItemTitle>{{locInfo.location_name}}</div>
+                <div matListItemLine>Localizacion</div>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon matListItemIcon>location_on</mat-icon>
+                <div matListItemTitle>{{areaInfo.area_name}}</div>
+                <div matListItemLine>Area</div>
             </mat-list-item>
             <mat-list-item>
                 <mat-icon matListItemIcon>assignment_ind</mat-icon>
