@@ -67,40 +67,35 @@ export class DataboardComponent {
 
   queryArea(area: string){
     console.log(area);
-    /*
     this.cliService.getClientesAreaSpec(area).subscribe(respuesta =>{
       this.clientes = respuesta as any[];
-      this.clientesQueryLista = this.clientes[0];
+      this.clientesQueryLista = this.clientes;
       console.log(this.clientesQueryLista)
       this.displayedColumns = ['area','petname','breed','name','location','service']
       this.queryReady = true;
       console.log("Query ready")
     })
-    */
 
 
 
   }
 
   queryLocation(loc:string){
-    /*
     this.cliService.getClientesLocation(loc).subscribe(respuesta =>{
       this.clientes = respuesta as any[];
-      this.clientesQueryLista = this.clientes[0];
+      this.clientesQueryLista = this.clientes;
       console.log(this.clientesQueryLista)
       this.displayedColumns = ['area','petname','breed','name','location','service']
       this.queryReady = true;
       console.log("Query ready")
     })
-    */
     
   }
 
   queryPaseadores(id:string){
-    /*
     this.paseadorService.getMascotasPaseador(id).subscribe(respuesta =>{
       this.paseadoresQuery = respuesta as any[];
-      this.paseadoresQueryLista = this.paseadoresQuery[0];
+      this.paseadoresQueryLista = this.paseadoresQuery;
       console.log(this.paseadoresQueryLista)
       this.displayedColumns = ['name','petname','breed','location','area','service']
       this.queryReady = true;
@@ -108,23 +103,19 @@ export class DataboardComponent {
 
       
     })
-    */
     
   }
 
   queryMascotasDuenos(){
-    //this.obtenerDatosVista();
-    /*
     this.mascotaService.getAllMascotasData().subscribe(respuesta =>{
       this.mascotasData = respuesta as MascotaData[];
-      this.mascotaLista = this.mascotasData[0];
+      this.mascotaLista = this.mascotasData;
       console.log(this.mascotaLista);
       this.displayedColumns = ['petname','breed','client','walker','area','location','service']
       this.queryReady = true;
       console.log("Query ready");
 
     })
-    */
   }
 
 
