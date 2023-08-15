@@ -15,6 +15,21 @@
         <mat-divider></mat-divider>
         <mat-list>
             <div mat-subheader>Datos</div>
+            <mat-list-item>
+              <mat-icon matListItemIcon>face</mat-icon>
+              <div matListItemTitle>{{servicioAc.servicio_ID}}</div>
+              <div matListItemLine>ID de Servicio</div>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListItemIcon>opacity</mat-icon>
+              <div matListItemTitle>{{mascotaInf.pet_name}}</div>
+              <div matListItemLine>Mascota con servicio contratado</div>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon matListItemIcon>location_searching</mat-icon>
+                <div matListItemTitle>{{paseador.walker_name}}</div>
+                <div matListItemLine>Paseador asignado</div>
+            </mat-list-item>
             
             
           </mat-list>
