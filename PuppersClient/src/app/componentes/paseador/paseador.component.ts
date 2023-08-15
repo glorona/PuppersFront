@@ -21,7 +21,7 @@ import { Paseo } from 'src/app/interfaces/paseo';
   styleUrls: ['./paseador.component.css']
 })
 export class PaseadorComponent {
-  
+  arreglo=Array<Object>
   mascotas:Mascota[]=[];
   selected=0;
   paseador: Paseador[]=[];
@@ -39,6 +39,7 @@ export class PaseadorComponent {
   photopaseo=''
   servicio :Servicio[]=[] 
   paseo : Paseo[]=[]
+  
   constructor(private fireStorage:AngularFireStorage, private paseoSvc : PaseoService,private mascotaService: MascotaService,private tokenSvc: TokenService,private paseadorSvc: PaseadorService, private clienteSvc : ClienteService,private locationSvc : ArealocationService,private servicioSvc:ServicioService){
     this.ide= tokenSvc.getId();
    mascotaService.getMascotabyWalker(this.ide).subscribe(respuesta => {
@@ -94,10 +95,11 @@ export class PaseadorComponent {
     }
 
 onSubmitInicio(){
+  //validar que no marque 2 veces
   if(this.selected==0){
     window.alert("debe seleccionar una mascota primero")
   }else{
-    this.mostrar=true;
+    //this.mostrar=true;
     console.log(this.mascota[0].pet_token)
     console.log(this.paseador[0].walker_ID)
     this.servicioSvc.getServiciosPaseadorMascota(this.mascota[0].pet_token,this.paseador[0].walker_ID).subscribe(ser=>{
@@ -117,6 +119,69 @@ onSubmitInicio(){
   }
   
 }
+
+onSubmitFin(){
+  //validar que este seleccionado la mascota
+  if(this.selected==0){
+    window.alert("Selecciona una mascota antes de marcar la salida")
+  }else{
+    this.paseoSvc.getPaseoPaseadorCurrent(this.paseador[0].walker_ID).subscribe(p=>{
+
+      this.servicioSvc.getServiciosPaseadorMascota(this.mascota[0].pet_token,this.paseador[0].walker_ID).subscribe(ser=>{
+        this.servicio= ser as Servicio[];
+        let serviceid= this.servicio[0].servicio_ID;
+        let walker= this.paseador[0].walker_ID;
+        console.log(walker)
+        console.log(serviceid)
+        // validar que hayan paseos
+        if(Object.values(p).length >0){
+          console.log("entra")
+
+           //si es que no encuentra el paseo mandar alerta de que inicie
+        let paseoid=-1;
+        Object.values(p).forEach(function (element){
+          //console.log(Object(element)["paseo_ID"])
+          
+          console.log((Object(element)["end_date"])==null)
+          if( (serviceid==(Object(element)["servicio_ID"])) && (walker==(Object(element)["walker_ID"])) &&  ((Object(element)["end_date"])==null)){
+            //console.log(Object(element)["paseo_ID"])
+            paseoid=Object(element)["paseo_ID"];
+            
+            
+            
+          }
+          
+        });
+
+        //si es que sale del for y no encontró nada 
+              if (paseoid==-1){
+                window.alert("Debe iniciar un paseo primero")
+              }else{//validar que suba foto
+                  //llamar al service de finalizar
+                  this.paseoSvc.endPaseo(paseoid,this.photopaseo).subscribe(r=>{
+                    console.log(r);
+                  })
+              }
+
+        }else{
+          window.alert("Debe marcar el inicio de un paseo primero")
+        }
+       
+
+      
+      })
+      
+      
+      //validar con servicio y ya obtendria el paseo id
+
+    })
+    //validar que no marque 2 veces
+  }
+  
+}
+
+
+
 async onFileChange(event:any){
   const file = event.target.files[0]
   if(file){

@@ -61,23 +61,24 @@
 
           
           
-          <mat-card-content *ngIf="mostrar"><mat-icon >pets</mat-icon> Foto del paseo:</mat-card-content>
-          <input type="file" *ngIf="mostrar" accept=".jpg, .png, .jpeg" required (change)="onFileChange($event)">
-
+          
           
         </mat-card>
         
   </mat-grid-tile>
   
   <mat-grid-tile>
-    <mat-card class="example-card c3"  >
+    <mat-card class="example-card c4"  >
+      <mat-card-content *ngIf="selected"><mat-icon >pets</mat-icon> Foto del paseo:</mat-card-content>
+      <input type="file" *ngIf="selected" accept=".jpg, .png, .jpeg" required (change)="onFileChange($event)">
 
   <mat-card-content>
     <mat-icon >pets</mat-icon> Marcar finalización del paseo
   </mat-card-content>
-  <button class="btn btn-primary btn-block">
+  <button class="btn btn-primary btn-block" (click)="onSubmitFin()">
     Finalizar paseo
   </button>
+
 </mat-card>
         
 </mat-grid-tile>
