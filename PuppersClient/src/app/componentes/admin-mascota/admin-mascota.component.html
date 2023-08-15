@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="contenidopag">
     <app-sidenav></app-sidenav>
-    <div class="contenidoside">
+    <div class="contenidoside" *ngIf="dataready">
         <div class="botontext">
             <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon" routerLink="/manageboard">
               <mat-icon color="accent">arrow_back</mat-icon>

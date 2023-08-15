@@ -24,7 +24,7 @@ export class AdminMascotaComponent {
   paseadorInfo!: Paseador;
   mascotaInfo!: Mascota;
   servicioInfo!: Servicio;
-
+  dataready = false;
   constructor(private route:ActivatedRoute, private serv:ServicioService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
   }
@@ -36,27 +36,25 @@ export class AdminMascotaComponent {
     this.mascotaService.getMascota(id).subscribe(respuesta2 =>{
       this.mascota = respuesta2 as Mascota[];
       this.mascotaInfo = this.mascota[0];
-    })
-
-    this.serv.getServicioMascota(this.mascotaInfo.pet_token).subscribe(respuesta =>{
-      this.servicio = respuesta as Servicio[];
-      this.servicioInfo = this.servicio[0];
-      this.getData();
+      this.getData()
     })
 
   }
 
   getData(){
+    this.serv.getServicioMascota(this.mascotaInfo.pet_token).subscribe(respuesta =>{
+      this.servicio = respuesta as Servicio[];
+      this.servicioInfo = this.servicio[0];
+      this.paseadorService.getPaseador(this.servicioInfo.walker_ID).subscribe(respuesta =>{
+        this.paseador = respuesta as Paseador[];
+        this.paseadorInfo = this.paseador[0];
+        this.dataready = true;
+      })
+    })
+
     this.clienteService.getCliente(this.mascotaInfo.client_ID).subscribe(respuesta =>{
       this.dueno = respuesta as Cliente[];
       this.duenoInfo = this.dueno[0];
-      console.log(this.duenoInfo)
-    })
-
-    this.paseadorService.getPaseador(this.servicioInfo.walker_ID).subscribe(respuesta =>{
-      this.paseador = respuesta as Paseador[];
-      this.paseadorInfo = this.paseador[0];
-      console.log(this.paseadorInfo)
     })
 
 

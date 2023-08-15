@@ -19,9 +19,13 @@ export class CreateClienteComponent {
   fechaString = this.fechaformat(this.fecha);
   clientes: Cliente[] = [];
   areas: Area[] = [];
+  arrpresentar: Localizacion[] = [];
   localizaciones: Localizacion[] = [];
+  localizaNew: Localizacion[] = [];
   selectedArea = 0;
   selectedLocation = 0;
+  areaLoaded = false;
+  newLocation = false;
   constructor(private cliService:ClienteService, private aloc:ArealocationService, private router:Router){
     cliService.getClientes().subscribe(respuesta => {
       this.clientes = respuesta as Cliente[];
@@ -62,6 +66,11 @@ export class CreateClienteComponent {
       this.linkclient = this.link.value;
     })
 
+    this.newLocationName.valueChanges.subscribe(value =>{
+      this.newLocationName.setValue(value,{emitEvent:false})
+      this.newLoc = this.newLocationName.value;
+    })
+
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -69,6 +78,7 @@ export class CreateClienteComponent {
   cedula = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(11)]);
   nombre = new FormControl('',[Validators.required]);
   link = new FormControl('', [Validators.required, Validators.minLength(30)]);
+  newLocationName = new FormControl('',[Validators.required]);
   formValid = false;
   messageError = false;
   telclient: any = this.telefono.value;
@@ -76,11 +86,43 @@ export class CreateClienteComponent {
   emailclient: any = this.email.value;
   cedclient: any = this.cedula.value;
   linkclient: any = this.link.value;
+  newLoc: any = this.newLocationName.value;
+  respu: any;
   firstpart = "";
   secondpart = "";
   userclient = "";
   padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
+  }
+
+  getErrorLocation(){
+    let msg = ''
+    if (this.newLocationName.hasError('required')){
+      
+      msg = 'Debe ingresar una nueva localizacion';
+    }
+
+    return msg;
+
+  }
+
+  getDataAreaLocation(id: number){
+    this.arrpresentar = [];
+    for(const locrec of this.localizaciones){
+      if(locrec.area_id == id){
+        this.arrpresentar.push(locrec)
+      }
+    }
+    this.areaLoaded = true
+
+
+  }
+
+  actualizarVistaLocations(){
+    if(this.selectedLocation != -1){
+      this.newLocation = false;
+    }
+
   }
 
   fechaformat(date: Date){
@@ -126,6 +168,11 @@ export class CreateClienteComponent {
     return msg;
   }
 
+  nuevaLocalizacion(){
+    this.newLocation = true;
+
+  }
+
 
   getErrorCed(){
     let msg = ''
@@ -140,6 +187,19 @@ export class CreateClienteComponent {
 
     return msg;
   }
+
+  createLocation(){
+    if(!this.newLocationName.invalid){
+      this.aloc.addLocation(this.newLoc,this.selectedArea).subscribe(respuesta =>{
+        this.respu = respuesta as Localizacion;
+        console.log(this.respu.location_id)
+        alert("Nueva localizacion agregada.")
+        
+
+      })
+    }
+  }
+
 
   generarUserName(){
     const arreglonombres = this.nomclient.split(" ")
@@ -169,17 +229,34 @@ export class CreateClienteComponent {
 
   onSubmit(){
     this.generarUserName();
-    if(this.telefono.invalid || this.link.invalid || this.nombre.invalid || this.cedula.invalid || this.selectedArea == 0 || this.selectedLocation == 0){
-      console.log("Error!");
-      this.errorForm();
+    if(this.newLocation){
+      console.log("Revisando post")
+      if(this.telefono.invalid || this.newLocationName.invalid || this.link.invalid || this.nombre.invalid || this.cedula.invalid || this.selectedArea == 0 || this.selectedLocation == 0){
+          console.log("Error!");
+          this.errorForm();
+        }
+      else{
+          this.messageError = false;
+          this.cliService.registerCliente(this.telclient, this.cedclient,this.nomclient,this.fechaString,this.emailclient,this.userclient,this.cedclient,this.respu.location_id,this.linkclient).subscribe(respuesta =>{
+              
+            alert("Se ha agregado el cliente.")
+            this.router.navigate(['/manageboard'])
+          })
+        }
     }
     else{
-      this.messageError = false;
-      this.cliService.registerCliente(this.telclient, this.cedclient,this.nomclient,this.fechaString,this.emailclient,this.userclient,this.cedclient,this.selectedLocation,this.linkclient).subscribe(respuesta =>{
-          
-        console.log("Insertado!")
-        this.router.navigate(['/manageboard'])
-      })
+      if(this.telefono.invalid || this.link.invalid || this.nombre.invalid || this.cedula.invalid || this.selectedArea == 0 || this.selectedLocation == 0){
+        console.log("Error!");
+        this.errorForm();
+      }
+      else{
+        this.messageError = false;
+        this.cliService.registerCliente(this.telclient, this.cedclient,this.nomclient,this.fechaString,this.emailclient,this.userclient,this.cedclient,this.selectedLocation,this.linkclient).subscribe(respuesta =>{
+            
+          alert("Se ha agregado el cliente.")
+          this.router.navigate(['/manageboard'])
+        })
+      }
     }
 
   }

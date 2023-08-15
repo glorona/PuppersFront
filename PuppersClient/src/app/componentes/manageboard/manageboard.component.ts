@@ -9,6 +9,10 @@ import { MascotaData } from 'src/app/interfaces/mascota-data';
 import { ArealocationService } from 'src/app/servicios/arealocation.service';
 import { Area } from 'src/app/interfaces/area';
 import { Localizacion } from 'src/app/interfaces/localizacion';
+import { ServicioService } from 'src/app/servicios/servicio.service';
+import { Servicio } from 'src/app/interfaces/servicio';
+import { FranjaService } from 'src/app/servicios/franja.service';
+import { FranjaHoraria } from 'src/app/interfaces/franja-horaria';
 @Component({
   selector: 'app-manageboard',
   templateUrl: './manageboard.component.html',
@@ -26,11 +30,13 @@ export class ManageboardComponent {
   mascotas1: Mascota[] = [];
   mascotalista!: MascotaData;
   clientes: Cliente[] = [];
+  servicioList: Servicio[] = [];
+  franjas: FranjaHoraria[] = [];
   paseador = false;
   cliente = false;
   mascota = false;
-
-  constructor(private aloc:ArealocationService,private cliService:ClienteService, mascotaService:MascotaService, paseadorService: PaseadorService ){
+  servicios = false;
+  constructor(private franjaH:FranjaService,private servicioService:ServicioService,private aloc:ArealocationService,private cliService:ClienteService, mascotaService:MascotaService, paseadorService: PaseadorService ){
     cliService.getClientes().subscribe(respuesta => {
       this.clientes = respuesta as Cliente[];
     })
@@ -54,8 +60,19 @@ export class ManageboardComponent {
 
     paseadorService.getPaseadores().subscribe(respuesta2 =>{
       this.paseadores = respuesta2 as Paseador[];
+      //Como es por default hay que cargar la vista
       this.obtenerDatosVista();
     })
+
+    servicioService.getServicios().subscribe(respuesta2 =>{
+      this.servicioList = respuesta2 as Servicio[];
+    })
+
+    franjaH.getFranjas().subscribe(respuesta =>{
+      this.franjas = respuesta as FranjaHoraria[];
+    })
+
+
 
 
   }
@@ -67,6 +84,7 @@ export class ManageboardComponent {
       this.cliente = false;
       this.paseador = true;
       this.mascota = false;
+      this.servicios = false;
       this.listamostrar = this.paseadores;
       this.displayedColumns = ['ID', 'name', 'tel','date','actions'];
     }
@@ -74,6 +92,7 @@ export class ManageboardComponent {
       this.cliente = true;
       this.paseador = false;
       this.mascota = false;
+      this.servicios = false;
       this.listamostrar = this.clientes;
       const arr = [];
       let areaname = "";
@@ -103,10 +122,51 @@ export class ManageboardComponent {
       this.mascota = true;
       this.cliente = false;
       this.paseador = false;
+      this.servicios = false;
       this.listamostrar = this.mascotas1;
       console.log(this.listamostrar)
       this.displayedColumns = [ 'name', 'breed', 'service','actions'];
 
+    }
+    else if(this.selected == "option4"){
+      this.mascota = false;
+      this.cliente = false;
+      this.paseador = false;
+      this.servicios = true;
+      this.listamostrar = this.servicioList;
+      const arr = [];
+      let paseador = "";
+      let mascota = "";
+      let fH = "";
+      for(const servi of this.listamostrar){
+        for(const pas of this.paseadores){
+          if(servi.walker_ID == pas.walker_ID){
+            paseador = pas.walker_name;
+          }
+        }
+        for(const masc of this.mascotas1){
+          if(servi.pet_token == masc.pet_token){
+            mascota = masc.pet_name;
+          }
+
+        }
+
+
+        for(const franj of this.franjas){
+          if(servi.franja_id ==  franj.franja_id){
+            fH = franj.convertido;
+          }
+        }
+
+
+
+        const dict = {"servicio_ID":servi.servicio_ID,"pet":mascota,"paseador":paseador,"time":fH};
+        arr.push(dict)
+
+
+      }
+      this.listamostrar = arr;
+      this.displayedColumns = [ 'ID', 'pet', 'walker','time','actions'];
     }
     else{
       this.cliente = false;

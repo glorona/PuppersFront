@@ -19,6 +19,7 @@ export class AdminPaseadorComponent {
   paseador: Paseador[] = [];
   paseadorInfo!: Paseador;
   id_s!: string;
+  notdelete = false;
   link_defaultpaseador = "https://firebasestorage.googleapis.com/v0/b/puppersimage.appspot.com/o/puppers%2Fprofile.png?alt=media&token=0778deb9-2a8e-4e82-8f38-b42a7861c40c"
   link = "";
   constructor(private route:ActivatedRoute, private serv:ServicioService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
@@ -56,11 +57,16 @@ export class AdminPaseadorComponent {
   }
 
   del(){
-
-    this.paseadorService.deletePaseador(this.id_s).subscribe(respuesta2 =>{
-      alert("Se ha borrado el paseador.")
-      this.router.navigate(['/manageboard'])
-    })
+    if(this.mascotasAsignadas.length <= 0){
+      this.paseadorService.deletePaseador(this.id_s).subscribe(respuesta2 =>{
+        alert("Se ha borrado el paseador.")
+        this.router.navigate(['/manageboard'])
+      })
+    }
+    else{
+      alert("No se puede borrar el paseador por que tiene mascotas asignadas.")
+      this.notdelete = true;
+    }
 
   }
 

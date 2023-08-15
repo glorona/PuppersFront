@@ -170,8 +170,8 @@ export class CreatePaseadorComponent {
     else{
       this.messageError = false;
       this.paseadorService.registerPaseador(this.cedpaseador,this.telpaseador,this.nompaseador,this.fechaString,this.userpaseador,this.cedpaseador,this.addrpaseador,this.linkaddpaseador,this.photopaseador,this.selectedbt).subscribe(respuesta =>{  
-        console.log(respuesta)
-        //this.router.navigate(['/manageboard'])
+        alert("Se ha agregado el paseador.")
+        this.router.navigate(['/manageboard'])
       })
     }
 

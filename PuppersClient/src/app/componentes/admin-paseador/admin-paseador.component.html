@@ -69,12 +69,16 @@
             </mat-list-item>
           </mat-list>
 
+          
+          <h5 class="error" *ngIf="notdelete">No se pudo borrar el paseador. Tiene mascotas asignadas</h5>
+
+
           <div class="example-button-row">
             <button mat-raised-button color="primary" (click)="del()">Eliminar</button>
             <button mat-raised-button color="primary" (click)="restorePass()">Restablecer Contraseña</button>
             <button mat-raised-button color="accent" routerLink="/manageboard">Volver</button>
           </div>
-        
+                
         
 
         
