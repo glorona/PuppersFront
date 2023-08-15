@@ -24,6 +24,7 @@ servicio : Servicio[]=[];
 walker ='';
 service='';
 franja: FranjaHoraria[]=[];
+paseosFaltantes=0
  constructor( private paseoSvc:PaseoService,private route: ActivatedRoute,private paseadorSvc : PaseadorService,private franjaSv : FranjaService, private servicioSv: ServicioService,private mascotasSvc:MascotaService, private tokenSvc: TokenService,private clienteSvc: ClienteService,private router: Router) { 
 
   const {id} = this.route.snapshot.params;
@@ -39,10 +40,15 @@ franja: FranjaHoraria[]=[];
       //servicio para extraer la franja
 servicioSv.getServicioMascota(id).subscribe(s=>{
   this.servicio= s as Servicio[];
-  /*
+  
   this.paseoSvc.getPaseoServicio(this.servicio[0].servicio_ID).subscribe(p=>{
-    console.log(p)
-  })*/
+    //regresa numero de paseos completados
+    let numservicio =  Number(this.mascota[0].service.split("P")[0])*4
+    console.log(numservicio)
+    console.log(Object.values(p).length)
+    this.paseosFaltantes= numservicio-(Object.values(p).length)
+
+  })
   this.walker=this.servicio[0].walker_ID;
   
   //this.servicio[0].franja_id

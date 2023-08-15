@@ -21,7 +21,7 @@
                 <mat-icon >pets</mat-icon>
             </mat-card-content>
             <mat-card-content *ngFor="let m of mascota">
-                En su plan de {{m.service}} paseos, le quedan *reemplazar*paseos disponibles cambiar
+                En su plan de {{m.service}} paseos, le quedan {{paseosFaltantes}} paseos disponibles
             </mat-card-content>
           </mat-card>
           <mat-icon class="arrow">keyboard_arrow_right</mat-icon>
