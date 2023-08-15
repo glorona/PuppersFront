@@ -31,16 +31,6 @@
                 <div matListItemLine>Usuario</div>
             </mat-list-item>
             <mat-list-item>
-                <mat-icon matListItemIcon>location_city</mat-icon>
-                <div matListItemTitle>{{loc.location_name}}</div>
-                <div matListItemLine>Localizacion</div>
-            </mat-list-item>
-            <mat-list-item>
-                <mat-icon matListItemIcon>location_on</mat-icon>
-                <div matListItemTitle>{{area.area_name}}</div>
-                <div matListItemLine>Area</div>
-            </mat-list-item>
-            <mat-list-item>
                 <mat-icon matListItemIcon>assignment_ind</mat-icon>
                 <div matListItemTitle>{{clienteInfo.start_date}}</div>
                 <div matListItemLine>Fecha de Inicio</div>
@@ -56,6 +46,7 @@
 
           <div class="example-button-row">
             <button mat-raised-button color="primary" (click)="del()" >Eliminar</button>
+            <button mat-raised-button color="primary" >Restablecer Contraseña</button>
             <button mat-raised-button color="accent" routerLink="/manageboard">Volver</button>
           </div>
         

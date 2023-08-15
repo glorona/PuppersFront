@@ -11,9 +11,14 @@
         <h4>Informacion de {{paseadorInfo.walker_name}}</h4>
         <div class="example-button-row">
           <button mat-raised-button color="primary" routerLink="/editPaseador/{{paseadorInfo.walker_ID}}" >Editar</button>
-      </div>
+        </div>
         <mat-divider></mat-divider>
         <mat-list>
+            <div mat-subheader>Foto:</div>
+            <div class="imagedivprof">
+              <img class="profile-pic" src="{{link}}">
+            </div>
+            <mat-divider></mat-divider>
             <div mat-subheader>Datos</div>
             <mat-list-item>
               <mat-icon matListItemIcon>face</mat-icon>
@@ -23,7 +28,7 @@
             <mat-list-item>
               <mat-icon matListItemIcon>opacity</mat-icon>
               <div matListItemTitle>{{paseadorInfo.walker_bloodtype}}</div>
-              <div matListItemLine>Direccion</div>
+              <div matListItemLine>Tipo de Sangre</div>
           </mat-list-item>
             <mat-list-item>
                 <mat-icon matListItemIcon>location_searching</mat-icon>
@@ -66,6 +71,7 @@
 
           <div class="example-button-row">
             <button mat-raised-button color="primary" (click)="del()">Eliminar</button>
+            <button mat-raised-button color="primary" >Restablecer Contraseña</button>
             <button mat-raised-button color="accent" routerLink="/manageboard">Volver</button>
           </div>
         

@@ -47,11 +47,6 @@ export class CreateClienteComponent {
       this.nombre.setValue(value,{emitEvent:false})
       this.nomclient = this.nombre.value;
     })
-    this.username.valueChanges.subscribe(value =>{
-      this.username.setValue(value,{emitEvent:false})
-      this.userclient = this.username.value;
-    })
-
     this.email.valueChanges.subscribe(value =>{
       this.email.setValue(value,{emitEvent:false})
       this.emailclient = this.email.value;
@@ -73,16 +68,17 @@ export class CreateClienteComponent {
   telefono = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(11)]);
   cedula = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(11)]);
   nombre = new FormControl('',[Validators.required]);
-  username = new FormControl('',[Validators.required]);
   link = new FormControl('', [Validators.required, Validators.minLength(30)]);
   formValid = false;
   messageError = false;
   telclient: any = this.telefono.value;
   nomclient: any = this.nombre.value;
-  userclient: any = this.username.value;
   emailclient: any = this.email.value;
   cedclient: any = this.cedula.value;
   linkclient: any = this.link.value;
+  firstpart = "";
+  secondpart = "";
+  userclient = "";
   padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
   }
@@ -145,6 +141,14 @@ export class CreateClienteComponent {
     return msg;
   }
 
+  generarUserName(){
+    const arreglonombres = this.nomclient.split(" ")
+    this.firstpart = arreglonombres[0].slice(0,3)
+    this.secondpart = arreglonombres[1].slice(0,3)
+    const usuario = (this.firstpart + this.secondpart).toLowerCase();
+    this.userclient = usuario;
+  }
+
   getErrorNombre(){
     let msg = ''
     if (this.nombre.hasError('required')){
@@ -156,16 +160,6 @@ export class CreateClienteComponent {
 
   }
 
-  getErrorUsername(){
-    let msg = ''
-    if (this.username.hasError('required')){
-      
-      msg = 'Debe ingresar un usuario';
-    }
-
-    return msg;
-
-  }
 
   errorForm(){
     this.messageError = true;
@@ -174,8 +168,8 @@ export class CreateClienteComponent {
   }
 
   onSubmit(){
-
-    if(this.telefono.invalid || this.link.invalid || this.nombre.invalid || this.cedula.invalid || this.username.invalid || this.selectedArea == 0 || this.selectedLocation == 0){
+    this.generarUserName();
+    if(this.telefono.invalid || this.link.invalid || this.nombre.invalid || this.cedula.invalid || this.selectedArea == 0 || this.selectedLocation == 0){
       console.log("Error!");
       this.errorForm();
     }

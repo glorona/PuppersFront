@@ -40,14 +40,6 @@ export class AdminClienteComponent {
       console.log(this.mascotasAsignadas)
     })
 
-    this.aloc.getLocation(this.clienteInfo.location_id).subscribe(respuesta =>{
-      this.loc = respuesta as Localizacion;
-
-    })
-
-    this.aloc.getArea(this.loc.area_id).subscribe(respuesta =>{
-      this.area = respuesta as Area;
-    })
 
   }
 

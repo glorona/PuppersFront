@@ -95,3 +95,13 @@ td button{
 .example-button-row .mat-mdc-button-base {
     margin: 8px 8px 8px 0;
 }
+
+.imagedivprof{
+    max-width: 250px;
+    max-height: 250px;
+}
+
+.profile-pic{
+    max-width: 250px;
+    max-height: 250px;
+}

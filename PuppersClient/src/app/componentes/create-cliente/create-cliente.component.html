@@ -25,12 +25,6 @@
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Usuario del cliente: </mat-label>
-                <input matInput placeholder="marlil" [formControl]="username" [value]="username" required>
-                <mat-error *ngIf="username.invalid">{{getErrorUsername()}}</mat-error>
-            </mat-form-field>
-
-            <mat-form-field>
               <mat-label>Numero de cedula: </mat-label>
               <input matInput placeholder="0926805034" [formControl]="cedula" [value]="cedula" required>
               <mat-error *ngIf="cedula.invalid">{{getErrorCed()}}</mat-error>

@@ -30,10 +30,6 @@ export class CreatePaseadorComponent {
       this.nombre.setValue(value,{emitEvent:false})
       this.nompaseador = this.nombre.value;
     })
-    this.username.valueChanges.subscribe(value =>{
-      this.username.setValue(value,{emitEvent:false})
-      this.userpaseador = this.username.value;
-    })
 
     this.addr.valueChanges.subscribe(value =>{
       this.addr.setValue(value,{emitEvent:false})
@@ -50,18 +46,19 @@ export class CreatePaseadorComponent {
   telefono = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(12)]);
   cedula = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(12)]);
   nombre = new FormControl('',[Validators.required]);
-  username = new FormControl('',[Validators.required]);
   addr = new FormControl('',[Validators.required]);
   linkadd = new FormControl('',[Validators.required]);
   formValid= false;
   messageError = false;
   telpaseador: any = this.telefono.value;
   nompaseador: any = this.nombre.value;
-  userpaseador: any = this.username.value;
   cedpaseador: any = this.cedula.value;
   addrpaseador: any = this.addr.value;
   linkaddpaseador: any = this.linkadd.value;
   photopaseador = "";
+  firstpart = "";
+  secondpart = "";
+  userpaseador = "";
   padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
   }
@@ -123,16 +120,6 @@ export class CreatePaseadorComponent {
 
   }
 
-  getErrorUsername(){
-    let msg = ''
-    if (this.username.hasError('required')){
-      
-      msg = 'Debe ingresar un usuario';
-    }
-
-    return msg;
-
-  }
 
   getErrorAddr(){
     let msg = ''
@@ -156,6 +143,14 @@ export class CreatePaseadorComponent {
 
   }
 
+  generarUserName(){
+    const arreglonombres = this.nompaseador.split(" ")
+    this.firstpart = arreglonombres[0].slice(0,3)
+    this.secondpart = arreglonombres[1].slice(0,3)
+    const usuario = (this.firstpart + this.secondpart).toLowerCase();
+    this.userpaseador = usuario;
+  }
+
 
   
 
@@ -167,7 +162,8 @@ export class CreatePaseadorComponent {
 
   onSubmit(){
     console.log(this.cedpaseador);
-    if(this.telefono.invalid || this.nombre.invalid || this.cedula.invalid || this.username.invalid || this.addr.invalid || this.linkadd.invalid){
+    this.generarUserName();
+    if(this.telefono.invalid || this.nombre.invalid || this.cedula.invalid || this.addr.invalid || this.linkadd.invalid){
       console.log("Error!");
       this.errorForm();
     }
