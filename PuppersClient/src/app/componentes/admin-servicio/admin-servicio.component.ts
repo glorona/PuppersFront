@@ -28,9 +28,11 @@ export class AdminServicioComponent {
   dataready = false;
   mascota: Mascota[] = [];
   pase: Paseador[] = [];
+  franj: FranjaHoraria[] = [];
   mascotaInf!: Mascota;
   paseador!: Paseador;
-  constructor(private route:ActivatedRoute, private serv:ServicioService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
+  fi!: FranjaHoraria;
+  constructor(private fh:FranjaService,private route:ActivatedRoute, private serv:ServicioService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
   }
   
@@ -57,6 +59,11 @@ export class AdminServicioComponent {
     this.paseadorService.getPaseador(this.servicioAc.walker_ID).subscribe(respuesta2 =>{
       this.pase = respuesta2 as Paseador[];
       this.paseador = this.pase[0];
+    })
+
+    this.fh.getFranja(this.servicioAc.franja_id).subscribe(respuesta =>{
+      this.franj = respuesta as FranjaHoraria[];
+      this.fi = this.franj[0];
     })
 
     
