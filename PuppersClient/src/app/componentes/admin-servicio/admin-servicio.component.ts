@@ -26,6 +26,10 @@ export class AdminServicioComponent {
   servicioAc!: Servicio;
   servici: Servicio[] = [];
   dataready = false;
+  mascota: Mascota[] = [];
+  pase: Paseador[] = [];
+  mascotaInf!: Mascota;
+  paseador!: Paseador;
   constructor(private route:ActivatedRoute, private serv:ServicioService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
   }
@@ -44,6 +48,16 @@ export class AdminServicioComponent {
   getData(){
     console.log("Data")
     this.dataready = true;
+
+    this.mascotaService.getMascota(this.servicioAc.pet_token).subscribe(respuesta2 =>{
+      this.mascota = respuesta2 as Mascota[];
+      this.mascotaInf = this.mascota[0];
+    })
+
+    this.paseadorService.getPaseador(this.servicioAc.walker_ID).subscribe(respuesta2 =>{
+      this.pase = respuesta2 as Paseador[];
+      this.paseador = this.pase[0];
+    })
 
     
   }
