@@ -57,6 +57,7 @@ import { environment } from 'src/environments/environment';
 import { AdminServicioComponent } from './componentes/admin-servicio/admin-servicio.component';
 import { EditServicioComponent } from './componentes/edit-servicio/edit-servicio.component';
 import { AddServicioComponent } from './componentes/add-servicio/add-servicio.component';
+import { CambiarcontrasenaComponent } from './componentes/cambiarcontrasena/cambiarcontrasena.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,6 +86,7 @@ import { AddServicioComponent } from './componentes/add-servicio/add-servicio.co
     AdminServicioComponent,
     EditServicioComponent,
     AddServicioComponent,
+    CambiarcontrasenaComponent,
   ],
   imports: [
     BrowserModule,

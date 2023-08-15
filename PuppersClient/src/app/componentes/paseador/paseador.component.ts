@@ -100,16 +100,56 @@ onSubmitInicio(){
     window.alert("debe seleccionar una mascota primero")
   }else{
     //this.mostrar=true;
+    //validar que no haya iniciado
+    
+
     console.log(this.mascota[0].pet_token)
     console.log(this.paseador[0].walker_ID)
     this.servicioSvc.getServiciosPaseadorMascota(this.mascota[0].pet_token,this.paseador[0].walker_ID).subscribe(ser=>{
     this.servicio=ser as Servicio[];
     console.log(this.servicio);
 
+
+      //aqui validar que ya no haya iniciado antes de escribirlo
       //start paseo
-      this.paseoSvc.startPaseo(this.paseador[0].walker_ID,this.servicio[0].servicio_ID).subscribe(spaseo=>{
-        console.log(spaseo)
-      });
+
+      
+      this.paseoSvc.getPaseoPaseadorCurrent(this.paseador[0].walker_ID).subscribe(p=>{
+        //retorna paseos actuales para ese paseador
+        //ahora validar el servicio actual
+        let escrito= false;
+        let serviceid= this.servicio[0].servicio_ID;
+        let walker= this.paseador[0].walker_ID;
+        
+        Object.values(p).forEach(function (element){
+          //console.log(Object(element)["paseo_ID"])
+          
+          console.log((Object(element)["end_date"])==null)
+          if( (serviceid==(Object(element)["servicio_ID"])) && (walker==(Object(element)["walker_ID"])) &&  ((Object(element)["end_date"])==null)){
+            //console.log(Object(element)["paseo_ID"])
+            escrito=true;
+            console.log(escrito)
+            
+            
+            
+          }
+          
+        });
+
+
+        if(escrito){
+          window.alert("ya inició este paseo")
+        }else{
+          this.paseoSvc.startPaseo(this.paseador[0].walker_ID,this.servicio[0].servicio_ID).subscribe(spaseo=>{
+            console.log(spaseo)
+          });
+        }
+
+          
+        })
+
+        
+      
 
 
 
@@ -158,9 +198,14 @@ onSubmitFin(){
                 window.alert("Debe iniciar un paseo primero")
               }else{//validar que suba foto
                   //llamar al service de finalizar
-                  this.paseoSvc.endPaseo(paseoid,this.photopaseo).subscribe(r=>{
-                    console.log(r);
-                  })
+                  if(this.photopaseo!=''){
+                    this.paseoSvc.endPaseo(paseoid,this.photopaseo).subscribe(r=>{
+                      console.log(r);
+                    })
+                  }else{
+                    window.alert("Debe subir una foto")
+                  }
+                  
               }
 
         }else{
