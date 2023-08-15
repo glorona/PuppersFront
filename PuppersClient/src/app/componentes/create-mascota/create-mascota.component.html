@@ -40,7 +40,7 @@
                 <mat-select [(value)]="selectedCliente">
                     <mat-option value="default">Selecciona un Dueño</mat-option>
                     <div *ngFor="let cliente of clientes">
-                      <mat-option value={{cliente.client_tel}}>{{cliente.client_name}}</mat-option>
+                      <mat-option value={{cliente.client_ID}}>{{cliente.client_name}}</mat-option>
                     </div>
                   </mat-select>
             </mat-form-field>

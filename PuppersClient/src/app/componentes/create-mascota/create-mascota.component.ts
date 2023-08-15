@@ -93,7 +93,7 @@ export class CreateMascotaComponent {
 
   onSubmit(){
 
-    if( this.nombre.invalid || this.breed.invalid || this.selectedCliente == 'default' || this.selectedService){
+    if( this.nombre.invalid || this.breed.invalid || this.selectedCliente == 'default' || this.selectedService == "default"){
       console.log("Error!");
       this.errorForm();
     }
