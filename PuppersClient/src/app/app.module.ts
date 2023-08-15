@@ -54,6 +54,9 @@ import { ImageuploadComponent } from './common/imageupload/imageupload.component
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { environment } from 'src/environments/environment';
+import { AdminServicioComponent } from './componentes/admin-servicio/admin-servicio.component';
+import { EditServicioComponent } from './componentes/edit-servicio/edit-servicio.component';
+import { AddServicioComponent } from './componentes/add-servicio/add-servicio.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +82,9 @@ import { environment } from 'src/environments/environment';
     EditPaseadorComponent,
     EditClienteComponent,
     ImageuploadComponent,
+    AdminServicioComponent,
+    EditServicioComponent,
+    AddServicioComponent,
   ],
   imports: [
     BrowserModule,

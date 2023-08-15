@@ -21,15 +21,21 @@ import { EditMascotaComponent } from './componentes/edit-mascota/edit-mascota.co
 import { CreateMascotaComponent } from './componentes/create-mascota/create-mascota.component';
 import { CreatePaseadorComponent } from './componentes/create-paseador/create-paseador.component';
 import { CreateClienteComponent } from './componentes/create-cliente/create-cliente.component';
+import { AdminServicioComponent } from './componentes/admin-servicio/admin-servicio.component';
+import { EditServicioComponent } from './componentes/edit-servicio/edit-servicio.component';
+import { AddServicioComponent } from './componentes/add-servicio/add-servicio.component';
 const routes: Routes = [
   {path:"dashboard",component:DashboardComponent, canActivate:[AdminGuard]},
   {path:"manageboard",component:ManageboardComponent,canActivate:[AdminGuard]},
   {path:"adminCliente/:id",component:AdminClienteComponent,canActivate:[AdminGuard]},
   {path:"adminPaseador/:id",component:AdminPaseadorComponent,canActivate:[AdminGuard]},
   {path:"adminMascota/:id",component:AdminMascotaComponent,canActivate:[AdminGuard]},
+  {path:"adminServicio/:id",component:AdminServicioComponent,canActivate:[AdminGuard]},
+  {path:"editServicio/:id",component:EditServicioComponent,canActivate:[AdminGuard]},
   {path:"editCliente/:id",component:EditClienteComponent,canActivate:[AdminGuard]},
   {path:"editPaseador/:id",component:EditPaseadorComponent,canActivate:[AdminGuard]},
   {path:"editMascota/:id",component:EditMascotaComponent,canActivate:[AdminGuard]},
+  {path:"addServicio",component:AddServicioComponent,canActivate:[AdminGuard]},
   {path:"addMascota",component:CreateMascotaComponent,canActivate:[AdminGuard]},
   {path:"addPaseador",component:CreatePaseadorComponent,canActivate:[AdminGuard]},
   {path:"addCliente",component:CreateClienteComponent,canActivate:[AdminGuard]},
