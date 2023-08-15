@@ -39,7 +39,7 @@ export class PaseadorComponent {
   photopaseo=''
   servicio :Servicio[]=[] 
   paseo : Paseo[]=[]
-  constructor(private fireStorage:AngularFireStorage,paseoSvc : PaseoService,private mascotaService: MascotaService,private tokenSvc: TokenService,private paseadorSvc: PaseadorService, private clienteSvc : ClienteService,private locationSvc : ArealocationService,private servicioSvc:ServicioService){
+  constructor(private fireStorage:AngularFireStorage, private paseoSvc : PaseoService,private mascotaService: MascotaService,private tokenSvc: TokenService,private paseadorSvc: PaseadorService, private clienteSvc : ClienteService,private locationSvc : ArealocationService,private servicioSvc:ServicioService){
     this.ide= tokenSvc.getId();
    mascotaService.getMascotabyWalker(this.ide).subscribe(respuesta => {
     this.mascotas = respuesta as Array<Mascota>;
@@ -94,11 +94,28 @@ export class PaseadorComponent {
     }
 
 onSubmitInicio(){
-  this.mostrar=true;
-  this.servicioSvc.getServiciosPaseadorMascota(this.mascota[0].pet_token,this.paseador[0].walker_ID).subscribe(ser=>{
+  if(this.selected==0){
+    window.alert("debe seleccionar una mascota primero")
+  }else{
+    this.mostrar=true;
+    console.log(this.mascota[0].pet_token)
+    console.log(this.paseador[0].walker_ID)
+    this.servicioSvc.getServiciosPaseadorMascota(this.mascota[0].pet_token,this.paseador[0].walker_ID).subscribe(ser=>{
     this.servicio=ser as Servicio[];
     console.log(this.servicio);
+
+      //start paseo
+      this.paseoSvc.startPaseo(this.paseador[0].walker_ID,this.servicio[0].servicio_ID).subscribe(spaseo=>{
+        console.log(spaseo)
+      });
+
+
+
   });
+  
+  
+  }
+  
 }
 async onFileChange(event:any){
   const file = event.target.files[0]
@@ -107,6 +124,7 @@ async onFileChange(event:any){
     const uploadTask =await this.fireStorage.upload(path,file)
     this.photopaseo = await uploadTask.ref.getDownloadURL()
     console.log(this.photopaseo)
+
   }
 }
 

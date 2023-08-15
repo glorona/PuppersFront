@@ -31,9 +31,12 @@ export class PaseoService {
   }
 
   getPaseosCountPaseador(id:string){
-    return this.http.get(this.address+`/paseos/count/paseador/${id}`,{headers:{'auth':this.tokenusr}})
+    return this.http.get(this.address+`/paseos/count/paseador/${id}`,{headers:{'auth':this.tokenusr}}).pipe()
   }
 
+  getPaseoServicio(id:number){
+    return this.http.get(this.address+`/paseos/servicio/${id}`,{headers:{'auth':this.tokenusr}})
+  }
   
 
   startPaseo(wid:string,sid:number){

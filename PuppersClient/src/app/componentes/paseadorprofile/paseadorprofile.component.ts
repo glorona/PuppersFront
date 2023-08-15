@@ -21,6 +21,8 @@ export class PaseadorprofileComponent {
   mascota:Mascota[]=[]
   cliente: Cliente[]=[]
   cuentapaseos=0;
+  conteo =0
+  
   constructor( private route: ActivatedRoute,private paseoSvc:PaseoService, private router: Router, private tokenSvc: TokenService, private paseadorSvc:PaseadorService, private mascotasSvc: MascotaService,private clienteSvc:ClienteService){
     const {id,pet} = this.route.snapshot.params;
     console.log(id)
@@ -32,10 +34,14 @@ export class PaseadorprofileComponent {
       
       
     });
-    /*
-    paseoSvc.getPaseosCountPaseador(id).subscribe(conteo=>{
-      console.log(conteo)
-    });*/
+    
+    paseoSvc.getPaseosCountPaseador(id).subscribe(c=>{
+      //this.conteo=c as Object[];
+      //console.log(this.conteo[0])
+    this.conteo = Object.values(c)[0]
+      
+      //console.log(this.conteo)
+    });
     mascotasSvc.getMascota(pet).subscribe(res=>{
         this.mascota= res as Mascota[];
     });

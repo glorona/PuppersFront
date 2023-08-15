@@ -10,6 +10,7 @@ import { Servicio } from 'src/app/interfaces/servicio';
 import { FranjaService } from 'src/app/servicios/franja.service';
 import { FranjaHoraria } from 'src/app/interfaces/franja-horaria';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
+import { PaseoService } from 'src/app/servicios/paseo.service';
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
@@ -23,7 +24,7 @@ servicio : Servicio[]=[];
 walker ='';
 service='';
 franja: FranjaHoraria[]=[];
- constructor( private route: ActivatedRoute,private paseadorSvc : PaseadorService,private franjaSv : FranjaService, private servicioSv: ServicioService,private mascotasSvc:MascotaService, private tokenSvc: TokenService,private clienteSvc: ClienteService,private router: Router) { 
+ constructor( private paseoSvc:PaseoService,private route: ActivatedRoute,private paseadorSvc : PaseadorService,private franjaSv : FranjaService, private servicioSv: ServicioService,private mascotasSvc:MascotaService, private tokenSvc: TokenService,private clienteSvc: ClienteService,private router: Router) { 
 
   const {id} = this.route.snapshot.params;
   
@@ -38,6 +39,10 @@ franja: FranjaHoraria[]=[];
       //servicio para extraer la franja
 servicioSv.getServicioMascota(id).subscribe(s=>{
   this.servicio= s as Servicio[];
+  /*
+  this.paseoSvc.getPaseoServicio(this.servicio[0].servicio_ID).subscribe(p=>{
+    console.log(p)
+  })*/
   this.walker=this.servicio[0].walker_ID;
   
   //this.servicio[0].franja_id
