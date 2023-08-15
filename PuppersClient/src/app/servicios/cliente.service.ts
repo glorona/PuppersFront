@@ -60,7 +60,11 @@ export class ClienteService {
   }
 
   restoreAuth(id:string){
-    return this.http.put(this.address+'/admin/restore/cliente',{"client_ID":id})
+    return this.http.put(this.address+'/admin/restore/cliente',{"client_ID":id},{headers:{'auth':this.tokenusr}})
+  }
+
+  updateAuth(user:string,opass:string,nus:string,np:string){
+    return this.http.put(this.address+'/clientes/update/auth',{"client_user":user,"client_password":opass,"new_user":nus,"new_password":np},{headers:{'auth':this.tokenusr}})
   }
 
 

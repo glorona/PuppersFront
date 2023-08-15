@@ -25,6 +25,7 @@ import { AdminServicioComponent } from './componentes/admin-servicio/admin-servi
 import { EditServicioComponent } from './componentes/edit-servicio/edit-servicio.component';
 import { AddServicioComponent } from './componentes/add-servicio/add-servicio.component';
 import { CambiarcontrasenaComponent } from './componentes/cambiarcontrasena/cambiarcontrasena.component';
+import { AuthyGuard } from './servicios/authy.guard';
 const routes: Routes = [
   {path:"dashboard",component:DashboardComponent, canActivate:[AdminGuard]},
   {path:"manageboard",component:ManageboardComponent,canActivate:[AdminGuard]},
@@ -45,7 +46,7 @@ const routes: Routes = [
   {path:"databoard",component:DataboardComponent, canActivate:[AdminGuard]},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
-  {path:"cambiarcontrasena",component:CambiarcontrasenaComponent},
+  {path:"cambiarcontrasena",component:CambiarcontrasenaComponent,canActivate:[AuthyGuard]},
   {path:"homecliente",component:HomeclienteComponent, canActivate:[ClienteGuard]},
   {path:"paseadorprofile/:id/:pet",component:PaseadorprofileComponent, canActivate:[ClienteGuard]},
   {path:"**",component:LoginComponent}

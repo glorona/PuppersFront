@@ -53,11 +53,11 @@ export class PaseadorService {
   }
 
   updateAuth(user:string,opass:string,nus:string,np:string){
-    return this.http.put(this.address+'/paseadores/update/auth',{"walker_user":user,"walker_password":opass,"new_user":nus,"new_password":np})
+    return this.http.put(this.address+'/paseadores/update/auth',{"walker_user":user,"walker_password":opass,"new_user":nus,"new_password":np},{headers:{'auth':this.tokenusr}})
   }
 
   restoreAuth(id:string){
-    return this.http.put(this.address+'/admin/restore/paseador',{"walker_ID":id})
+    return this.http.put(this.address+'/admin/restore/paseador',{"walker_ID":id},{headers:{'auth':this.tokenusr}})
   }
 
 

@@ -39,10 +39,16 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password,this.selected).subscribe({
       next: data => {
         this.tokenStorage.saveToken(data['token']);
-        this.tokenStorage.saveID(password);
         this.tokenStorage.saveRoles(this.selected);
+        this.tokenStorage.saveUser(username);
         this.id = this.tokenStorage.getId();
         this.rolesjson = this.tokenStorage.getRoles();
+        if(this.rolesjson == 'paseador'){
+          this.tokenStorage.saveID(data['walker_ID']);
+        }
+        else{
+          this.tokenStorage.saveID(data['client_ID']);
+        }
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.authService.loginSuccess(this.isLoggedIn);
