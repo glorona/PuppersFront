@@ -228,7 +228,6 @@ export class CreateClienteComponent {
   }
 
   onSubmit(){
-    this.generarUserName();
     if(this.newLocation){
       console.log("Revisando post")
       if(this.telefono.invalid || this.newLocationName.invalid || this.link.invalid || this.nombre.invalid || this.cedula.invalid || this.selectedArea == 0 || this.selectedLocation == 0){
@@ -236,6 +235,7 @@ export class CreateClienteComponent {
           this.errorForm();
         }
       else{
+          this.generarUserName();
           this.messageError = false;
           this.cliService.registerCliente(this.telclient, this.cedclient,this.nomclient,this.fechaString,this.emailclient,this.userclient,this.cedclient,this.respu.location_id,this.linkclient).subscribe(respuesta =>{
               
@@ -250,6 +250,7 @@ export class CreateClienteComponent {
         this.errorForm();
       }
       else{
+        this.generarUserName();
         this.messageError = false;
         this.cliService.registerCliente(this.telclient, this.cedclient,this.nomclient,this.fechaString,this.emailclient,this.userclient,this.cedclient,this.selectedLocation,this.linkclient).subscribe(respuesta =>{
             

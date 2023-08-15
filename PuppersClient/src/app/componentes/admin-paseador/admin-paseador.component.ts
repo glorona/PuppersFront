@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/servicios/token.service';
 import { Paseador } from 'src/app/interfaces/paseador';
 import { ServicioService } from 'src/app/servicios/servicio.service';
+import { PaseoService } from 'src/app/servicios/paseo.service';
 
 @Component({
   selector: 'app-admin-paseador',
@@ -20,9 +21,11 @@ export class AdminPaseadorComponent {
   paseadorInfo!: Paseador;
   id_s!: string;
   notdelete = false;
+  count = 0;
+  resp: any;
   link_defaultpaseador = "https://firebasestorage.googleapis.com/v0/b/puppersimage.appspot.com/o/puppers%2Fprofile.png?alt=media&token=0778deb9-2a8e-4e82-8f38-b42a7861c40c"
   link = "";
-  constructor(private route:ActivatedRoute, private serv:ServicioService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
+  constructor(private paseo:PaseoService,private route:ActivatedRoute, private serv:ServicioService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
   }
 
@@ -45,6 +48,11 @@ export class AdminPaseadorComponent {
     this.mascotaService.getMascotabyWalker(id).subscribe(respuesta =>{
       this.mascotasAsignadas = respuesta as Mascota[];
       console.log(this.mascotasAsignadas)
+    })
+
+    this.paseo.getPaseosCountPaseador(id).subscribe(respuesta =>{
+      this.resp = respuesta;
+      this.count = this.resp.total
     })
 
   }

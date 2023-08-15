@@ -1,1 +1,34 @@
-<p>admin-servicio works!</p>
+<app-navbar></app-navbar>
+<div class="contenidopag">
+    <app-sidenav></app-sidenav>
+    <div class="contenidoside" *ngIf="dataready">
+        <div class="botontext">
+            <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon" routerLink="/manageboard">
+              <mat-icon color="accent">arrow_back</mat-icon>
+            </button>
+            <h5>Volver</h5>
+        </div>
+        <h4>Informacion de Servicio</h4>
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" routerLink="/editServicio/{{servicioAc.servicio_ID}}" >Editar</button>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-list>
+            <div mat-subheader>Datos</div>
+            
+            
+          </mat-list>
+
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" (click)="del()">Eliminar</button>
+            <button mat-raised-button color="accent" routerLink="/manageboard">Volver</button>
+          </div>
+        
+        
+
+        
+
+    </div>
+
+
+</div>
