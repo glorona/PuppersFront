@@ -45,7 +45,15 @@ export class AdminMascotaComponent {
     this.serv.getServicioMascota(this.mascotaInfo.pet_token).subscribe(respuesta =>{
       this.servicio = respuesta as Servicio[];
       this.servicioInfo = this.servicio[0];
-      this.paseadorService.getPaseador(this.servicioInfo.walker_ID).subscribe(respuesta =>{
+      let walkerid = "";
+      if(this.servicio.length <=0){
+        walkerid = "0000000000"
+      }
+      else{
+        walkerid = this.servicioInfo.walker_ID
+
+      }
+      this.paseadorService.getPaseador(walkerid).subscribe(respuesta =>{
         this.paseador = respuesta as Paseador[];
         this.paseadorInfo = this.paseador[0];
         this.dataready = true;

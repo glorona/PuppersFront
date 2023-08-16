@@ -15,7 +15,8 @@ export class CambiarcontrasenaComponent {
 
   user = ""
   roles = "";
-
+  admin = false;
+  userState  = true;
   constructor(private cliService:ClienteService,private paseadorService:PaseadorService,private authService: AuthyService, private tokenStorage: TokenService, private router: Router) { 
 
   }
@@ -25,6 +26,10 @@ export class CambiarcontrasenaComponent {
     console.log(this.user)
     this.roles = this.tokenStorage.getRoles();
     console.log(this.roles)
+    if(this.roles == 'admin'){
+      this.admin = true;
+      this.userState=false;
+    }
   }
 
   form: any = {

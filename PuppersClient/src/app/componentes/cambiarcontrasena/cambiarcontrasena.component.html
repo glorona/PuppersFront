@@ -11,6 +11,14 @@
       #f="ngForm"
       novalidate
     >
+      <div class='form-group' *ngIf="admin">
+        <label >Si desea cambiar su clave de administrador, contacte con el servicio tecnico de puppers.</label>
+        <div class="form-group">
+          <button mat-raised-button color="accent" routerLink="/login">Volver</button>
+        </div>
+      </div>
+
+      <div *ngIf="userState">
       <div class="form-group">
         <label> Cambio de contraseña para {{user}}</label>
         <div class="form-group">
@@ -89,6 +97,7 @@
           Login failed: {{ errorMessage }}
         </div>
       </div>
+    </div>
     </form>
 
   </div>
