@@ -46,6 +46,7 @@ export class ClienteService {
   }
 
   registerCliente(cel:string, id:string, name: string, date: string, email:string, username: string, password: string, location:number, adlink:string){
+    console.log({'client_tel':cel, "client_ID":id, 'client_name':name, 'start_date':date,'client_email':email,'client_user':username,'client_password':password, 'location_id':location, 'address_link':adlink})
     return this.http.post(this.address+'/clientes/add',{'client_tel':cel, "client_ID":id, 'client_name':name, 'start_date':date,'client_email':email,'client_user':username,'client_password':password, 'location_id':location, 'address_link':adlink},{headers:{'auth':this.tokenusr}})
   }
 

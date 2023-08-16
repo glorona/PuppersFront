@@ -56,4 +56,9 @@ export class ServicioService {
   deleteServicio(sid:number){
     return this.http.delete(this.address+`/servicios/delete/${sid}`,{headers:{'auth':this.tokenusr}})
   }
+
+  editServicio(sid:number, fid:number,wid:string){
+    return this.http.put(this.address+`/servicios/update`,{"servicio_ID":sid,"franja_id":fid,"walker_ID":wid},{headers:{'auth':this.tokenusr}})
+
+  }
 }

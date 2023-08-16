@@ -16,7 +16,7 @@
             <mat-form-field>
                 <mat-label>Mascota:</mat-label>
         
-                <mat-select [(value)]="selectedMascota">
+                <mat-select [(value)]="selectedMascota" disabled>
                   <div *ngFor="let masc of mascotas">
                     <mat-option value={{masc.pet_token}}>{{masc.pet_name}}</mat-option>
                   </div>

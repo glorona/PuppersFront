@@ -106,13 +106,12 @@ export class EditServicioComponent {
       this.errorForm();
     }
     else{
-      /*
-      this.serv.upd(this.selectedMascota,this.selectedFranja,this.selectedPaseador).subscribe(respuesta =>{
+
+      this.serv.editServicio(this.servicioAc.servicio_ID,parseInt(this.selectedFranja),this.selectedPaseador).subscribe(respuesta =>{
         alert("Se ha editado el servicio!")
         this.router.navigate(['/manageboard'])
       })
-      Falta Ruta para editar servicio
-      */ 
+  
     }
   }
 

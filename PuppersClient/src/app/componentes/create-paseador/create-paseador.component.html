@@ -39,7 +39,7 @@
 
             <mat-form-field>
                 <mat-label>Link de direccion Google Maps del paseador: </mat-label>
-                <input matInput placeholder="https://goo.gl/maps/ewBM4pmCVJDWVGHL6" [formControl]="linkadd" [value]="linkadd" required>
+                <input matInput placeholder="https://goo.gl/maps/ewBM4pmCVJDWVGHL6" [formControl]="linkadd" [value]="linkadd">
                 <mat-error *ngIf="linkadd.invalid">{{getErrorLink()}}</mat-error>
             </mat-form-field>
 
@@ -58,7 +58,7 @@
             </mat-form-field>
 
             <label>Foto del paseador: </label><br>
-            <input type="file" (change)="onFileChange($event)" accept=".jpg, .png, .jpeg" required>
+            <input type="file" (change)="onFileChange($event)" accept=".jpg, .png, .jpeg">
 
 
 

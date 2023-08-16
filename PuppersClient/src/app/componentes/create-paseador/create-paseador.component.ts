@@ -17,6 +17,7 @@ export class CreatePaseadorComponent {
   clientes: Cliente[] = [];
   tipoSangre = ["A+","A-","B+","B-","AB+","AB-","O+","O-"]
   selectedbt = "default";
+  linkdefault = "https://firebasestorage.googleapis.com/v0/b/puppersimage.appspot.com/o/puppers%2Fprofile.png?alt=media&token=0778deb9-2a8e-4e82-8f38-b42a7861c40c";
   constructor(private paseadorService:PaseadorService, private fireStorage:AngularFireStorage, private router:Router){
     this.telefono.valueChanges.subscribe(value =>{
       this.telefono.setValue(value,{emitEvent:false})
@@ -47,7 +48,7 @@ export class CreatePaseadorComponent {
   cedula = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(12)]);
   nombre = new FormControl('',[Validators.required]);
   addr = new FormControl('',[Validators.required]);
-  linkadd = new FormControl('',[Validators.required]);
+  linkadd = new FormControl('');
   formValid= false;
   messageError = false;
   telpaseador: any = this.telefono.value;
@@ -161,13 +162,19 @@ export class CreatePaseadorComponent {
   }
 
   onSubmit(){
-    console.log(this.cedpaseador);
-    this.generarUserName();
-    if(this.telefono.invalid || this.nombre.invalid || this.cedula.invalid || this.addr.invalid || this.linkadd.invalid){
+    if(this.telefono.invalid || this.nombre.invalid || this.cedula.invalid || this.addr.invalid ){
       console.log("Error!");
       this.errorForm();
     }
     else{
+      if(this.photopaseador == ""){
+        this.photopaseador = this.linkdefault;
+      }
+      if(this.linkaddpaseador == ""){
+        this.linkaddpaseador = "https://linknoasginado.com";
+
+      }
+      this.generarUserName();
       this.messageError = false;
       this.paseadorService.registerPaseador(this.cedpaseador,this.telpaseador,this.nompaseador,this.fechaString,this.userpaseador,this.cedpaseador,this.addrpaseador,this.linkaddpaseador,this.photopaseador,this.selectedbt).subscribe(respuesta =>{  
         alert("Se ha agregado el paseador.")

@@ -37,7 +37,7 @@
 
             <mat-form-field>
                 <mat-label>Numero de telefono: </mat-label>
-                <input matInput value={{telpaseador}} disabled>
+                <input matInput value={{telpaseador}}>
                 <mat-error *ngIf="telefono.invalid">{{getErrorCel()}}</mat-error>
               </mat-form-field>
 
@@ -49,23 +49,29 @@
 
             <mat-form-field>
                 <mat-label>Direccion del paseador: </mat-label>
-                <input matInput value={{addrpaseador}} disabled>
+                <input matInput value={{addrpaseador}}>
                 <mat-error *ngIf="addr.invalid">{{getErrorAddr()}}</mat-error>
             </mat-form-field>
 
 
             <mat-form-field>
                 <mat-label>Link de direccion Google Maps del paseador: </mat-label>
-                <input matInput value={{linkaddpaseador}} disabled>
+                <input matInput value={{linkaddpaseador}}>
                 <mat-error *ngIf="linkadd.invalid">{{getErrorLink()}}</mat-error>
             </mat-form-field>
-
             <mat-form-field>
-                <mat-label>Foto del paseador: </mat-label>
+                <mat-label>Foto del paseador actual: </mat-label>
                 <input matInput value={{photopaseador}} disabled>
                 <mat-error *ngIf="photo.invalid">{{getErrorPhoto()}}</mat-error>
             </mat-form-field>
 
+
+            <mat-divider></mat-divider>
+            <label>Foto del paseador nueva: </label><br>
+            <input type="file" (change)="onFileChange($event)" accept=".jpg, .png, .jpeg">
+
+
+            <br>
 
 
 

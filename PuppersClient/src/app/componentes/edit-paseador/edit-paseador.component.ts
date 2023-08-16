@@ -6,6 +6,7 @@ import { PaseadorService } from 'src/app/servicios/paseador.service';
 import { Paseador } from 'src/app/interfaces/paseador';
 import { Mascota } from 'src/app/interfaces/mascota';
 import { MascotaService } from 'src/app/servicios/mascota.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 const now = new Date();
 @Component({
   selector: 'app-edit-paseador',
@@ -20,7 +21,7 @@ export class EditPaseadorComponent {
   selectedLocation = 'default';
   tipoSangre = ["A+","A-","B+","B-","AB+","AB-","O+","O-"]
   selectedbt = "default";
-  constructor(private mascotaService:MascotaService, private route:ActivatedRoute,private paseadorService:PaseadorService, private router:Router){
+  constructor(private fireStorage:AngularFireStorage, private mascotaService:MascotaService, private route:ActivatedRoute,private paseadorService:PaseadorService, private router:Router){
     this.telefono.valueChanges.subscribe(value =>{
       this.telefono.setValue(value,{emitEvent:false})
       this.telpaseador = this.telefono.value;
@@ -156,6 +157,16 @@ export class EditPaseadorComponent {
 
   }
 
+  async onFileChange(event:any){
+    const file = event.target.files[0]
+    if(file){
+      const path = `puppers/${file.name}`
+      const uploadTask =await this.fireStorage.upload(path,file)
+      this.photopaseador = await uploadTask.ref.getDownloadURL()
+      console.log(this.photopaseador)
+    }
+  }
+
   getErrorUsername(){
     let msg = ''
     if (this.username.hasError('required')){
@@ -208,6 +219,7 @@ export class EditPaseadorComponent {
     return 'Uno o mas parametros estan incorrectos. por favor revisa tus entradas!';
 
   }
+  
 
   onSubmit(){
     console.log(this.cedpaseador);

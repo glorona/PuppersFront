@@ -77,7 +77,7 @@ export class CreateClienteComponent {
   telefono = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(11)]);
   cedula = new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(11)]);
   nombre = new FormControl('',[Validators.required]);
-  link = new FormControl('', [Validators.required, Validators.minLength(30)]);
+  link = new FormControl('',);
   newLocationName = new FormControl('',[Validators.required]);
   formValid = false;
   messageError = false;
@@ -237,6 +237,10 @@ export class CreateClienteComponent {
       else{
           this.generarUserName();
           this.messageError = false;
+          if(this.linkclient == ""){
+            this.linkclient = "https://linknoasginado.com";
+    
+          }
           this.cliService.registerCliente(this.telclient, this.cedclient,this.nomclient,this.fechaString,this.emailclient,this.userclient,this.cedclient,this.respu.location_id,this.linkclient).subscribe(respuesta =>{
               
             alert("Se ha agregado el cliente.")
@@ -252,6 +256,10 @@ export class CreateClienteComponent {
       else{
         this.generarUserName();
         this.messageError = false;
+        if(this.linkclient == ""){
+          this.linkclient = "https://linknoasginado.com";
+  
+        }
         this.cliService.registerCliente(this.telclient, this.cedclient,this.nomclient,this.fechaString,this.emailclient,this.userclient,this.cedclient,this.selectedLocation,this.linkclient).subscribe(respuesta =>{
             
           alert("Se ha agregado el cliente.")
