@@ -15,6 +15,8 @@ import { Mascota } from 'src/app/interfaces/mascota';
 import { Paseador } from 'src/app/interfaces/paseador';
 import { FranjaService } from 'src/app/servicios/franja.service';
 import { FranjaHoraria } from 'src/app/interfaces/franja-horaria';
+import { PaseoService } from 'src/app/servicios/paseo.service';
+import { Paseo } from 'src/app/interfaces/paseo';
 @Component({
   selector: 'app-admin-servicio',
   templateUrl: './admin-servicio.component.html',
@@ -27,12 +29,15 @@ export class AdminServicioComponent {
   servici: Servicio[] = [];
   dataready = false;
   mascota: Mascota[] = [];
+  paseadores: Paseador[] = [];
   pase: Paseador[] = [];
   franj: FranjaHoraria[] = [];
+  paseoslist: Paseo[] = [];
+  arr: any[] = [];
   mascotaInf!: Mascota;
   paseador!: Paseador;
   fi!: FranjaHoraria;
-  constructor(private fh:FranjaService,private route:ActivatedRoute, private serv:ServicioService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
+  constructor(private ps:PaseoService,private fh:FranjaService,private route:ActivatedRoute, private serv:ServicioService, private paseadorService:PaseadorService,private mascotaService:MascotaService,private clienteService:ClienteService, private router:Router){
 
   }
   
@@ -61,12 +66,41 @@ export class AdminServicioComponent {
       this.paseador = this.pase[0];
     })
 
+    this.paseadorService.getPaseadores().subscribe(respuesta =>{
+      this.paseadores = respuesta as Paseador[];
+    })
+
     this.fh.getFranja(this.servicioAc.franja_id).subscribe(respuesta =>{
       this.franj = respuesta as FranjaHoraria[];
       this.fi = this.franj[0];
     })
 
+    this.ps.getPaseoServicio(this.servicioAc.servicio_ID).subscribe(respuesta =>{
+      this.paseoslist = respuesta as Paseo[];
+      console.log(this.paseoslist);
+      this.loadList();
+    })
+
+
+
+
     
+  }
+
+  loadList(){
+    let paseadorname = ""
+    let number = 1;
+    for(const paseo of this.paseoslist){
+      for(const paseador of this.paseadores){
+        if(paseo.walker_ID == paseador.walker_ID){
+          paseadorname = paseador.walker_name;
+        }
+
+      }
+      const mapa = {"no":number,"paseo_ID":paseo.paseo_ID,"walker_name":paseadorname}
+      number+=1
+      this.arr.push(mapa)
+    }
   }
 
   del(){
