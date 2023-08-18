@@ -13,6 +13,8 @@ import { ServicioService } from 'src/app/servicios/servicio.service';
 import { Servicio } from 'src/app/interfaces/servicio';
 import { FranjaService } from 'src/app/servicios/franja.service';
 import { FranjaHoraria } from 'src/app/interfaces/franja-horaria';
+import { PaseoService } from 'src/app/servicios/paseo.service';
+import { Paseo } from 'src/app/interfaces/paseo';
 @Component({
   selector: 'app-manageboard',
   templateUrl: './manageboard.component.html',
@@ -36,7 +38,9 @@ export class ManageboardComponent {
   cliente = false;
   mascota = false;
   servicios = false;
-  constructor(private franjaH:FranjaService,private servicioService:ServicioService,private aloc:ArealocationService,private cliService:ClienteService, mascotaService:MascotaService, paseadorService: PaseadorService ){
+  serviciosclick = false;
+  selectedServiciosVer = "option1";
+  constructor(private ps:PaseoService,private franjaH:FranjaService,private servicioService:ServicioService,private aloc:ArealocationService,private cliService:ClienteService, mascotaService:MascotaService, paseadorService: PaseadorService ){
     cliService.getClientes().subscribe(respuesta => {
       this.clientes = respuesta as Cliente[];
     })
@@ -85,6 +89,7 @@ export class ManageboardComponent {
       this.paseador = true;
       this.mascota = false;
       this.servicios = false;
+      this.serviciosclick = false;
       this.listamostrar = this.paseadores;
       this.displayedColumns = ['ID', 'name', 'tel','date','actions'];
     }
@@ -93,6 +98,7 @@ export class ManageboardComponent {
       this.paseador = false;
       this.mascota = false;
       this.servicios = false;
+      this.serviciosclick = false;
       this.listamostrar = this.clientes;
       const arr = [];
       let areaname = "";
@@ -123,6 +129,7 @@ export class ManageboardComponent {
       this.cliente = false;
       this.paseador = false;
       this.servicios = false;
+      this.serviciosclick = false;
       this.listamostrar = this.mascotas1;
       console.log(this.listamostrar)
       this.displayedColumns = [ 'name', 'breed', 'service','actions'];
@@ -133,40 +140,111 @@ export class ManageboardComponent {
       this.cliente = false;
       this.paseador = false;
       this.servicios = true;
+      this.serviciosclick = true;
       this.listamostrar = this.servicioList;
       const arr = [];
       let paseador = "";
       let mascota = "";
       let fH = "";
-      for(const servi of this.listamostrar){
-        for(const pas of this.paseadores){
-          if(servi.walker_ID == pas.walker_ID){
-            paseador = pas.walker_name;
+      let service = "";
+      let localidad = "";
+      if(this.selectedServiciosVer == "option1"){
+
+        
+        for(const servi of this.listamostrar){
+          for(const pas of this.paseadores){
+            if(servi.walker_ID == pas.walker_ID){
+              paseador = pas.walker_name;
+            }
           }
-        }
-        for(const masc of this.mascotas1){
-          if(servi.pet_token == masc.pet_token){
-            mascota = masc.pet_name;
+          for(const masc of this.mascotas1){
+            if(servi.pet_token == masc.pet_token){
+              mascota = masc.pet_name;
+              service = masc.service;
+              for(const cliente of this.clientes){
+                if(cliente.client_ID == masc.client_ID){
+                  for(const locati of this.locations){
+                    if(cliente.location_id == locati.location_id){
+                      localidad = locati.location_name;
+                    }
+                  }
+                }
+              }
+            }
+  
           }
-
-        }
-
-
-        for(const franj of this.franjas){
-          if(servi.franja_id ==  franj.franja_id){
-            fH = franj.convertido;
+  
+  
+          for(const franj of this.franjas){
+            if(servi.franja_id ==  franj.franja_id){
+              fH = franj.convertido;
+            }
           }
+  
+  
+  
+          const dict = {"servicio_ID":servi.servicio_ID,"pet":mascota,"servicio":service,"paseador":paseador,"location":localidad,"time":fH};
+          arr.push(dict)
+  
+  
         }
 
+      }
+      else{
+        let count = 0
+        let arrpase = []
+        let paseoactivo = false;
+        for(const servi of this.listamostrar){
+    
+
+          this.ps.getPaseoServicio(servi.servicio_ID).subscribe(respuesta =>{
+            arrpase = respuesta as Paseo[];
+            console.log(arrpase);
+            count = arrpase.length;
+          })
 
 
-        const dict = {"servicio_ID":servi.servicio_ID,"pet":mascota,"paseador":paseador,"time":fH};
-        arr.push(dict)
-
+          for(const pas of this.paseadores){
+            if(servi.walker_ID == pas.walker_ID){
+              paseador = pas.walker_name;
+            }
+          }
+          for(const masc of this.mascotas1){
+            if(servi.pet_token == masc.pet_token){
+              mascota = masc.pet_name;
+              service = masc.service;
+              paseoactivo = this.paseoActivo(count,masc.service);
+              for(const cliente of this.clientes){
+                if(cliente.client_ID == masc.client_ID){
+                  for(const locati of this.locations){
+                    if(cliente.location_id == locati.location_id){
+                      localidad = locati.location_name;
+                    }
+                  }
+                }
+              }
+            }
+  
+          }
+  
+  
+          for(const franj of this.franjas){
+            if(servi.franja_id ==  franj.franja_id){
+              fH = franj.convertido;
+            }
+          }
+  
+          
+          const dict = {"servicio_ID":servi.servicio_ID,"pet":mascota,"servicio":service,"paseador":paseador,"location":localidad,"time":fH};
+          if(paseoactivo){
+            arr.push(dict)
+          }
+  
+        }
 
       }
       this.listamostrar = arr;
-      this.displayedColumns = [ 'ID', 'pet', 'walker','time','actions'];
+      this.displayedColumns = [ 'ID', 'pet','serv', 'walker','loca','time','actions'];
     }
     else{
       this.cliente = false;
@@ -175,6 +253,23 @@ export class ManageboardComponent {
 
     }
 
+  }
+
+  paseoActivo(paseosDone:number, servicio:string){
+    if(servicio == "5P"){
+      if(paseosDone  <= 20){
+        return true;
+      }
+      return false;
+
+    }
+    else{
+      if(paseosDone <= 12){
+        return true;
+      }
+      return false;
+      
+    }
   }
 
 }

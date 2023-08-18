@@ -90,14 +90,17 @@ export class AdminServicioComponent {
   loadList(){
     let paseadorname = ""
     let number = 1;
+    let fecha = "";
     for(const paseo of this.paseoslist){
       for(const paseador of this.paseadores){
         if(paseo.walker_ID == paseador.walker_ID){
           paseadorname = paseador.walker_name;
+          const fechaparc = paseo.end_date.split("T");
+          fecha = fechaparc[0];
         }
 
       }
-      const mapa = {"no":number,"paseo_ID":paseo.paseo_ID,"walker_name":paseadorname}
+      const mapa = {"no":number,"paseo_ID":paseo.paseo_ID,"walker_name":paseadorname,"fecha":fecha}
       number+=1
       this.arr.push(mapa)
     }
