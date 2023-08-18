@@ -11,8 +11,8 @@
         <mat-card class="example-card" >
             
             
-            <mat-card-content class="select"><mat-icon >pets</mat-icon> Selecciona tú mascota</mat-card-content>
-            <mat-form-field >
+            <mat-card-content *ngIf="mostrar" class="select"><mat-icon >pets</mat-icon> Selecciona tú mascota</mat-card-content>
+            <mat-form-field *ngIf="mostrar">
               <mat-label >Mascotas: </mat-label>
               <mat-select [(value)]="selected" >
                 <div *ngFor="let foto of mascotas">
@@ -24,11 +24,23 @@
                 
             </mat-select>
             
+            
               </mat-form-field>
-              
-              
              
-           
+                
+              <mat-form-field *ngIf="mostrar2">
+                <mat-label>O ingrese su código referencial </mat-label>
+              
+                <input matInput [formControl]="codigo" [value]="codigo" type="number" >
+                
+                
+            </mat-form-field>
+            
+            <div *ngIf="mostrar2">
+              <button class="btn btn-form"  (click)="onSubmitCodigo()">
+                Enviar Código
+              </button>
+            </div>
           </mat-card>
         
     </mat-grid-tile>
@@ -55,9 +67,12 @@
           <mat-card-content>
             <mat-icon >pets</mat-icon> Marcar recepción de Mascota
           </mat-card-content>
-          <button class="btn btn-primary btn-block" (click)="onSubmitInicio()">
-            Iniciar paseo
-          </button>
+          <div>
+            <button class="btn btn-primary btn-block " (click)="onSubmitInicio()">
+              Iniciar paseo
+            </button>
+          </div>
+          
 
           
           
@@ -75,9 +90,13 @@
   <mat-card-content>
     <mat-icon >pets</mat-icon> Marcar finalización del paseo
   </mat-card-content>
-  <button class="btn btn-primary btn-block" (click)="onSubmitFin()">
+  <div>
+    <button class="btn btn-primary btn-block" (click)="onSubmitFin()">
     Finalizar paseo
   </button>
+
+  </div>
+  
 
 </mat-card>
         

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Mascota } from '../../interfaces/mascota';
 import { MascotaService } from '../../servicios/mascota.service';
 import { TokenService } from 'src/app/servicios/token.service';
@@ -24,6 +24,7 @@ export class PaseadorComponent {
   arreglo=Array<Object>
   mascotas:Mascota[]=[];
   selected=0;
+
   paseador: Paseador[]=[];
   ide =''
   idepaseador=''
@@ -35,11 +36,12 @@ export class PaseadorComponent {
   area : Area[]=[]
   mascotabreed=''
   areaname='';
-  mostrar=false;
+  mostrar=true;
   photopaseo=''
   servicio :Servicio[]=[] 
   paseo : Paseo[]=[]
-  
+ mostrar2=true;
+  haycodigo=false
   constructor(private fireStorage:AngularFireStorage, private paseoSvc : PaseoService,private mascotaService: MascotaService,private tokenSvc: TokenService,private paseadorSvc: PaseadorService, private clienteSvc : ClienteService,private locationSvc : ArealocationService,private servicioSvc:ServicioService){
     this.ide= tokenSvc.getId();
    mascotaService.getMascotabyWalker(this.ide).subscribe(respuesta => {
@@ -54,15 +56,23 @@ export class PaseadorComponent {
     paseadorSvc.getPaseador(this.ide).subscribe(res =>{
       this.paseador = res as Paseador[];
     });
-
     
+    this.codigo.valueChanges.subscribe(value =>{
+      this.codigo.setValue(value,{emitEvent:false})
+      this.codval= this.codigo.value;
+    })
     
     
   }
+  
 
-
+codigo = new FormControl('');
+codval: any = this.codigo.value;
   obtenerDatosVista(){
-      console.log(this.selected);
+      
+      if(this.mostrar==true){
+        this.mostrar2=false;
+      }
       this.mascotaService.getMascota(this.selected).subscribe(res =>{
       this.mascota = res as Mascota[];
       this.mascotabreed= this.mascota[0].pet_breed;
@@ -118,7 +128,12 @@ onSubmitInicio(){
         //retorna paseos actuales para ese paseador
         //ahora validar el servicio actual
         let escrito= false;
+        
         let serviceid= this.servicio[0].servicio_ID;
+        console.log("servicio")
+        console.log(serviceid)
+
+
         let walker= this.paseador[0].walker_ID;
         
         Object.values(p).forEach(function (element){
@@ -225,6 +240,21 @@ onSubmitFin(){
   
 }
 
+onSubmitCodigo(){
+  if(this.codigo==null){
+    window.alert("Debe ingresar un código")
+  }
+  this.mostrar=false;
+  let cod = this.codval.toString();
+  let suma=0;
+  for(let x=0;x<cod.length;x++){
+    suma+= parseInt(cod[x])
+  }
+  console.log(suma);
+  this.selected=suma;
+  this.obtenerDatosVista()
+  
+}
 
 
 async onFileChange(event:any){
