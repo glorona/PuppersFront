@@ -28,6 +28,7 @@ export class AdminPaseadorComponent {
   id_s!: string;
   notdelete = false;
   countmesready = false;
+  arrpase: Paseo[] = [];
   count = 0;
   countmes = 0;
   resp: any;
@@ -58,11 +59,6 @@ export class AdminPaseadorComponent {
       }
     })
 
-    this.mascotaService.getMascotabyWalker(id).subscribe(respuesta =>{
-      this.mascotasAsignadas = respuesta as Mascota[];
-      console.log(this.mascotasAsignadas)
-    })
-
     this.mascotaService.getMascotas().subscribe(respuesta =>{
       this.mascotas = respuesta as Mascota[];
     })
@@ -74,6 +70,8 @@ export class AdminPaseadorComponent {
 
     this.serv.getServiciosPaseador(id).subscribe(respuesta =>{
       this.serviciospaseador = respuesta as Servicio[];
+      console.log(this.serviciospaseador);
+      this.obtenerMascotasServiciosActivos();
     })
 
   }
@@ -116,6 +114,50 @@ export class AdminPaseadorComponent {
     const fechaparc = fecha.split("T");
     const fechareturn = fechaparc[0];
     return fechareturn;
+  }
+
+  paseoActivo(paseosDone:number, servicio:string){
+    if(servicio == "5P"){
+      if(paseosDone  <= 20){
+        return true;
+      }
+      return false;
+
+    }
+    else{
+      if(paseosDone <= 12){
+        return true;
+      }
+      return false;
+      
+    }
+  }
+
+  obtenerMascotasServiciosActivos(){
+    let count = 0;
+    const listareturn = [];
+    let service = "";
+    for(const servi of this.serviciospaseador){
+      if(servi.walker_ID == this.paseadorInfo.walker_ID){
+
+        this.paseo.getPaseoServicio(servi.servicio_ID).subscribe(respuesta =>{
+          this.arrpase = respuesta as Paseo[];
+          console.log(this.arrpase);
+          count = this.arrpase.length;
+        })
+        for(const masc of this.mascotas){
+          if(servi.pet_token == masc.pet_token){
+            service = masc.service;
+            if(this.paseoActivo(count,service)){
+              listareturn.push(masc);
+            }
+          }
+        }   
+      }
+    }
+
+    this.mascotasAsignadas = listareturn;
+
   }
 
   obtenerPaseosMes(mes:string){

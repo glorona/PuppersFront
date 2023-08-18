@@ -8,9 +8,11 @@
             </button>
             <h5>Volver</h5>
         </div>
-        <h4>Informacion de Servicio</h4>
+        <h4>Informacion de Servicio {{servicioAc.servicio_ID}}</h4>
         <div class="example-button-row">
             <button mat-raised-button color="primary" routerLink="/editServicio/{{servicioAc.servicio_ID}}" >Editar</button>
+            <button mat-raised-button color="primary" (click)="generateRef()" >Generar codigo de referencia</button>
+            <button mat-raised-button color="accent" (click)="renewService()" >Renovar Servicio</button>
         </div>
         <mat-divider></mat-divider>
         <mat-list>
@@ -36,11 +38,25 @@
               <div matListItemLine>Franja Horaria</div>
           </mat-list-item>
           <mat-divider></mat-divider>
-          <div mat-subheader>Paseos realizados</div>
-          <mat-list-item *ngFor="let paseo of arr">
-            <div matListItemTitle>{{paseo.no}}. {{paseo.walker_name}} - {{paseo.fecha}}</div>
-            <div matListItemLine>Paseador - Fecha</div>
-          </mat-list-item>
+          <div *ngIf="paseosDoneReady">
+            <div mat-subheader>Paseos realizados:</div>
+            <mat-list-item *ngFor="let paseo of arr">
+              <div matListItemTitle>{{paseo.no}}. {{paseo.walker_name}} - {{paseo.fecha}}</div>
+              <div matListItemLine>Paseador - Fecha</div>
+            </mat-list-item>
+
+          </div>
+
+          <div *ngIf="code">
+            <mat-divider></mat-divider>
+            <div mat-subheader>Codigo de referencia:</div>
+            <mat-list-item>
+              <mat-icon matListItemIcon>how_to_reg</mat-icon>
+              <div matListItemTitle>{{codigoRef}}</div>
+              <div matListItemLine>Codigo de Referencia</div>
+            </mat-list-item>
+            
+          </div>
 
 
             
