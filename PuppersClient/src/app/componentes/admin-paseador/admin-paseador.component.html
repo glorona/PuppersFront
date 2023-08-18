@@ -37,7 +37,7 @@
             </mat-list-item>
             <mat-list-item>
               <mat-icon matListItemIcon>location_on</mat-icon>
-              <div matListItemTitle>{{paseadorInfo.walker_linkaddress}}</div>
+              <div matListItemTitle><a href="{{paseadorInfo.walker_linkaddress}}">{{paseadorInfo.walker_linkaddress}}</a></div>
               <div matListItemLine>Link de direccion</div>
           </mat-list-item>
             <mat-list-item>
@@ -73,7 +73,29 @@
               <mat-icon matListItemIcon>assessment</mat-icon>
               <div matListItemTitle>{{count}}</div>
               <div matListItemLine>Paseos totales</div>
-          </mat-list-item>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <div mat-subheader>Calcular Pagos por Paseos Mensuales: </div>
+            <mat-form-field>
+              <mat-label>Mes a calcular:</mat-label>
+      
+              <mat-select [(value)]="selectedmonth">
+                <mat-option value="default">Selecciona un mes</mat-option>
+                <div *ngFor="let mes of meses">
+                  <mat-option value={{mes}} (click)="obtenerPaseosMes(mes)">{{mes}}</mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+            <mat-list-item *ngIf="countmesready">
+              <mat-icon matListItemIcon>assessment</mat-icon>
+              <div matListItemTitle>{{countmes}}</div>
+              <div matListItemLine>Paseos mensuales</div>
+            </mat-list-item>
+            <mat-list-item *ngIf="countmesready">
+              <mat-icon matListItemIcon>attach_money</mat-icon>
+              <div matListItemTitle>{{precio}}</div>
+              <div matListItemLine>Paseos mensuales</div>
+            </mat-list-item>
           </mat-list>
 
           
