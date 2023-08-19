@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
+import {  Router } from "@angular/router";
 import { AuthyService } from "./authy.service";
 import { TokenService } from "./token.service";
 @Injectable({
@@ -9,9 +9,7 @@ export class PaseadorGuard  {
   constructor(
 		private authService: AuthyService, private tokSer: TokenService,
 		private router: Router) { }
-	canActivate(
-		route: ActivatedRouteSnapshot,
-		state: RouterStateSnapshot): boolean | Promise<boolean> {
+	canActivate(): boolean | Promise<boolean> {
     let isAuthenticated = false;
     if (this.tokSer.getToken()) {
       isAuthenticated = true;

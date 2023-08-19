@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { Router } from "@angular/router";
 import { AuthyService } from "./authy.service";
 import { TokenService } from "./token.service";
 @Injectable({
@@ -9,16 +9,14 @@ export class AdminGuard  {
   constructor(
 		private authService: AuthyService, private tokSer: TokenService,
 		private router: Router) { }
-	canActivate(
-		route: ActivatedRouteSnapshot,
-		state: RouterStateSnapshot): boolean | Promise<boolean> {
+	canActivate(): boolean | Promise<boolean> {
     
-    var isAuthenticated = false;
+    let isAuthenticated = false;
     if (this.tokSer.getToken()) {
       isAuthenticated = true;
     }
-    var hasAccess = false;
-    var roles = this.tokSer.getRoles();
+    let hasAccess = false;
+    const roles = this.tokSer.getRoles();
 		if (!isAuthenticated) {
 			this.router.navigate(['/login']);
 		}

@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Component} from '@angular/core';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormControl, Validators} from '@angular/forms';
+
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { Cliente } from 'src/app/interfaces/cliente';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ArealocationService } from 'src/app/servicios/arealocation.service';
 import { Area } from 'src/app/interfaces/area';
 import { Localizacion } from 'src/app/interfaces/localizacion';
@@ -261,7 +262,7 @@ export class CreateClienteComponent {
   
         }
         this.cliService.registerCliente(this.telclient, this.cedclient,this.nomclient,this.fechaString,this.emailclient,this.userclient,this.cedclient,this.selectedLocation,this.linkclient).subscribe(respuesta =>{
-            
+          console.log(respuesta)
           alert("Se ha agregado el cliente.")
           this.router.navigate(['/manageboard'])
         })

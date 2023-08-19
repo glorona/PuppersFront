@@ -1,7 +1,4 @@
-import { Injectable , OnDestroy } from '@angular/core';
-import { BehaviorSubject, catchError, from, map, Observable, tap } from 'rxjs';
-import { Router } from '@angular/router';
-import { AuthTransaction, OktaAuth } from '@okta/okta-auth-js';
+import { Injectable} from '@angular/core';
 import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root'

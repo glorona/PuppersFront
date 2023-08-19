@@ -7,7 +7,7 @@ import { AuthyService } from 'src/app/servicios/authy.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  form: any = {
+  form: unknown = {
     username: null,
     password: null
   };
@@ -17,13 +17,5 @@ export class RegisterComponent {
 
   constructor(private authService: AuthyService) { }
 
-  ngOnInit(): void {
-  }
-
-  onSubmit(): void {
-    const { username, password} = this.form;
-
-    
-  }
 
 }

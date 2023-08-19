@@ -4,7 +4,7 @@ import { Mascota } from 'src/app/interfaces/mascota';
 import { MascotaService } from 'src/app/servicios/mascota.service';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
 import { TokenService } from 'src/app/servicios/token.service';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { PaseoService } from 'src/app/servicios/paseo.service';

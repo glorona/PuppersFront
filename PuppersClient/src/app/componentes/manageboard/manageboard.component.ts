@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { Mascota } from 'src/app/interfaces/mascota';

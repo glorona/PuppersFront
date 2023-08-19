@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
 import { Component } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Area } from 'src/app/interfaces/area';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { Localizacion } from 'src/app/interfaces/localizacion';
 import { Mascota } from 'src/app/interfaces/mascota';
-import { Paseador } from 'src/app/interfaces/paseador';
 import { ArealocationService } from 'src/app/servicios/arealocation.service';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { MascotaService } from 'src/app/servicios/mascota.service';

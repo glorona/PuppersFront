@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
 import {AngularFireStorage} from "@angular/fire/compat/storage"
 @Component({
@@ -14,6 +15,7 @@ export class ImageuploadComponent {
       const path = `puppers/${file.name}`
       const uploadTask =await this.fireStorage.upload(path,file)
       const url = await uploadTask.ref.getDownloadURL()
+      console.log(url)
     }
   }
 }

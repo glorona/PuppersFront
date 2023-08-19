@@ -1,6 +1,4 @@
-import { Component , OnDestroy, OnInit } from '@angular/core';
-import { Subject, take, takeUntil } from 'rxjs';
-import { AuthyService } from 'src/app/servicios/authy.service';
+import { Component } from '@angular/core';
 import { TokenService } from 'src/app/servicios/token.service';
 @Component({
   selector: 'app-navbar',

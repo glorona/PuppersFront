@@ -1,14 +1,10 @@
 import {Component} from '@angular/core';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ArealocationService } from 'src/app/servicios/arealocation.service';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
 import { MascotaService } from 'src/app/servicios/mascota.service';
 import { ServicioService } from 'src/app/servicios/servicio.service';
-import { Servicio } from 'src/app/interfaces/servicio';
 import { Area } from 'src/app/interfaces/area';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { Localizacion } from 'src/app/interfaces/localizacion';
@@ -91,6 +87,7 @@ export class AddServicioComponent {
     }
     else{
       this.serv.addServicio(this.selectedMascota,this.selectedFranja,this.selectedPaseador).subscribe(respuesta =>{
+        console.log(respuesta);
         alert("Se ha creado el servicio!")
         this.router.navigate(['/manageboard'])
       })

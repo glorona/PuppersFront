@@ -1,16 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Component} from '@angular/core';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormControl, Validators} from '@angular/forms';
+
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { Cliente } from 'src/app/interfaces/cliente';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
 import { Paseador } from 'src/app/interfaces/paseador';
 import { MascotaService } from 'src/app/servicios/mascota.service';
 import { ArealocationService } from 'src/app/servicios/arealocation.service';
-import { Area } from 'src/app/interfaces/area';
-import { Localizacion } from 'src/app/interfaces/localizacion';
 const now = new Date();
 @Component({
   selector: 'app-create-mascota',

@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
 import { Mascota } from '../../interfaces/mascota';
 import { MascotaService } from 'src/app/servicios/mascota.service';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TokenService } from 'src/app/servicios/token.service';
 import { Paseador } from 'src/app/interfaces/paseador';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { PaseoService } from 'src/app/servicios/paseo.service';
@@ -12,7 +14,6 @@ import * as moment from 'moment';
 import { Servicio } from 'src/app/interfaces/servicio';
 import { Paseo } from 'src/app/interfaces/paseo';
 const mesact = moment(moment.now()).format("MM")
-const mes_str = mesact.toString();
 const yract = moment(moment.now()).format("YYYY")
 
 @Component({

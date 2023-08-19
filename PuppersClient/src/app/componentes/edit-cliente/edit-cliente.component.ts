@@ -1,7 +1,7 @@
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Component} from '@angular/core';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormControl, Validators} from '@angular/forms';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -289,7 +289,7 @@ export class EditClienteComponent {
       this.messageError = false;
       this.selectedLocation = this.respu.location_id;
       this.cliService.updateCliente(this.telclient,this.cedclient,this.nomclient,this.fechaString,this.emailclient,parseInt(this.selectedLocation),this.linkclient).subscribe(respuesta =>{
-          
+        console.log(respuesta);
         console.log("Insertado!")
         this.router.navigate(['/manageboard'])
       })

@@ -1,5 +1,7 @@
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Component} from '@angular/core';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaseadorService } from 'src/app/servicios/paseador.service';

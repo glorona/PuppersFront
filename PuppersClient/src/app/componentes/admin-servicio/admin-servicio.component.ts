@@ -1,16 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Component} from '@angular/core';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ArealocationService } from 'src/app/servicios/arealocation.service';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
 import { MascotaService } from 'src/app/servicios/mascota.service';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { Servicio } from 'src/app/interfaces/servicio';
-import { Area } from 'src/app/interfaces/area';
-import { Cliente } from 'src/app/interfaces/cliente';
-import { Localizacion } from 'src/app/interfaces/localizacion';
 import { Mascota } from 'src/app/interfaces/mascota';
 import { Paseador } from 'src/app/interfaces/paseador';
 import { FranjaService } from 'src/app/servicios/franja.service';

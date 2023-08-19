@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-types */
 import { Component } from '@angular/core';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import { Mascota } from '../../interfaces/mascota';
 import { MascotaService } from '../../servicios/mascota.service';
 import { TokenService } from 'src/app/servicios/token.service';
@@ -129,12 +131,12 @@ onSubmitInicio(){
         //ahora validar el servicio actual
         let escrito= false;
         
-        let serviceid= this.servicio[0].servicio_ID;
+        const serviceid= this.servicio[0].servicio_ID;
         console.log("servicio")
         console.log(serviceid)
 
 
-        let walker= this.paseador[0].walker_ID;
+        const walker= this.paseador[0].walker_ID;
         
         Object.values(p).forEach(function (element){
           //console.log(Object(element)["paseo_ID"])
@@ -184,8 +186,8 @@ onSubmitFin(){
 
       this.servicioSvc.getServiciosPaseadorMascota(this.mascota[0].pet_token,this.paseador[0].walker_ID).subscribe(ser=>{
         this.servicio= ser as Servicio[];
-        let serviceid= this.servicio[0].servicio_ID;
-        let walker= this.paseador[0].walker_ID;
+        const serviceid= this.servicio[0].servicio_ID;
+        const walker= this.paseador[0].walker_ID;
         console.log(walker)
         console.log(serviceid)
         // validar que hayan paseos
@@ -245,7 +247,7 @@ onSubmitCodigo(){
     window.alert("Debe ingresar un código")
   }
   this.mostrar=false;
-  let cod = this.codval.toString();
+  const cod = this.codval.toString();
   let suma=0;
   for(let x=0;x<cod.length;x++){
     suma+= parseInt(cod[x])

@@ -1,6 +1,4 @@
-import { Component , OnDestroy, OnInit } from '@angular/core';
-import { Subject, take, takeUntil } from 'rxjs';
-import { AuthyService } from './servicios/authy.service';
+import { Component  } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

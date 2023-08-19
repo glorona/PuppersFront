@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
 import { Mascota } from '../../interfaces/mascota';
 import { MascotaService } from 'src/app/servicios/mascota.service';
@@ -43,7 +44,7 @@ servicioSv.getServicioMascota(id).subscribe(s=>{
   
   this.paseoSvc.getPaseoServicio(this.servicio[0].servicio_ID).subscribe(p=>{
     //regresa numero de paseos completados
-    let numservicio =  Number(this.mascota[0].service.split("P")[0])*4
+    const numservicio =  Number(this.mascota[0].service.split("P")[0])*4
     console.log(numservicio)
     console.log(Object.values(p).length)
     this.paseosFaltantes= numservicio-(Object.values(p).length)

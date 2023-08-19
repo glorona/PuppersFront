@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Component} from '@angular/core';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import { Cliente } from 'src/app/interfaces/cliente';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PaseadorService } from 'src/app/servicios/paseador.service';
 const now = new Date();
 import {AngularFireStorage} from "@angular/fire/compat/storage"
@@ -177,6 +178,7 @@ export class CreatePaseadorComponent {
       this.generarUserName();
       this.messageError = false;
       this.paseadorService.registerPaseador(this.cedpaseador,this.telpaseador,this.nompaseador,this.fechaString,this.userpaseador,this.cedpaseador,this.addrpaseador,this.linkaddpaseador,this.photopaseador,this.selectedbt).subscribe(respuesta =>{  
+        console.log(respuesta);
         alert("Se ha agregado el paseador.")
         this.router.navigate(['/manageboard'])
       })

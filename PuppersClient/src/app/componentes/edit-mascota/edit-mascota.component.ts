@@ -1,3 +1,5 @@
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -137,7 +139,7 @@ export class EditMascotaComponent {
     else{
       this.messageError = false;
       this.mascotaService.updateMascota(this.mascotaInfo.pet_token,this.duenoInfo.client_ID,this.mascotaname,this.breedmasc,this.selectedService,this.fechaString).subscribe(respuesta =>{
-          
+        console.log(respuesta)
         console.log("Actualizado!")
         this.router.navigate(['/manageboard'])
       })
